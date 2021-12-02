@@ -1,0 +1,36 @@
+<!-- community_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}Community Collections{% endblock page_title %}
+
+{% block page_header %} {{ object.repository }} : {{ object.name }} {% endblock page_header %}
+
+{% block content %}
+
+	{% if messages %}
+	    {% for message in messages %}
+	    <h5{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h5>
+	    {% endfor %}
+	{% endif %}
+
+	<h2> {{ object.name }} 
+		<small><a href="{% url 'oai_collection_add' object.identifier %}">add a collection</a></small>
+		<small><a href="{% url 'oai_harvest_community' object.identifier %}">harvest all collections</a></small>
+	</h2>
+	{% for i in collections %}
+		<p><a href="{% url 'oai_collection' i.identifier %}">{{ i.name }}</a><small> {{ i.identifier }} </small></p>	
+		<p>
+			<a class="btn btn-sm btn-secondary" href="{% url 'oai_collection_edit' i.identifier %}">edit</a>
+			<a class="btn btn-sm btn-danger" href="{% url 'oai_collection_delete' i.identifier %}">remove</a>
+			<a class="btn btn-sm btn-warning" href="{% url 'oai_harvest_collection' i.identifier %}">harvest</a>		
+		</p>
+		<dl>
+			<dt> OAI Identifier: {{ i.identifier }}</dt>
+			<dt> Community: {{ i.community }}</dt>
+			<dt> Number of records harvested: {{ i.count_records }}</dt>
+			<dt> Created on: {{ i.created }}</dt>
+			<dt> Modified on: {{ i.modified }}</dt>
+		</dl>
+	{% endfor %}
+{% endblock content %}

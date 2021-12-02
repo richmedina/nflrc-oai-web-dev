@@ -1,0 +1,153 @@
+<!-- home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% block page_header %}
+<div class="row">
+    <div class="col-md-9">     
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Dorothy Chun and Trude Heift, Editors</h5>
+                <p class="small">Published by the National Foreign Language Resource Center (NFLRC) with additional support by the NFLRC and the Center for Language & Technology at the University of Hawai‘i at Mānoa, and the Center for Open Educational Resources and Language Learning (COERLL) at the University of Texas at Austin</p>
+            </div>
+            <!-- Announcements -->
+            <div class="col-md-6">
+                <h4 class="border-space" style="font-weight: bold"><i class="fa fa-star" style="color: #7d0000;" aria-hidden="true"></i> First Annual Dorothy Chun Award!</h4>
+                <p>The inaugural <i><b>Dorothy Chun Award for Best Journal Article in Language Learning & Technology</i></b> has been granted to Dr. Ines Martin. <a href="https://www.lltjournal.org/dorothy-chun-award/">Read more</a> about her achievement and this new format for recognizing research excellence in LLT.</p>
+            </div>
+            <div class="col-md-6">
+                <h4 class="border-space" style="font-weight: bold"><i class="fa fa-star" style="color: #F4D03F;" aria-hidden="true"></i> Changes to LLT in 2022</h4>
+                <p>Starting in January 2022, LLT will transition from a tri-annual to continuous article publication model. For details on our new publication procedures and standards, please click <a href="https://www.lltjournal.org/item/3227">here</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="text-center panel panel-default" style="padding: 1.0em;">
+            <p style="font-size: 0.8em">Current Impact Factor {% if user.is_staff %}<a href="">[update]</a> {% endif %}</p>
+            <p style="font-size: 1.5em">{{impact_factor}}</p>
+            <p class="text-left" style="font-size: 0.8em;">In 2017, LLT was ranked #1 in the world among Open Access journals in Linguistics, and #3 in the world among Open Access journals in Education!</p>
+            <div style="font-size: 0.9em"><a href="{% url 'page_slug_view' 'about' %}#rankings">see rankings</a></div>
+        </div>        
+    </div>
+</div>  
+{% endblock page_header %}
+
+{% block content %}
+<!-- ROW 1 -->
+<div class="row">
+    <!-- RIGHT PANEL -->
+    <div class="col-md-3 order-md-2 order-sm-1">
+        <div><h3>Special Issue Title Number 3</h3></div>
+        <div><h3>Special Issue Title Number 2</h3></div>
+        {% include 'base-side-menu.html' %}
+    </div>
+    
+    <!-- LEFT PANEL -->
+    <div class="col-md-9 order-md-1 order-sm-2">
+        <h3><a href="{% url 'collection' latest.identifier %}" class="static_a_display" style="color: #000">{{ title.0 }} </a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' latest.pk %}">Update</a></small>{% endif %}</h3>
+        <h4><strong>{{ title.1 }}</strong></h4>
+        {% if toc.Preface %}<h4 class="border-space">&nbsp;</h4>{% endif %}
+
+        {% for sub_type, data in toc.Preface.items %} 
+            {% for doc in data.records %}
+                <div class="row">
+                    <div class="col-11"> 
+                        <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
+                            <strong>{{ doc.0 }}</strong>
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+                        </a>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {% if toc.Article %}<h4 class="border-space">Articles</h4>{% endif %}
+        {% for sub_type, data in toc.Article.items %} 
+            <strong>{{ sub_type }}</strong>
+            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+            {% for doc in data.records %}
+                <div class="row">
+                    <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
+                        <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
+                            <strong>{{ doc.0 }}</strong>
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+                        </a>
+                    </div>
+                    <div class="col-2"><em>{{ doc.4 }} </em></div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    
+        {% if toc.Column %}<h4 class="border-space">Columns</h4>{% endif %}
+        {% for sub_type, data in toc.Column.items %} 
+            <strong>{{ sub_type }}</strong>
+            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+            {% for doc in data.records %}
+                <div class="row">
+                    <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
+                        <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
+                            <strong>{{ doc.0 }}</strong>
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+                        </a>
+                    </div>
+                    <div class="col-2"><em> {{ doc.4 }}</em></div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    
+        {% if toc.Review %}<h4 class="border-space">Reviews</h4>{% endif %}
+        {% for sub_type, data in toc.Review.items %}
+            <strong>{{ sub_type }}</strong>
+            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+            {% for doc in data.records %}
+                <div class="row">
+                    <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
+                        <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
+                            <strong>{{ doc.0 }}</strong>
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+                        </a>
+                    </div>
+                    <div class="col-2"><em> {{ doc.4 }}</em></div>
+                </div>
+            {% endfor %}
+        {% endfor %}            
+    </div> 
+</div> <!-- End ROW 1 -->
+
+<!-- ROW 2 -->
+<div class="row"></div>
+
+<!-- ROW 3 -->
+<div class="row" class="prev_issues">
+    <div class="col-12">
+        <h3 class="border-space">Previous Issues <a href="{% url 'previous_issues' %}" class="btn btn-small btn-link static_a_display">view all</a></h3>        
+    </div>          
+
+    {% for num, volume in volumes.items %}
+        <div class="col-md-3">
+            <a class="btn btn-default" data-bs-toggle="collapse" href="#id-{{num}}-collapse" role="button" aria-expanded="false" aria-controls="id-{{num}}-collapse">
+                <i class="fa fa-caret-right"></i> {{ volume.0.name|slice:":9"}}</a>
+            <div>
+            <ul id="id-{{num}}-collapse" class="list-unstyled collapse">
+            {% for j in volume %}
+                <li><p><a href="{% url 'collection' j.identifier %}" class="static_a_display">{{ j.name }}</a></p></li>
+            {% endfor %}
+            </ul>
+            </div>
+        </div>
+    {% endfor %}                    
+</div>
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+<!-- repository_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}Repositories{% endblock page_title %}
+
+{% block content %}
+
+	{% if messages %}
+	    {% for message in messages %}
+	    <h5{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h5>
+	    {% endfor %}
+	{% endif %}
+
+	<h2> {{ object.name }}
+		<small><a href="{% url 'oai_community_add' object.id %}">add a set</a></small>
+	</h2>
+	<small>{{ object.base_url }}</small>
+
+	{% for i in communities %}		
+		<h4>
+			<a href="{{ i.get_absolute_url }}">{{ i.name }}</a>
+			<small> {{ i.identifier }} </small>
+			<small><a href="{% url 'oai_community_edit' i.identifier %}">edit</a></small>
+			<small><a href="{% url 'oai_community_delete' i.identifier %}">remove</a></small>
+			</small>
+		</h4>
+		{% for j in i.list_collections %}
+			<p><a href="{% url 'oai_collection' j.identifier %}">{{ j.name }}</a><small> {{ j.identifier }} </small></p>
+			<p>
+				<a class="btn btn-sm btn-secondary" href="{% url 'oai_collection_edit' j.identifier %}">edit</a>
+				<a class="btn btn-sm btn-danger" href="{% url 'oai_collection_delete' j.identifier %}">remove</a>
+				<a class="btn btn-sm btn-warning" href="{% url 'oai_harvest_collection' j.identifier %}">harvest</a>		
+			</p>
+		{% endfor %}
+	{% endfor %}
+
+{% endblock content %}

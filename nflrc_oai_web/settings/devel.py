@@ -17,3 +17,12 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.environ['WHOOSH_PATH']
+    },
+}
+
+STATICFILES_DIRS = [BASE_DIR / '..' / 'static',]
