@@ -1,0 +1,26 @@
+<!-- post_list_view.html -->
+{% extends 'base.html' %}
+
+{% block page_header %}
+	<h2>News & Announcements</h2>
+{% endblock page_header %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-9">
+		<dl>
+		{% for i in object_list %}
+			<div class="shadow-sm p-2 mb-2">
+				<dt>{{ i.title }} {% if i.featured %} <span class="badge bg-llt-gold">featured</span> {% endif %}
+				{% if user.is_staff %} <a href="{% url 'post_update_view' i.pk %}">edit</a> {% endif %}
+				</dt>
+				<dd>{{ i.content|safe }}</dd>
+				<div class="text-end"><small>{{ i.modified }}</small></div>
+			</div>
+		{% endfor %}
+		</dl>			
+	</div>
+
+	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
+</div>		
+{% endblock content %}

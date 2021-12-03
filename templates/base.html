@@ -27,18 +27,18 @@
 </head>
 <body>
     <!-- Fixed navbar content -->
-    <nav class="navbar navbar-expand-xl navbar-light bg-white sticky-lg-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-lg-top">
         <div class="container-md">
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{%static 'img/logo-hdr.png'%}" class="align-text-top" width height="70px">
             </a>
             <div class="nav navbar-text" style="">
-                <h2>Language Learning & Technology</h2>
-                <h6>A refereed journal for second and foreign language scholars and educators.</h6>
+                <h2 class="fs-3">Language Learning & Technology</h2>
+                <h6 class="fs-6">A refereed journal for second and foreign language scholars and educators.</h6>
             </div> 
 
             <div class="collapse navbar-collapse navbar-right" id="lltmenu">
-                <div class="navbar-nav" style="font-size: .8.5em;">
+                <div class="navbar-nav" style="font-size: .85em;">
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                     <a class="nav-link" href="{% url 'page_slug_view' 'about' %}">About</a>
                     <a class="nav-link" href="{% url 'page_slug_view' 'people' %}">People</a>

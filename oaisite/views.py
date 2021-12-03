@@ -10,7 +10,7 @@ from haystack.generic_views import SearchView
 
 from oaiharvests.models import Community, Collection, Record, MetadataElement
 from .models import OAISitePage, OAISitePost
-from .forms import PageUpdateForm
+from .forms import PageUpdateForm, PostUpdateForm
 
 
 class HomeView(TemplateView):
@@ -26,6 +26,9 @@ class HomeView(TemplateView):
             context['latest'] = Collection.objects.all().order_by('-name')[0]
             context['title'] = context['latest'].title_tuple()
             context['toc'] = context['latest'].list_toc_by_page()
+
+            features = OAISitePost.objects.filter(featured=True).order_by('-featured_rank') 
+            if features: context['featured_posts'] = features[:3]
         except Exception as e:
             messages.info(self.request, e)
         
@@ -146,6 +149,40 @@ class PageViewPrivate(LoginRequiredMixin, DetailView):
         context['admin_edit'] = reverse('admin:lltsite_storypage_change', args=(self.get_object().id,))
         context['curr_page'] = self.get_object().id
         return context
+
+
+class PostListView(ListView):
+    model = OAISitePost
+    template_name = 'post_list_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PostListView, self).get_context_data(**kwargs)
+        context['object_list'] = self.object_list.order_by('-modified')
+        return context
+
+
+class PostView(DetailView):
+    model = OAISitePost
+    template_name = 'post_view.html'
+    context_object_name = 'post'
+
+    def get(self, request, *args, **kwargs):
+        if not self.get_object().published:
+            # will redirect to login required view
+            return redirect('staff_page_view', item=self.get_object().id)
+        return super(PostView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PostView, self).get_context_data(*args, **kwargs)
+        # context['admin_edit'] = reverse('admin:lltsite_storypage_change', args=(self.get_object().id,))
+        # context['curr_page'] = self.get_object().id
+        return context
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = OAISitePost
+    template_name = 'post_view_update.html'
+    form_class = PostUpdateForm
 
 
 class SearchHaystackView(SearchView):
