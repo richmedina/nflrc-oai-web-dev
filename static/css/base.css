@@ -29,15 +29,17 @@ dt.metadata {
 
 /******************************** Colors *******************************************************/
 
+
 .btn-color-flat { background-color: #d49b32; color: #fff; }
 
+.bg-llt-darkgray {background-color: #dee2e6;}
 .bg-llt-gray { background: #eeeeee; color: #666;}
 .bg-llt-white { background: #fff; color: #666;}
 
 .bg-llt-burgundy { background: #7d0000; color: #fff; }
 .llt-burgundy {color: #7d0000; border-color: #7d0000;}
 
-.bg-llt-gold { background: #DCAA3B; color: #fff; }
+.bg-llt-gold { background: #DCAA3B; color: #7d0000; }
 .llt-gold {color: #DCAA3B; border-color: #DCAA3B;}
 
 .lt-gray {color: #ddd;}

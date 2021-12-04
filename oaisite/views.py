@@ -1,7 +1,7 @@
 import json
 
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
 
@@ -26,9 +26,10 @@ class HomeView(TemplateView):
             context['latest'] = Collection.objects.all().order_by('-name')[0]
             context['title'] = context['latest'].title_tuple()
             context['toc'] = context['latest'].list_toc_by_page()
+            context['byline'] = OAISitePost.objects.get(pk=5)
 
             features = OAISitePost.objects.filter(featured=True).order_by('-featured_rank') 
-            if features: context['featured_posts'] = features[:3]
+            if features: context['featured_posts'] = features[:2]
         except Exception as e:
             messages.info(self.request, e)
         
@@ -144,11 +145,9 @@ class PageViewPrivate(LoginRequiredMixin, DetailView):
     template_name = 'page_view.html'
     context_object_name = 'page'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(PageViewPrivate, self).get_context_data(*args, **kwargs)
-        context['admin_edit'] = reverse('admin:lltsite_storypage_change', args=(self.get_object().id,))
-        context['curr_page'] = self.get_object().id
-        return context
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(PageViewPrivate, self).get_context_data(*args, **kwargs)
+    #     return context
 
 
 class PostListView(ListView):
@@ -157,7 +156,9 @@ class PostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
-        context['object_list'] = self.object_list.order_by('-modified')
+        if not self.request.user.is_staff:
+            self.object_list = self.object_list.filter(published=True)
+        context['object_list'] = self.object_list.order_by('-modified')    
         return context
 
 
@@ -169,7 +170,7 @@ class PostView(DetailView):
     def get(self, request, *args, **kwargs):
         if not self.get_object().published:
             # will redirect to login required view
-            return redirect('staff_page_view', item=self.get_object().id)
+            return redirect('staff_post_view', pk=self.get_object().id)
         return super(PostView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -183,6 +184,16 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = OAISitePost
     template_name = 'post_view_update.html'
     form_class = PostUpdateForm
+
+
+class PostViewPrivate(LoginRequiredMixin, DetailView):
+    model = OAISitePost
+    template_name = 'post_view.html'
+    context_object_name = 'post'
+
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(PostViewPrivate, self).get_context_data(*args, **kwargs)
+    #     return context
 
 
 class SearchHaystackView(SearchView):

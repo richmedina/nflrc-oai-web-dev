@@ -10,12 +10,13 @@
 	<div class="col-md-9">
 		<dl>
 		{% for i in object_list %}
-			<div class="shadow-sm p-2 mb-2">
+			<div class="shadow-sm p-2 mb-2 position-relative">
 				<dt>{{ i.title }} {% if i.featured %} <span class="badge bg-llt-gold">featured</span> {% endif %}
 				{% if user.is_staff %} <a href="{% url 'post_update_view' i.pk %}">edit</a> {% endif %}
 				</dt>
 				<dd>{{ i.content|safe }}</dd>
 				<div class="text-end"><small>{{ i.modified }}</small></div>
+				<a href="{% url 'post_view' i.pk %}" class="stretched-link">read</a>
 			</div>
 		{% endfor %}
 		</dl>			

@@ -29,6 +29,7 @@ from oaisite.views import (
     PostListView,
     PostView,
     PostUpdateView,
+    PostViewPrivate,
     PageViewPrivate,
     SearchHaystackView,
     # KeywordBrowseView,
@@ -66,6 +67,7 @@ urlpatterns = [
     path('post-archive/', PostListView.as_view(), name='post_list_view'),
     path('post/<int:pk>/', PostView.as_view(), name='post_view'),
     path('post/edit/<int:pk>/', PostUpdateView.as_view(), name='post_update_view'),
+    path('staff-post/<int:pk>/', PostViewPrivate.as_view(), name='staff_post_view'),
     path('search/', SearchHaystackView.as_view(), name='haystack_search'),
     # path('keys/$', KeywordBrowseView.as_view(), name='keyword_browse_view'),
 

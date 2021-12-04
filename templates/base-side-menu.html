@@ -1,10 +1,8 @@
 <!-- base-side-menu.html -->
 <div class="row">
 	<div class="col-md-12">
-		            					
-		<ul class="list-unstyled">
-			<li><a href="{% url 'page_slug_view' 'dorothy-chun-award' %}" class="btn btn-sm btn-block bg-llt-gold" style="font-size: 1.2em; letter-spacing: 1px; font-weight: bold;color:#7d0000;"><i class="fa fa-star" aria-hidden="true"></i> Best Paper Award</a></li>
-		</ul>
+		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'dorothy-chun-award' %}" class="btn btn-sm bg-llt-gold " style="font-size: 1.2em; letter-spacing: 1px; font-weight: bold;"><i class="fa fa-star" aria-hidden="true"></i> Best Paper Award</a>       					
+		
 		<ul class="list-unstyled">
 			<li><a href="{% url 'page_slug_view' 'permissions' %}" class="btn btn-md btn-link static_a_display">{% if curr_page == 7 %}<i class="fa fa-circle lt-gray"></i>{% endif %} Permissions</a></li>
 
@@ -24,9 +22,8 @@
 			<li><a href="{% url 'page_slug_view' 'special-issue-archive' %}" class="btn btn-md btn-link static_a_display">{% if curr_page == 17 %}<i class="fa fa-circle lt-gray"></i>{% endif %} Special Issues</a></li>		
 		</ul>
 
-		<p><a href="https://listserv.hawaii.edu/cgi-bin/wa?SUBED1=LLT-L&A=1" class="btn btn-sm btn-block bg-llt-gray" target="_blank">Subscribe</a></p>
-		<p><a href="{% url 'page_slug_view' 'contribute' %}" class="btn btn-sm btn-block bg-llt-gray">Donate</a></p>
+		<p class="d-grid gap-2"><a href="https://listserv.hawaii.edu/cgi-bin/wa?SUBED1=LLT-L&A=1" class="btn btn-sm bg-llt-darkgray" target="_blank">Subscribe</a></p>
+		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'contribute' %}" class="btn btn-sm bg-llt-darkgray">Donate</a></p>
+		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'copy-editing' %}" class="btn btn-sm bg-llt-gold">{% if curr_page == 18 %}<i class="fa fa-circle llt-burgundy"></i>{% endif %} Volunteer to Copy Edit</a></p>
 	</div>
 </div>
-
-{% if cur_page == 4%}<i class="fa fa-circle text-info"></i>{% endif %}
