@@ -195,7 +195,7 @@ class Collection(TimeStampedModel):
         toc = defaultdict()
 
         d = self.get_collection_date()
-        is_cap = d.year < 2020
+        is_cap = d.year > 2020
 
         if is_cap:
             toc_item_list = self.list_records_by_date_and_volume()
@@ -400,6 +400,7 @@ class Record(TimeStampedModel):
                 self.full_text = r.text
                 self.save()
             except Exception as e:
+                print(e)
                 return (self.pk, url, e)
         
         return None

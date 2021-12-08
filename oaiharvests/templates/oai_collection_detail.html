@@ -42,7 +42,7 @@
 	<h4><strong>Records</strong></h4>
 	
 	{% for i in records %}
-	<h5><strong>{{ i }}</strong> </h5>
+	<h5>{%if not i.full_text %}<span class="badge bg-danger fs-6">full text</span> {% endif %}<strong>{{ i }}</strong> </h5>
 		<dl>
 			<dt><a href="{% url 'item_full' i.pk %}">view record</a></dt>
 			{% if i.hdr_datestamp > i.modified %} <h3>Out of date</h3> {% endif %}

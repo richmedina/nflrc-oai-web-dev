@@ -9,7 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous"> -->
+    <script src="https://kit.fontawesome.com/1e9ed288eb.js" crossorigin="anonymous"></script>
+
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{% static 'img/apple-touch-icon.png' %}"/>
@@ -32,7 +34,7 @@
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{%static 'img/logo-hdr.png'%}" class="align-text-top" width height="70px">
             </a>
-            <div class="nav navbar-text" style="">
+            <div class="nav navbar-text text-secondary" style="">
                 <h2 class="fs-3">Language Learning & Technology</h2>
                 <h6 class="fs-6">A refereed journal for second and foreign language scholars and educators.</h6>
             </div> 
@@ -43,7 +45,6 @@
                     <a class="nav-link" href="{% url 'page_slug_view' 'about' %}">About</a>
                     <a class="nav-link" href="{% url 'page_slug_view' 'people' %}">People</a>
                     <a class="nav-link" href="{% url 'page_slug_view' 'contact' %}">Contact</a>
-                    {% if user.is_staff %}<a class="nav-link" href="{% url 'oai_repository_list' %}">OAI</a>{% endif %}
                 </div> 
                 <form class="d-flex" method="get" action="{% url 'haystack_search' %}" >
                     <input type="search" class="form-control" placeholder="Search for..." name="q" value="{{query}}" aria-label="Search">
@@ -74,11 +75,18 @@
             </div>
         </div>
     
-        <div class="content-block">{% block content %} {% endblock content %}</div>
+        <div>{% block content %} {% endblock content %}</div>
     </div>
 
     <!-- Footer -->
+    <div class="fixed-bottom bg-light static_a_display" role="navigation">
+        <div id="footer" class="container-fluid text-center text-muted border-start-0 border-top-1 border-end-0 border-bottom-0 border-secondary rounded-0" style="font-size: .7em;">
+            <div><strong>ISSN 1094-3501</strong></div>
+            <div>Published by the National Foreign Language Resource Center at the University of Hawai‘i at Mānoa (Honolulu, HI, U.S.A.) <br><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</div>
 
+            <div class="text-muted">Site maintained by the <a href="https://clt.manoa.hawaii.edu" target="_blank">Center for Language & Technology</a>, University of Hawai‘i at Mānoa <a href="{% url 'admin:index' %}"> <i class="fas fa-lock"> </i></a>{% if user.is_staff %} <a href="{% url 'oai_repository_list' %}"><i class="fas fa-book-open"></i></a>{% endif %}</div>
+        </div>
+    </div>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     

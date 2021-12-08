@@ -188,6 +188,7 @@ class OaiCollectionCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(OaiCollectionCreateView, self).get_context_data(**kwargs)        
         context['view_type'] = 'add new collection'
+        context['repository'] = self.community
         return context
 
 

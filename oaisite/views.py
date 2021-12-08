@@ -135,10 +135,12 @@ class PageView(DetailView):
         context['curr_page'] = self.get_object().id
         return context
 
+
 class PageUpdateView(LoginRequiredMixin, UpdateView):
     model = OAISitePage
     template_name = 'page_view_update.html'
     form_class = PageUpdateForm
+
 
 class PageViewPrivate(LoginRequiredMixin, DetailView):
     model = OAISitePage

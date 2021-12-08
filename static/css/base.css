@@ -1,9 +1,7 @@
 body {
   /*height: 100%;*/
   background: #fff !important;
-  /*padding: 15px;
-  padding-top: 100px;
-  padding-bottom: 50px;*/
+  padding-bottom: 100px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
 }
@@ -14,7 +12,7 @@ body {
 .static_a_display:active {color: #666; text-decoration: none;}
 
 .border-space {
-  border-bottom: solid 1px #ccc;
+  border-bottom: solid 1px #dee2e6;
 }
 
 dt.metadata {
@@ -32,7 +30,7 @@ dt.metadata {
 
 .btn-color-flat { background-color: #d49b32; color: #fff; }
 
-.bg-llt-darkgray {background-color: #dee2e6; color: #fff;}
+.bg-llt-darkgray {background-color: #dee2e6;}
 .bg-llt-gray { background: #eeeeee; color: #666;}
 .bg-llt-white { background: #fff; color: #666;}
 
@@ -43,6 +41,7 @@ dt.metadata {
 .llt-gold {color: #DCAA3B; border-color: #DCAA3B;}
 
 .lt-gray {color: #ddd;}
+.llt-darkgray {color: #dee2e6;}
 /******************************** End Colors **********************************************/
 
 

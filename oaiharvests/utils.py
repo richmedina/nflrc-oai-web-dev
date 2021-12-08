@@ -113,6 +113,7 @@ def batch_harvest_articles(collection_obj):
             element.element_type = 'bitstream_txt'
             element.element_data = json.dumps([bitstreams['bitstream_txt']])
             element.save()
+            record_obj.load_full_text()
         else:
             try:
                 record_obj = LocalRecord.objects.get(identifier=record.header.identifier)
@@ -287,10 +288,10 @@ class OAIUtils(object):
         # Filter record headers to build collection map from the community
         community_collections = {}  
         for i in record_headers:
-            # Iterate over associated sets looking for collections 
-            for j in i.setSpecs:     
+            # Iterate over associated sets looking for collections
+            for j in i.setSpecs:
                 if j[:3] == 'col':
-                    community_collections[j] = None  # register collection id 
+                    community_collections[j] = None  # register collection id
 
         # Map names to ids in collection map {setSpec: setName}
         # listsets oai request returns the 'setName' of the collection in metadata...       
