@@ -25,44 +25,61 @@
     <!-- LEFT PANEL -->
     <div class="col-md-9">
         
-        <!-- Featured Posts -->
+        <!-- Recent article and/or special issue -->
         <div class="row">
-        {% for i in featured_posts %}
+            <!-- Latest article display -->
             <div class="col-md pb-2">
                 <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 " style="height: 100%;">
                     <div class="card-body text-secondary bg-llt-darkgray">
-                        <dt class="card-title" >{{ i.title }}</dt>
-                        <dd class="card-text" style="font-size: 0.8rem">{{ i.content|safe|truncatewords:24 }}</dd>
-                        <a href="{% url 'post_view' i.pk %}" class="stretched-link"></a>     
+                        <span class="badge bg-llt-gold">Latest Article</span>
+                        <dt class="card-title">{{ data.records.items.5.title }} The evolution of identity research in CALL: From scripted chatrooms to engaged construction of the digital self</dt>
+                        <dd class="card-text" style="">{{ recent|safe|truncatewords:24 }}</dd>
+                        <a href="{% url 'home' %}" class="stretched-link"></a>     
                     </div>               
-                </div>
-                {% if forloop.last %} 
-                    <div class="text-end"><a href="{% url 'post_list_view' %}" class="link-secondary" style="font-size: 0.8em">... more news</a>
-                </div>
-                {% endif %}                         
-            </div>
-        {% endfor %}
-        </div>
-        
-        <!-- Special Issue display -->
-        <div class="card p-1 mb-3 border-0" style="max-width: 600px;">
-            <div class="row g-0">
-                <div class="col-md-3">
-                    <img src="{% static 'img/sample.jpg' %}" class="img-fluid border-0 rounded-0" alt="...">
-                </div>
-                <div class="col-md-9">
-                    <div class="card-body p-1 pt-0">
-                        <dt class="card-title">Special Issue: Big Data in Language Education & Research</dt>
-                        <dd class="card-text">December 2021</dd>
-                        <a href="" class="stretched-link"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </div>                         
+            </div>   
+            <!-- Special Issue display -->
+            <div class="col-md pb-2 ">
+                <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 p-0 " style="">
+                    <div class="row g-0" style=" height: 100%">  
 
+                       <!-- Special Issue Book cover -->
+                       <div class="col-md-5 bg-secondary text-white p-2 shadow-lg" style="font-family: Helvetica, Arial, sans-serif; width: 140px"> 
+                            
+                            <div class="row pt-2" style="font-size: .9em;">  
+                                <div class="col text-start lh-sm"><strong>Big Data in Language Education & Research and the Singularity of Being</strong> </div>
+                            </div>
+                            <div class="row" style="font-size: 0.4em;">
+                                <div class="col text-start pt-2 lh-sm">
+                                    <p>Edited by<br>
+                                    John Lennon<br>
+                                    Paul McCartney<br>
+                                    Ringo Starr<br>
+                                    George Harrison<br></p>
+                                </div>
+                            </div>
+                            <div class="row" style="font-size: 0.4em;">
+                                <div class="col text-start pt-2 lh-sm">December 2021</div>
+                            </div>
+
+                        </div>
+
+                        <!-- Special Issue meta -->
+                        <div class="col-md-7 bg-white text-secondary fst-italic">
+
+                                <!-- <dt class="card-title" >Special Issue: Big Data in Language Education & Research</dt> -->
+                                <dd class="card-text p-2">
+                                    <span class="badge bg-llt-gold">Special Issue</span> Drawing on past and current scholarship on digitally mediated communication in language learning, this review article examines the evolution of identity research in computer-assisted language learning (CALL) from the 1990s to the present day.</dd>
+                                <a href="{% url 'home' %}" class="stretched-link"></a>     
+                        </div>
+
+                    </div>               
+                </div>                         
+            </div>
+        </div>
         <!-- Current Issue -->
         <h3><a href="{% url 'collection' latest.identifier %}" class="static_a_display text-secondary">{{ title.0 }} </a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' latest.pk %}">Update</a></small>{% endif %}</h3>
-        <h4><strong>{{ title.1 }}</strong></h4>
+        <!-- <h4><strong>{{ title.1 }}</strong></h4> -->
 
         <div>
             <a href="#articles" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Articles <span class="badge bg-secondary  rounded-0">8</span></a> 
@@ -95,7 +112,7 @@
                     <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <div class="fs-6">
-                                <span class="badge rounded-0 bg-llt-gold">new</span>
+                                <span class="badge rounded-0 bg-llt-gold"></span>
                                 <strong>{{ doc.0 }}</strong>
                             </div>
                             <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
@@ -150,6 +167,16 @@
                 <a href="{% url 'page_slug_view' 'about' %}" class="stretched-link"></a>
             </div>
         </div>
+        {% for i in featured_posts %}
+            <div class="card border-0 rounded-0 pb-2">
+                <div class="card-body text-secondary bg-llt-darkgray">
+                    <span class="badge bg-secondary rounded-0">news</span>
+                    <dt class="card-title" >{{ i.title }}</dt>
+                    <dd class="card-text" style="font-size: 0.8rem">{{ i.content|safe|truncatewords:24 }}</dd>
+                    <a href="{% url 'post_view' i.pk %}" class="stretched-link"></a>     
+                </div>                                   
+            </div>
+        {% endfor %}
         {% include 'base-side-menu.html' %}
     </div>
 </div> <!-- End ROW 1 -->
