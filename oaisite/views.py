@@ -47,6 +47,24 @@ class PreviousIssuesView(TemplateView):
         context['curr_page'] = 'previous_issues'
         return context
 
+class SpecialIssuesView(TemplateView):
+    template_name = 'special_issues.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SpecialIssuesView, self).get_context_data(**kwargs)
+        journal = Community.objects.all()[0]
+        volumes = journal.list_collections_by_volume()
+        context['issues'] = []
+        for num, issues in volumes.items():
+            for j in issues:
+                title = j.title_tuple()
+                if title[1]:
+                    t = title[0].split(',')
+                    title = (t, title[1], title[2])
+                    context['issues'].append(title)
+        context['curr_page'] = 'special_issues'
+        return context
+
 
 class CommunityView(DetailView):
     model = Community

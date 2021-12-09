@@ -100,7 +100,7 @@ class Collection(TimeStampedModel):
         if pos >= 0:
             a = self.name[:pos].strip()
             b = self.name[pos:]
-            title = (a, b)
+            title = (a, b, self)
             
         return title
 

@@ -1,0 +1,22 @@
+<!-- special_issues.html -->
+{% extends 'base.html' %}
+
+{% block page_header %}
+	<h2>Special Issues <a href="{% url 'page_slug_view' 'previous-issues' %}" class="btn btn-md btn-link static_a_display">All Previous Issues</a></h2>
+{% endblock page_header %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-9">
+			<div class="row">		
+			{% for issue in issues %}
+				<div class="col-md-4 p-2 text-justify">			
+					{% include 'base-book-cover.html' %}				
+				</div>
+			{% endfor %}		
+			</div>		
+		</div>
+
+		<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
+	</div>		
+{% endblock content %}

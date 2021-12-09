@@ -19,6 +19,7 @@ from django.urls import path
 from oaisite.views import (
     HomeView, 
     PreviousIssuesView,
+    SpecialIssuesView,
     CommunityView, 
     CollectionListView, 
     CollectionView, 
@@ -56,6 +57,7 @@ from oaiharvests.views import (
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('previous-issues/', PreviousIssuesView.as_view(), name='previous_issues'),
+    path('special-issues/', SpecialIssuesView.as_view(), name='special_issues'),
     path('community/<pk>/', CommunityView.as_view(), name='community'),
     path('collections/', CollectionListView.as_view(), name='collection_list'),
     path('collection/<pk>/', CollectionView.as_view(), name='collection'),
