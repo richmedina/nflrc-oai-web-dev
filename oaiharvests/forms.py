@@ -86,4 +86,5 @@ class CreateCollectionForm(ModelForm):
             'identifier': forms.Select(choices=[]),
             'community': forms.HiddenInput()
         }
+
         

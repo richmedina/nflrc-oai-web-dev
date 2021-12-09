@@ -195,7 +195,7 @@ class OaiCollectionCreateView(CreateView):
 class OaiCollectionUpdateView(UpdateView):
     model = Collection
     template_name = 'oai_collection_form.html'
-    fields = ['name']
+    fields = ['name', 'edited_by']
 
     def get_context_data(self, **kwargs):
         context = super(OaiCollectionUpdateView, self).get_context_data(**kwargs)        

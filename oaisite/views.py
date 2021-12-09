@@ -60,8 +60,10 @@ class SpecialIssuesView(TemplateView):
                 title = j.title_tuple()
                 if title[1]:
                     t = title[0].split(',')
-                    title = (t, title[1], title[2])
+                    editors = title[2].edited_by.split(',')
+                    title = (t, title[1], title[2], editors)
                     context['issues'].append(title)
+
         context['curr_page'] = 'special_issues'
         return context
 
