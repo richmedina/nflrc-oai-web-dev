@@ -90,6 +90,7 @@ class Collection(TimeStampedModel):
     name = models.CharField(max_length=256, blank=True)
     community = models.ForeignKey(Community, null=True, blank=True, on_delete=models.CASCADE)
     last_harvest = models.DateTimeField(auto_now=True)
+    edited_by = models.TextField(default='', blank=True, help_text='Enter editor names (first then last). Separate multiple editor names with a comma.')
 
     def title_tuple(self):
         """Parses name of collection to enumerate 'special issue' titles if they exist.
