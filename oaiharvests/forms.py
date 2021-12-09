@@ -87,4 +87,14 @@ class CreateCollectionForm(ModelForm):
             'community': forms.HiddenInput()
         }
 
+
+class UpdateCollectionForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):        
+        super(UpdateCollectionForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update(size='95%')
+
+    class Meta:
+        model = Collection
+        fields = ['name', 'edited_by']
         

@@ -14,7 +14,7 @@ from django.contrib import messages
 import json
 
 from .models import Repository, Community, Collection, MetadataElement, Record
-from .forms import CreateRepositoryForm, CreateCommunityForm, CreateCollectionForm
+from .forms import CreateRepositoryForm, CreateCommunityForm, CreateCollectionForm, UpdateCollectionForm
 from .utils import OAIUtils, filter_existing_collections, batch_harvest_issues, batch_harvest_articles
 
 class OaiRepositoryListView(ListView):
@@ -195,7 +195,8 @@ class OaiCollectionCreateView(CreateView):
 class OaiCollectionUpdateView(UpdateView):
     model = Collection
     template_name = 'oai_collection_form.html'
-    fields = ['name', 'edited_by']
+    # fields = ['name', 'edited_by']
+    form_class = UpdateCollectionForm
 
     def get_context_data(self, **kwargs):
         context = super(OaiCollectionUpdateView, self).get_context_data(**kwargs)        
