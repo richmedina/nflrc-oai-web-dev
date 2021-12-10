@@ -2,16 +2,21 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
-<span><a href="{% url 'post_list_view' %}">archives</a></span>
-	<h2>News: {{ post.title }} 
-		{% if user.is_staff %}<small><a href="{% url 'post_update_view' post.pk %}">edit</a></small>{% endif %}
-	</h2>
-
+{% if post.featured %}<span class="badge bg-llt-gold rounded-0">Featured</span>{% endif %}<span class="badge bg-secondary rounded-0">News</span> <span class="oai-micro-fs-6">{{ post.modified|date:"M j Y" }}</span>
 {% endblock page_header %}
 
 {% block content %}
+<h2> {{ post.title }} 
+	{% if user.is_staff %}
+		<a href="{% url 'post_update_view' post.pk %}" class="btn btn-link btn-sm">edit</a> 
+		<a href="{% url 'home' %}" class="btn btn-link btn-sm">add new post</a>
+	{% endif %} 
+	<span><a href="{% url 'post_list_view' %}" class="btn btn-link btn-sm">view all</a></span>
+</h2>
 <div class="row">
-	<div class="col-md-9">{{ post.content|safe }}</div>
+	<div class="col-md-9">
+		<div class=" card border-5 border-start-0 border-top-0 border-end-0 border-bottom-1 border-secondary rounded-0">{{ post.content|safe }}</div>
+	</div>
 	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
 </div>		
 {% endblock content %}

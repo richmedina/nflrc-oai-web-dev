@@ -67,12 +67,22 @@ dt.metadata {
 }
 /******************************** End Centered Submenu **********************************************/
 
+/******************************** Custom Font Sizes **********************************************/
+.oai-micro-fs-4 {font-size: 0.4rem}
+.oai-micro-fs-6 {font-size: 0.6rem}
+.oai-micro-fs-8 {font-size: 0.8rem}
+
+
+/******************************** End Font Sizes **********************************************/
+
+
+
 
 /******************************** Box Borders **********************************************/
-.row .my-inner {
+/*.row .my-inner {
   padding: 5px;
   margin: 10px 1px 1px 1px;
-}
+}*/
 
 .list-group-item.hilite_row {
   background-color: #B2D1B2

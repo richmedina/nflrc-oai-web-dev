@@ -27,27 +27,27 @@
                 <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 " style="height: 100%;">
                     <div class="card-body text-secondary bg-llt-darkgray">
                         <span class="badge bg-llt-gold rounded-0">Latest Article</span>
-                        <dt class="card-title">{{ latest_article.0 }}</dt>
-                        <dd class="card-text" style="font-size: 0.8rem">
+                        <div class="card-title">{{ latest_article.0 }}</div>
+                        <div class="card-text oai-micro-fs-8">
                             {% for j in latest_article.1 %} 
                                 {{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}
                             {% endfor %}
-                        </dd>
-                          
+                        </div>                          
                     </div>
-                    <div class="card-footer text-secondary bg-llt-darkgray border-0" style="font-size: 0.8rem">{{ latest_article.4 }}</div>
+                    <div class="card-footer text-secondary bg-llt-darkgray border-0 oai-micro-fs-8">{{ latest_article.4 }}</div>
                     <a href="{{ latest_article.0.get_absolute_url }}" class="stretched-link"></a>               
                 </div>                         
             </div>
             {% else %}
+            <!-- Display a Featured Post -->
             <div class="col-md pb-2">
                 <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0" style="height: 100%;">
                     <div class="card-body text-secondary bg-llt-darkgray">
                         <span class="badge bg-secondary rounded-0">News</span>
-                        <dt class="card-title" >{{ featured_posts.1.title }}</dt>
-                        <dd class="card-text" style="font-size: 0.8rem">{{ featured_posts.1.content|safe|truncatewords:24 }}</dd>     
+                        <div class="card-title" >{{ featured_posts.1.title }}</div>
+                        <div class="card-text oai-micro-fs-8">{{ featured_posts.1.content|safe|truncatewords:24 }}</div>     
                     </div>
-                    <div class="card-footer border-0 text-secondary bg-llt-darkgray" style="font-size: 0.6rem">{{ featured_posts.1.modified | date:"M j Y"}}</div>
+                    <div class="card-footer border-0 text-secondary bg-llt-darkgray oai-micro-fs-6">{{ featured_posts.1.modified | date:"M j Y"}}</div>
                     <a href="{% url 'post_view' featured_posts.1.pk %}" class="stretched-link"></a>                                   
                 </div> 
             </div>           
@@ -58,19 +58,16 @@
             <div class="col-md pb-2 ">
                 <!-- Special Issue Book cover -->
                 <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 bk-cover-bg-{{special_issue.color_code}} text-white lh-sm" style="height: 100%;">
-                    <div class="card-body text-break">
+                    <div class="card-body">
                         <span class="badge bg-llt-gold rounded-0">Latest Special Issue</span>
-                        <p style="font-size: 1.0rem; height: 40%"><strong>{{special_issue.subtitle|slice:"14:"}}</strong></p><br>
-                        <p style="font-size: 0.4rem;">
+                        <p style="height: 36%">{{special_issue.subtitle|slice:"14:"}}</p><br>
+                        <p class="oai-micro-fs-4">
                             {% if special_issue.editors %}
-                                Edited by <br>
-                                {% for e in special_issue.editors %}
-                                    {{e}}<br>
-                                {% endfor %} 
+                                Edited by <br>{% for e in special_issue.editors %}{{e}}<br>{% endfor %} 
                             {% endif %}     
                         </p>
                     </div>        
-                    <div class="card-footer border-0 bk-cover-bg-{{special_issue.color_code}} text-white" style="font-size: 0.3rem;">{{special_issue.title}}<br>{{special_issue.date}}</div>
+                    <div class="card-footer border-0 bk-cover-bg-{{special_issue.color_code}} text-white oai-micro-fs-4">{{special_issue.title}}<br>{{special_issue.date}}</div>
                     <a href="{% url 'collection' special_issue.object.pk %}" class="stretched-link"></a>
                 </div>
             </div>
@@ -165,7 +162,7 @@
         <div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
             <div class="card-body">
                 <dt class="card-title">{{ byline.title }}</dt>
-                <dd class="card-text" style="font-size: .8em">{{ byline.content|safe }}</dd>
+                <dd class="card-text oai-micro-fs-6">{{ byline.content|safe }}</dd>
                 <a href="{% url 'page_slug_view' 'about' %}" class="stretched-link"></a>
             </div>
         </div>
@@ -174,9 +171,9 @@
                 <div class="card-body text-secondary bg-llt-darkgray">
                     <span class="badge bg-secondary rounded-0">News</span>
                     <dt class="card-title" >{{ i.title }}</dt>
-                    <dd class="card-text" style="font-size: 0.8rem">{{ i.content|safe|truncatewords:12 }}</dd>     
+                    <dd class="card-text oai-micro-fs-8">{{ i.content|safe|truncatewords:12 }}</dd>     
                 </div>
-                <div class="card-footer border-0 text-secondary bg-llt-darkgray" style="font-size: 0.6rem">{{ i.modified | date:"M j Y"}}</div>
+                <div class="card-footer border-0 text-secondary bg-llt-darkgray oai-micro-fs-6">{{ i.modified | date:"M j Y"}}</div>
                 <a href="{% url 'post_view' i.pk %}" class="stretched-link"></a>                               
             </div>
         {% endfor %}

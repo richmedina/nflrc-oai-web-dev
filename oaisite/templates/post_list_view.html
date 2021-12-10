@@ -8,18 +8,18 @@
 {% block content %}
 <div class="row">
 	<div class="col-md-9">
-		<dl>
-		{% for i in object_list %}
-			<div class="shadow-sm p-2 mb-2 position-relative">
-				<dt>{{ i.title }} {% if i.featured %} <span class="badge bg-llt-gold">featured</span> {% endif %}
-				{% if user.is_staff %} <a href="{% url 'post_update_view' i.pk %}">edit</a> {% endif %}
-				</dt>
-				<dd>{{ i.content|safe }}</dd>
-				<div class="text-end"><small>{{ i.modified }}</small></div>
-				<a href="{% url 'post_view' i.pk %}" class="stretched-link">read</a>
-			</div>
-		{% endfor %}
-		</dl>			
+		<div class="row">
+			{% for i in object_list %}
+			<div class="col-md-3 mb-3">
+				<div class="card shadow-sm p-2 position-relative border-5 border-start-0 border-top-0 border-end-0 border-bottom-1 border-secondary rounded-0" style="height: 100%;">
+					<div class="card-title"><h6>{% if i.featured %}<span class="badge bg-llt-gold rounded-0 oai-micro-fs-4">featured</span>{% endif %}</h6>{{ i.title }}</div>
+					<div class="card-body oai-micro-fs-8">{{ i.content|safe|truncatewords:24 }}</div>
+					<div class="card-footer text-end bg-white border-0 oai-micro-fs-6">{{ i.modified|date:"M j Y" }}</div>
+					<a href="{% url 'post_view' i.pk %}" class="btn btn-link btn-sm stretched-link"></a>
+				</div>
+			</div>	
+			{% endfor %}
+		</div>
 	</div>
 
 	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
