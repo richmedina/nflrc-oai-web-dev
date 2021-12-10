@@ -9,7 +9,7 @@
 <h2> {{ post.title }} 
 	{% if user.is_staff %}
 		<a href="{% url 'post_update_view' post.pk %}" class="btn btn-link btn-sm">edit</a> 
-		<a href="{% url 'home' %}" class="btn btn-link btn-sm">add new post</a>
+		<a href="{% url 'post_create_view' %}" class="btn btn-link btn-sm">add new post</a>
 	{% endif %} 
 	<span><a href="{% url 'post_list_view' %}" class="btn btn-link btn-sm">view all</a></span>
 </h2>

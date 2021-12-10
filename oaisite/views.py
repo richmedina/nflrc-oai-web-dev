@@ -205,6 +205,12 @@ class PostView(DetailView):
         return context
 
 
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = OAISitePost
+    template_name = 'post_view_create.html'
+    form_class = PostUpdateForm
+    
+
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = OAISitePost
     template_name = 'post_view_update.html'

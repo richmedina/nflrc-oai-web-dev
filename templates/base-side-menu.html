@@ -20,7 +20,7 @@
 
 			<li><a href="{% url 'previous_issues' %}" class="btn btn-sm btn-link static_a_display border-0 rounded-0 d-grid gap-2 text-start {% if curr_page == 'previous_issues' %}bg-llt-darkgray{% endif %}"> Previous Issues</a></li>
 
-			<li><a href="{% url 'special_issues' %}" class="btn btn-sm btn-link static_a_display border-0 rounded-0 d-grid gap-2 text-start {% if curr_page == 12 %}bg-llt-darkgray{% endif %}"> Special Issues</a></li>		
+			<li><a href="{% url 'special_issues' %}" class="btn btn-sm btn-link static_a_display border-0 rounded-0 d-grid gap-2 text-start {% if curr_page == 'special_issues' %}bg-llt-darkgray{% endif %}"> Special Issues</a></li>		
 		</ul>
 
 		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'copy-editing' %}" class="btn btn-sm bg-llt-gold border-0 rounded-0">{% if curr_page == 18 %}<i class="fa fa-circle llt-burgundy"></i>{% endif %} Volunteer to Copy Edit</a></p>
