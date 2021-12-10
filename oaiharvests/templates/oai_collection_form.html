@@ -12,7 +12,7 @@
 	    {% endfor %}
 	{% endif %}
 	
-	<form action="" method="post" size='400'>{% csrf_token %}
+	<form action="" method="post">{% csrf_token %}
     	{{ form.as_p }}
     	<input type="submit" value="{{ view_type|title }}" />
 	</form>

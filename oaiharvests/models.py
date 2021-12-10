@@ -94,6 +94,7 @@ class Collection(TimeStampedModel):
     community = models.ForeignKey(Community, null=True, blank=True, on_delete=models.CASCADE)
     last_harvest = models.DateTimeField(auto_now=True)
     edited_by = models.TextField(default='', blank=True, help_text='Enter editor names (first then last). Separate multiple editor names with a comma.')
+    description = models.TextField(default='', blank=True, help_text='Provide a short description of this collection.')
 
     
     def editor_list(self):
@@ -105,7 +106,8 @@ class Collection(TimeStampedModel):
     def title_tuple(self):
         """Parses name of collection to enumerate 'special issue' titles if they exist.
         """
-        title = {'title': self.name, 'date': '', 'subtitle': '', 'object': self, 'editors': self.editor_list()}
+        color_code = (self.get_collection_date().year % 7) % 3
+        title = {'title': self.name, 'date': '', 'subtitle': '', 'object': self, 'editors': self.editor_list(), 'color_code': color_code}
         try:
             pos = self.name.lower().find(',')
             if pos >= 0:

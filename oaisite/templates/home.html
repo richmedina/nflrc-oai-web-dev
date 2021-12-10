@@ -12,13 +12,6 @@
 </ul>
 {% endif %}
 
-{% block page_header %}
-    <div class="row">    
-
-
-    </div>
-{% endblock page_header %}
-
 {% block content %}
 <!-- ROW 1 -->
 <div class="row">
@@ -27,52 +20,54 @@
         
         <!-- Recent article and/or special issue -->
         <div class="row">
+
             <!-- Latest article display -->
+            {% if latest_article %}
             <div class="col-md pb-2">
                 <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 " style="height: 100%;">
                     <div class="card-body text-secondary bg-llt-darkgray">
                         <span class="badge bg-llt-gold">Latest Article</span>
-                        <dt class="card-title">{{ latest_issue }} The evolution of identity research in CALL: From scripted chatrooms to engaged construction of the digital self</dt>
-                        <dd class="card-text" style="">{{ recent|safe|truncatewords:24 }}</dd>
-                        <a href="{% url 'home' %}" class="stretched-link"></a>     
+                        <dt class="card-title">{{ latest_article.0 }}</dt>
+                        <dd class="card-text" style="font-size: 0.8rem">
+                            {% for j in latest_article.1 %} 
+                                {{ j }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </dd>
+                        <dd class="card-text" style="font-size: 0.8rem">{{ latest_article.4 }}</dd>
+                        <a href="{{ latest_article.0.get_absolute_url }}" class="stretched-link"></a>  
                     </div>               
                 </div>                         
-            </div>   
-            <!-- Special Issue display -->
-            <div class="col-md pb-2 ">
-                <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 p-0 " style="height: 100%;">
-                    <div class="row g-0" style="">
-                        <!-- Special Issue Book cover -->
-                        <div class="col-md-5 bg-secondary text-white p-0" style="font-family: Helvetica, Arial, sans-serif; max-width: 240px">                            
-                            <div class="card border-0 rounded-0 bg-secondary text-white lh-sm shadow-sm " style="max-width: 240px">
-                                <div class="card-body text-break">
-                                    <p style="font-size: 1.0rem; height: 40%"><strong>{{special_issue.subtitle}}</strong></p><br>
-                                    <p style="font-size: 0.4rem;">
-                                        Edited by<br>
-                                        {% for e in special_issue_editors %}
-                                            {{e}}<br>
-                                        {% endfor %}      
-                                    </p>
-                                </div>        
-                                <div class="card-footer border-0  bg-secondary text-white" style="font-size: 0.3rem;">{{special_issue.title}}<br>{{special_issue.date}}</div>
-                                
-                            </div>
-                        </div>
+            </div>  
+            {% endif %}
 
-                        <!-- Special Issue meta -->
-                        <div class="col-md-7 bg-white text-secondary">
-                                <!-- <dt class="card-title" >Special Issue: Big Data in Language Education & Research</dt> -->
-                                <dd class="card-text p-2" style="font-size: 0.9rem;">
-                                    <span class="badge bg-llt-gold">Special Issue</span></dd>   
-                        </div>
-                    </div>
-                    <a href="{% url 'collection' special_issue.object %}" class="stretched-link"></a>              
-                </div>                         
+            <!-- Special Issue display -->
+            {% if special_issue %}
+            <div class="col-md pb-2 ">
+                <!-- Special Issue Book cover -->
+                <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 p-0 bk-cover-bg-{{special_issue.color_code}} text-white lh-sm" style="height: 100%;">
+                    <div class="card-body text-break">
+                        <p style="font-size: 1.0rem; height: 40%"><strong>{{special_issue.subtitle}}</strong></p><br>
+                        <p style="font-size: 0.4rem;">
+                            {% if special_issue.editors %}
+                                Edited by <br>
+                                {% for e in special_issue.editors %}
+                                    {{e}}<br>
+                                {% endfor %} 
+                            {% endif %}     
+                        </p>
+                    </div>        
+                    <div class="card-footer border-0  bk-cover-bg-{{special_issue.color_code}} text-white" style="font-size: 0.3rem;">{{special_issue.title}}<br>{{special_issue.date}}</div>
+                    <a href="{% url 'collection' special_issue.object.pk %}" class="stretched-link"></a>
+                </div>
             </div>
+            {% endif %}
+
         </div>
+            
+
         <!-- Current Issue -->
-        <h3><a href="{% url 'collection' latest.identifier %}" class="static_a_display text-secondary">{{ title.0 }} </a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' latest.pk %}">Update</a></small>{% endif %}</h3>
-        <h4><strong>{{ title.2 }}</strong></h4>
+        <h3><a href="{% url 'collection' current_vol.object.identifier %}" class="static_a_display text-secondary">{{ current_vol.title }} {{ current_vol.date }}</a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' current_vol.object.pk %}">Update</a></small>{% endif %}</h3>
+        <h4><strong>{{ current_vol.subtitle }}</strong></h4>
 
         <div>
             <a href="#articles" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Articles <span class="badge bg-secondary  rounded-0">8</span></a> 
@@ -80,9 +75,9 @@
             <a href="#reviews" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Reviews <span class="badge bg-secondary  rounded-0">3</span></a>
         </div>
 
-        {% if toc.Preface %}<h4 class="border-space">&nbsp;</h4>{% endif %}
+        {% if current_vol_toc.Preface %}<h4 class="border-space">&nbsp;</h4>{% endif %}
 
-        {% for sub_type, data in toc.Preface.items %} 
+        {% for sub_type, data in current_vol_toc.Preface.items %} 
             {% for doc in data.records %}
                 <div class="row">
                     <div class="col-11"> 
@@ -96,8 +91,8 @@
             {% endfor %}
         {% endfor %}
 
-        {% if toc.Article %}<h4 id="articles" class="border-space">Articles</h4>{% endif %}
-        {% for sub_type, data in toc.Article.items %} 
+        {% if current_vol_toc.Article %}<h4 id="articles" class="border-space">Articles</h4>{% endif %}
+        {% for sub_type, data in current_vol_toc.Article.items %} 
             <strong>{{ sub_type }}</strong>
             <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
             {% for doc in data.records %}
@@ -116,8 +111,8 @@
             {% endfor %}
         {% endfor %}
     
-        {% if toc.Column %}<h4 id="columns" class="border-space">Columns</h4>{% endif %}
-        {% for sub_type, data in toc.Column.items %} 
+        {% if current_vol_toc.Column %}<h4 id="columns" class="border-space">Columns</h4>{% endif %}
+        {% for sub_type, data in current_vol_toc.Column.items %} 
             <strong>{{ sub_type }}</strong>
             <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
             {% for doc in data.records %}
@@ -133,8 +128,8 @@
             {% endfor %}
         {% endfor %}
     
-        {% if toc.Review %}<h4 id="reviews" class="border-space">Reviews</h4>{% endif %}
-        {% for sub_type, data in toc.Review.items %}
+        {% if current_vol_toc.Review %}<h4 id="reviews" class="border-space">Reviews</h4>{% endif %}
+        {% for sub_type, data in current_vol_toc.Review.items %}
             <strong>{{ sub_type }}</strong>
             <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
             {% for doc in data.records %}

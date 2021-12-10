@@ -15,7 +15,8 @@
 	{% endif %}
 
 	<div>
-		<a id="harvest_btn" class="btn btn-sm btn-warning" href="#">Harvest</a> <span>last harvested on {{ object.last_harvest }}</span> 		
+		<a id="harvest_btn" class="btn btn-sm btn-warning" href="#">Harvest</a> <span>last harvested on {{ object.last_harvest }}</span> 
+
 	</div>
 
 	<div id="modalwait" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
@@ -29,8 +30,10 @@
 	  </div>
 	</div>
 
-	<h4>{{ object.name }} <span><a class="btn btn-link" href="{% url 'collection' object.pk %}">view on site</a></span></h4>
-
+	<h4>{{ object.name }}</h4>
+		<span><a class="btn btn-link" href="{% url 'oai_collection_edit' object.identifier %}"> edit </a></span>
+		<span><a class="btn btn-link" href="{% url 'collection' object.pk %}"> view on site </a> </span>
+	
 	<dl>
 		<dt> OAI Identifier: {{ object.identifier }}</dt>
 		<dt> Community: {{ object.community }}</dt>

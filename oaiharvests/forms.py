@@ -96,5 +96,5 @@ class UpdateCollectionForm(ModelForm):
 
     class Meta:
         model = Collection
-        fields = ['name', 'edited_by']
+        fields = ['name', 'edited_by', 'description']
         

@@ -42,6 +42,13 @@ dt.metadata {
 
 .lt-gray {color: #ddd;}
 .llt-darkgray {color: #dee2e6;}
+
+.bk-cover-bg-0 {background-color: #EC407A;} /* pink */
+
+.bk-cover-bg-1 {background-color: #607D8B;} /* slate gray */
+
+.bk-cover-bg-2 {background-color: #0288D1;} /* blue */
+
 /******************************** End Colors **********************************************/
 
 

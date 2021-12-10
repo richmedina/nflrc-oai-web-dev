@@ -23,13 +23,16 @@ class HomeView(TemplateView):
             journal = Community.objects.all()[0]
             context['keywords'] =  journal.aggregate_keywords()
             context['volumes'] = journal.list_collections_by_volume()
-            context['latest'] = Collection.objects.all().order_by('-name')[0]
-            context['latest_issue'] = context['latest'].list_records().order_by('-modified')[0]
-            context['title'] = context['latest'].title_tuple()
-            context['toc'] = context['latest'].list_toc_by_page()
-
+            
+            current_vol = Collection.objects.all().order_by('-name')[0]
+            context['current_vol'] = current_vol.title_tuple()
+            context['current_vol_toc'] = current_vol.list_toc_by_page()
+    
+            articles = context['current_vol_toc']['Article'].items()
+            article_data = next(iter(articles))[1]
+            context['latest_article'] = article_data['records'][0]
+            
             latest_special_issue = journal.get_special_issues()[0]
-
             context['special_issue'] = latest_special_issue.title_tuple()
             
             context['byline'] = OAISitePost.objects.get(pk=5)
@@ -53,6 +56,7 @@ class PreviousIssuesView(TemplateView):
         context['curr_page'] = 'previous_issues'
         return context
 
+
 class SpecialIssuesView(TemplateView):
     template_name = 'special_issues.html'
 
@@ -61,11 +65,6 @@ class SpecialIssuesView(TemplateView):
         journal = Community.objects.all()[0]
         context['special_issues'] = []
         for j in journal.get_special_issues():
-            # title = j.title_tuple()
-            # if title[1]:
-            #     t = title[0].split(',')
-            #     editors = title[2].edited_by.split(',')
-            #     title = (t, title[1], title[2], editors)
             context['special_issues'].append(j.title_tuple())
 
         context['curr_page'] = 'special_issues'
