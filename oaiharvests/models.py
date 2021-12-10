@@ -69,6 +69,9 @@ class Community(TimeStampedModel):
 
         return volumes_group
 
+    def get_special_issues(self):
+        return self.collection_set.filter(name__contains='Special Issue').order_by('-name')
+
     def aggregate_keywords(self):
         keywords = []
         for i in MetadataElement.objects.all().filter(element_type='subject'):
@@ -92,16 +95,32 @@ class Collection(TimeStampedModel):
     last_harvest = models.DateTimeField(auto_now=True)
     edited_by = models.TextField(default='', blank=True, help_text='Enter editor names (first then last). Separate multiple editor names with a comma.')
 
+    
+    def editor_list(self):
+        if self.edited_by:
+            return self.edited_by.split(',')
+        else:
+            return []
+
     def title_tuple(self):
         """Parses name of collection to enumerate 'special issue' titles if they exist.
         """
-        q = 'special issue'
-        title = (self.name, '')
-        pos = self.name.lower().find(q)
-        if pos >= 0:
-            a = self.name[:pos].strip()
-            b = self.name[pos:]
-            title = (a, b, self)
+        title = {'title': self.name, 'date': '', 'subtitle': '', 'object': self, 'editors': self.editor_list()}
+        try:
+            pos = self.name.lower().find(',')
+            if pos >= 0:
+                vol_name = self.name[:pos].strip()
+                vol_date = self.name[pos+1:].strip()
+
+            title['title'] = vol_name
+            title['date'] = vol_date
+
+            pos = vol_date.lower().find('special issue')
+            if pos >= 0:
+                title['date'] = vol_date[:pos].strip()  # collection date segment up to "Special Issue"
+                title['subtitle'] = vol_date[pos:].strip()  # remaining title string
+        except:
+            pass
             
         return title
 

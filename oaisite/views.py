@@ -24,8 +24,14 @@ class HomeView(TemplateView):
             context['keywords'] =  journal.aggregate_keywords()
             context['volumes'] = journal.list_collections_by_volume()
             context['latest'] = Collection.objects.all().order_by('-name')[0]
+            context['latest_issue'] = context['latest'].list_records().order_by('-modified')[0]
             context['title'] = context['latest'].title_tuple()
             context['toc'] = context['latest'].list_toc_by_page()
+
+            latest_special_issue = journal.get_special_issues()[0]
+
+            context['special_issue'] = latest_special_issue.title_tuple()
+            
             context['byline'] = OAISitePost.objects.get(pk=5)
 
             features = OAISitePost.objects.filter(featured=True).order_by('-featured_rank') 
@@ -53,16 +59,14 @@ class SpecialIssuesView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(SpecialIssuesView, self).get_context_data(**kwargs)
         journal = Community.objects.all()[0]
-        volumes = journal.list_collections_by_volume()
-        context['issues'] = []
-        for num, issues in volumes.items():
-            for j in issues:
-                title = j.title_tuple()
-                if title[1]:
-                    t = title[0].split(',')
-                    editors = title[2].edited_by.split(',')
-                    title = (t, title[1], title[2], editors)
-                    context['issues'].append(title)
+        context['special_issues'] = []
+        for j in journal.get_special_issues():
+            # title = j.title_tuple()
+            # if title[1]:
+            #     t = title[0].split(',')
+            #     editors = title[2].edited_by.split(',')
+            #     title = (t, title[1], title[2], editors)
+            context['special_issues'].append(j.title_tuple())
 
         context['curr_page'] = 'special_issues'
         return context
@@ -96,7 +100,7 @@ class CollectionView(DetailView):
         context = super(CollectionView, self).get_context_data(**kwargs)
         context['toc'] = self.get_object().list_toc_by_page()
         context['size'] = len(context['toc'])
-        context['title'] = self.get_object().title_tuple()
+        context['issue'] = self.get_object().title_tuple()
         return context
 
 

@@ -1,16 +1,16 @@
 <!-- base-book-cover.html -->
 <div class="card rounded-0 bg-secondary text-white lh-sm shadow-sm " style="height: 320px; max-width: 240px">
     <div class="card-body text-break">
-		<p style="font-size: 1.0rem; height: 40%"><strong>{{issue.1}}</strong></p><br>
+		<p style="font-size: 1.0rem; height: 40%"><strong>{{issue.subtitle}}</strong></p><br>
     	<p style="font-size: 0.4rem;">
-            {% if issue.3 %}
-        		<!-- Edited by <br> -->
-                {% for editor in issue.3 %}
+            {% if issue.editors %}
+        		Edited by <br>
+                {% for editor in issue.editors %}
                     {{editor}}<br>
                 {% endfor %}
             {% endif %}            
         </p>
     </div>        
-    <div class="card-footer border-0  bg-secondary text-white" style="font-size: 0.3rem;">{{issue.0.0}}<br>{{issue.0.1}}</div>
-    <a href="{% url 'collection' issue.2.pk %}" class="stretched-link"></a>
+    <div class="card-footer border-0  bg-secondary text-white" style="font-size: 0.3rem;">{{issue.title}}<br>{{issue.date}}</div>
+    <a href="{% url 'collection' issue.object.pk %}" class="stretched-link"></a>
 </div>

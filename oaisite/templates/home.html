@@ -32,7 +32,7 @@
                 <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 " style="height: 100%;">
                     <div class="card-body text-secondary bg-llt-darkgray">
                         <span class="badge bg-llt-gold">Latest Article</span>
-                        <dt class="card-title">{{ data.records.items.5.title }} The evolution of identity research in CALL: From scripted chatrooms to engaged construction of the digital self</dt>
+                        <dt class="card-title">{{ latest_issue }} The evolution of identity research in CALL: From scripted chatrooms to engaged construction of the digital self</dt>
                         <dd class="card-text" style="">{{ recent|safe|truncatewords:24 }}</dd>
                         <a href="{% url 'home' %}" class="stretched-link"></a>     
                     </div>               
@@ -40,46 +40,39 @@
             </div>   
             <!-- Special Issue display -->
             <div class="col-md pb-2 ">
-                <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 p-0 " style="">
-                    <div class="row g-0" style=" height: 100%">  
-
-                       <!-- Special Issue Book cover -->
-                       <div class="col-md-5 bg-secondary text-white p-2 shadow-lg" style="font-family: Helvetica, Arial, sans-serif; width: 140px"> 
-                            
-                            <div class="row pt-2" style="font-size: .9em;">  
-                                <div class="col text-start lh-sm"><strong>Big Data in Language Education & Research and the Singularity of Being</strong> </div>
+                <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 p-0 " style="height: 100%;">
+                    <div class="row g-0" style="">
+                        <!-- Special Issue Book cover -->
+                        <div class="col-md-5 bg-secondary text-white p-0" style="font-family: Helvetica, Arial, sans-serif; max-width: 240px">                            
+                            <div class="card border-0 rounded-0 bg-secondary text-white lh-sm shadow-sm " style="max-width: 240px">
+                                <div class="card-body text-break">
+                                    <p style="font-size: 1.0rem; height: 40%"><strong>{{special_issue.subtitle}}</strong></p><br>
+                                    <p style="font-size: 0.4rem;">
+                                        Edited by<br>
+                                        {% for e in special_issue_editors %}
+                                            {{e}}<br>
+                                        {% endfor %}      
+                                    </p>
+                                </div>        
+                                <div class="card-footer border-0  bg-secondary text-white" style="font-size: 0.3rem;">{{special_issue.title}}<br>{{special_issue.date}}</div>
+                                
                             </div>
-                            <div class="row" style="font-size: 0.4em;">
-                                <div class="col text-start pt-2 lh-sm">
-                                    <p>Edited by<br>
-                                    John Lennon<br>
-                                    Paul McCartney<br>
-                                    Ringo Starr<br>
-                                    George Harrison<br></p>
-                                </div>
-                            </div>
-                            <div class="row" style="font-size: 0.4em;">
-                                <div class="col text-start pt-2 lh-sm">December 2021</div>
-                            </div>
-
                         </div>
 
                         <!-- Special Issue meta -->
-                        <div class="col-md-7 bg-white text-secondary fst-italic">
-
+                        <div class="col-md-7 bg-white text-secondary">
                                 <!-- <dt class="card-title" >Special Issue: Big Data in Language Education & Research</dt> -->
-                                <dd class="card-text p-2">
-                                    <span class="badge bg-llt-gold">Special Issue</span> Drawing on past and current scholarship on digitally mediated communication in language learning, this review article examines the evolution of identity research in computer-assisted language learning (CALL) from the 1990s to the present day.</dd>
-                                <a href="{% url 'home' %}" class="stretched-link"></a>     
+                                <dd class="card-text p-2" style="font-size: 0.9rem;">
+                                    <span class="badge bg-llt-gold">Special Issue</span></dd>   
                         </div>
-
-                    </div>               
+                    </div>
+                    <a href="{% url 'collection' special_issue.object %}" class="stretched-link"></a>              
                 </div>                         
             </div>
         </div>
         <!-- Current Issue -->
         <h3><a href="{% url 'collection' latest.identifier %}" class="static_a_display text-secondary">{{ title.0 }} </a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' latest.pk %}">Update</a></small>{% endif %}</h3>
-        <!-- <h4><strong>{{ title.1 }}</strong></h4> -->
+        <h4><strong>{{ title.2 }}</strong></h4>
 
         <div>
             <a href="#articles" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Articles <span class="badge bg-secondary  rounded-0">8</span></a> 
