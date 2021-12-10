@@ -26,27 +26,41 @@
             <div class="col-md pb-2">
                 <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 " style="height: 100%;">
                     <div class="card-body text-secondary bg-llt-darkgray">
-                        <span class="badge bg-llt-gold">Latest Article</span>
+                        <span class="badge bg-llt-gold rounded-0">Latest Article</span>
                         <dt class="card-title">{{ latest_article.0 }}</dt>
                         <dd class="card-text" style="font-size: 0.8rem">
                             {% for j in latest_article.1 %} 
-                                {{ j }}{% if not forloop.last %}, {% endif %}
+                                {{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}
                             {% endfor %}
                         </dd>
-                        <dd class="card-text" style="font-size: 0.8rem">{{ latest_article.4 }}</dd>
-                        <a href="{{ latest_article.0.get_absolute_url }}" class="stretched-link"></a>  
-                    </div>               
+                          
+                    </div>
+                    <div class="card-footer text-secondary bg-llt-darkgray border-0" style="font-size: 0.8rem">{{ latest_article.4 }}</div>
+                    <a href="{{ latest_article.0.get_absolute_url }}" class="stretched-link"></a>               
                 </div>                         
-            </div>  
+            </div>
+            {% else %}
+            <div class="col-md pb-2">
+                <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0" style="height: 100%;">
+                    <div class="card-body text-secondary bg-llt-darkgray">
+                        <span class="badge bg-secondary rounded-0">News</span>
+                        <dt class="card-title" >{{ featured_posts.1.title }}</dt>
+                        <dd class="card-text" style="font-size: 0.8rem">{{ featured_posts.1.content|safe|truncatewords:24 }}</dd>     
+                    </div>
+                    <div class="card-footer border-0 text-secondary bg-llt-darkgray" style="font-size: 0.6rem">{{ featured_posts.1.modified | date:"M j Y"}}</div>
+                    <a href="{% url 'post_view' featured_posts.1.pk %}" class="stretched-link"></a>                                   
+                </div> 
+            </div>           
             {% endif %}
 
             <!-- Special Issue display -->
             {% if special_issue %}
             <div class="col-md pb-2 ">
                 <!-- Special Issue Book cover -->
-                <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 p-0 bk-cover-bg-{{special_issue.color_code}} text-white lh-sm" style="height: 100%;">
+                <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0 bk-cover-bg-{{special_issue.color_code}} text-white lh-sm" style="height: 100%;">
                     <div class="card-body text-break">
-                        <p style="font-size: 1.0rem; height: 40%"><strong>{{special_issue.subtitle}}</strong></p><br>
+                        <span class="badge bg-llt-gold rounded-0">Latest Special Issue</span>
+                        <p style="font-size: 1.0rem; height: 40%"><strong>{{special_issue.subtitle|slice:"14:"}}</strong></p><br>
                         <p style="font-size: 0.4rem;">
                             {% if special_issue.editors %}
                                 Edited by <br>
@@ -56,7 +70,7 @@
                             {% endif %}     
                         </p>
                     </div>        
-                    <div class="card-footer border-0  bk-cover-bg-{{special_issue.color_code}} text-white" style="font-size: 0.3rem;">{{special_issue.title}}<br>{{special_issue.date}}</div>
+                    <div class="card-footer border-0 bk-cover-bg-{{special_issue.color_code}} text-white" style="font-size: 0.3rem;">{{special_issue.title}}<br>{{special_issue.date}}</div>
                     <a href="{% url 'collection' special_issue.object.pk %}" class="stretched-link"></a>
                 </div>
             </div>
@@ -83,7 +97,7 @@
                     <div class="col-11"> 
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <strong>{{ doc.0 }}</strong>
-                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
                         </a>
                     </div>
                     <div class="col-2"></div>
@@ -94,7 +108,7 @@
         {% if current_vol_toc.Article %}<h4 id="articles" class="border-space">Articles</h4>{% endif %}
         {% for sub_type, data in current_vol_toc.Article.items %} 
             <strong>{{ sub_type }}</strong>
-            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
             {% for doc in data.records %}
                 <div class="row">
                     <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
@@ -103,7 +117,7 @@
                                 <span class="badge rounded-0 bg-llt-gold"></span>
                                 <strong>{{ doc.0 }}</strong>
                             </div>
-                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
                         </a>
                     </div>
                     <div class="col-2"><em>{{ doc.4 }} </em></div>
@@ -114,13 +128,13 @@
         {% if current_vol_toc.Column %}<h4 id="columns" class="border-space">Columns</h4>{% endif %}
         {% for sub_type, data in current_vol_toc.Column.items %} 
             <strong>{{ sub_type }}</strong>
-            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
             {% for doc in data.records %}
                 <div class="row">
                     <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <strong>{{ doc.0 }}</strong>
-                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
                         </a>
                     </div>
                     <div class="col-2"><em> {{ doc.4 }}</em></div>
@@ -131,13 +145,13 @@
         {% if current_vol_toc.Review %}<h4 id="reviews" class="border-space">Reviews</h4>{% endif %}
         {% for sub_type, data in current_vol_toc.Review.items %}
             <strong>{{ sub_type }}</strong>
-            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
             {% for doc in data.records %}
                 <div class="row">
                     <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <strong>{{ doc.0 }}</strong>
-                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}; {% endif %}</em> {% endfor %}</p>
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
                         </a>
                     </div>
                     <div class="col-2"><em> {{ doc.4 }}</em></div>
@@ -158,11 +172,12 @@
         {% for i in featured_posts %}
             <div class="card border-0 rounded-0 pb-2">
                 <div class="card-body text-secondary bg-llt-darkgray">
-                    <span class="badge bg-secondary rounded-0">news</span>
+                    <span class="badge bg-secondary rounded-0">News</span>
                     <dt class="card-title" >{{ i.title }}</dt>
-                    <dd class="card-text" style="font-size: 0.8rem">{{ i.content|safe|truncatewords:24 }}</dd>
-                    <a href="{% url 'post_view' i.pk %}" class="stretched-link"></a>     
-                </div>                                   
+                    <dd class="card-text" style="font-size: 0.8rem">{{ i.content|safe|truncatewords:12 }}</dd>     
+                </div>
+                <div class="card-footer border-0 text-secondary bg-llt-darkgray" style="font-size: 0.6rem">{{ i.modified | date:"M j Y"}}</div>
+                <a href="{% url 'post_view' i.pk %}" class="stretched-link"></a>                               
             </div>
         {% endfor %}
         {% include 'base-side-menu.html' %}
