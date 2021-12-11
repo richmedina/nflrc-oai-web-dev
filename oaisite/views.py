@@ -30,7 +30,7 @@ class HomeView(TemplateView):
     
             articles = context['current_vol_toc']['Article'].items()
             article_data = next(iter(articles))[1]
-            # context['latest_article'] = article_data['records'][1]
+            context['latest_article'] = article_data['records'][0]
             
             latest_special_issue = journal.get_special_issues()[0]
             context['special_issue'] = latest_special_issue.title_tuple()
