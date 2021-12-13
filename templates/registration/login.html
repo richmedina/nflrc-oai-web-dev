@@ -1,0 +1,23 @@
+<!-- login.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block page_header %}{% endblock page_header %}
+
+{% block content %}
+<div class="row block-center">
+	<div class="col-md-4 offset-4">
+		{% if form.errors %}
+		<p>Your username and password didn't match. Please try again.</p>
+		{% endif %}
+		
+		<form method="post" action="">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<p  class="text-center"><button class="btn btn-lg" type="submit">Login</button></p>
+		</form>
+
+	</div>
+</div>
+{% endblock content %}

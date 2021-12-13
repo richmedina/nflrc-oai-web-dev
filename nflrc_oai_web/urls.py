@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from oaisite.views import (
@@ -123,6 +124,8 @@ urlpatterns = [
      OaiCollectionHarvestView.as_view(
      ), name='oai_harvest_collection'),
 
+    path('editor-access/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('admin/', admin.site.urls),
 
     path('<slug>/', PageView.as_view(), name='page_slug_view'),
