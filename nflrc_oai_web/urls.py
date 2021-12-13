@@ -128,5 +128,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('admin/', admin.site.urls),
 
+    # path('news/<slug>/', PostView.as_view(), name='post_slug_view'),
     path('<slug>/', PageView.as_view(), name='page_slug_view'),
 ]

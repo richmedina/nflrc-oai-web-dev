@@ -2,12 +2,17 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
-	<h2>News & Announcements</h2>
+	<h2>News & Announcements
+		{% if user.is_staff %}
+			<a href="{% url 'post_create_view' %}" class="btn btn-link btn-sm">add new post</a>
+		{% endif %}
+	</h2>
 {% endblock page_header %}
 
 {% block content %}
 <div class="row">
 	<div class="col-md-9">
+
 		<div class="row">
 			{% for i in object_list %}
 			<div class="col-md-4 mb-4">

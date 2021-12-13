@@ -4,14 +4,14 @@
 {% load crispy_forms_tags %}
 
 {% block page_header %}
-	<h2>Add a New Post</h2> 
+	<h2>Add a News Item or Announcement</h2> 
 {% endblock page_header %}
 
 {% block content %}
 <div class="row">
 	<div class="col-md-9">
 		<form method="post" action="">{% csrf_token %}
-			<p class="text-right"><button type="submit" class="btn btn-md btn-success">Add</button></p>
+			<p class="text-left"><button type="submit" class="btn btn-md btn-success">Save</button></p>
 			{{ form | crispy }}			
 		</form>
 	</div>

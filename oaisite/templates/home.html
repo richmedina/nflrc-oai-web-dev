@@ -48,7 +48,7 @@
                         <div class="card-text oai-micro-fs-8">{{ featured_posts.1.content|safe|truncatewords:24 }}</div>     
                     </div>
                     <div class="card-footer border-0 text-secondary bg-llt-darkgray oai-micro-fs-6">{{ featured_posts.1.modified | date:"M j Y"}}</div>
-                    <a href="{% url 'post_view' featured_posts.1.pk %}" class="stretched-link"></a>                                   
+                    <a href="{% url 'post_view' featured_posts.1.pk %}" class="stretched-link"></a>
                 </div> 
             </div>           
             {% endif %}
@@ -160,7 +160,7 @@
     <!-- RIGHT PANEL -->
     <div class="col-md-3">
         <div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
-            <div class="card-body">
+            <div class="card-body p-2">
                 <dt class="card-title">{{ byline.title }}</dt>
                 <dd class="card-text oai-micro-fs-6">{{ byline.content|safe }}</dd>
                 <a href="{% url 'page_slug_view' 'about' %}" class="stretched-link"></a>
@@ -168,12 +168,11 @@
         </div>
         {% for i in featured_posts %}
             <div class="card border-0 rounded-0 pb-2">
-                <div class="card-body text-secondary bg-llt-darkgray">
-                    <span class="badge bg-secondary rounded-0">News</span>
-                    <dt class="card-title" >{{ i.title }}</dt>
-                    <dd class="card-text oai-micro-fs-8">{{ i.content|safe|truncatewords:12 }}</dd>     
+                <div class="card-body text-secondary bg-llt-darkgray p-2">
+                    <span class="badge bg-secondary rounded-0">News</span> <span class="oai-micro-fs-4">{{ i.modified | date:"M j Y"}}</span>                   
+                    <dt class="card-title"> {{ i.title }}</dt>
+                    <dd class="card-text oai-micro-fs-6">{{ i.content|safe|truncatewords:12 }}</dd>     
                 </div>
-                <div class="card-footer border-0 text-secondary bg-llt-darkgray oai-micro-fs-6">{{ i.modified | date:"M j Y"}}</div>
                 <a href="{% url 'post_view' i.pk %}" class="stretched-link"></a>                               
             </div>
         {% endfor %}

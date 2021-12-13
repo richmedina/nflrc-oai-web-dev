@@ -10,7 +10,7 @@ from haystack.generic_views import SearchView
 
 from oaiharvests.models import Community, Collection, Record, MetadataElement
 from .models import OAISitePage, OAISitePost
-from .forms import PageUpdateForm, PostUpdateForm
+from .forms import PageUpdateForm, PostCreateForm, PostUpdateForm
 
 
 class HomeView(TemplateView):
@@ -100,6 +100,7 @@ class CollectionView(DetailView):
         context['toc'] = self.get_object().list_toc_by_page()
         context['size'] = len(context['toc'])
         context['issue'] = self.get_object().title_tuple()
+        
         return context
 
 
@@ -208,7 +209,7 @@ class PostView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = OAISitePost
     template_name = 'post_view_create.html'
-    form_class = PostUpdateForm
+    form_class = PostCreateForm
     
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):

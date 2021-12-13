@@ -13,8 +13,23 @@ class PageUpdateForm(ModelForm):
         fields = ['title', 'content', 'published']
 
 
+class PostCreateForm(ModelForm):
+    
+    class Meta:
+        model = OAISitePost
+        fields = ['title', 'content', 'featured', 'featured_rank',]
+
+
 class PostUpdateForm(ModelForm):
     
     class Meta:
         model = OAISitePost
         fields = ['title', 'content', 'featured', 'featured_rank']
+
+
+
+# error_messages = {
+#             NON_FIELD_ERRORS: {
+#                 'unique_together': "%(model_name)s's %(field_labels)s are not unique.",
+#             }
+#         }

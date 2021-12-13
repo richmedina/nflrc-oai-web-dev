@@ -1,5 +1,7 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.urls import reverse
+
 
 # TimeStampedModel adds 'created' and 'modified' fields to each inherited class.
 from model_utils.models import TimeStampedModel
@@ -18,11 +20,11 @@ class OAISitePage(TimeStampedModel):
 
 
 class OAISitePost(TimeStampedModel):
-    title = models.CharField(max_length=512, blank=True)
+    title = models.CharField(max_length=512, blank=False)
     content = models.TextField(blank=True)
     featured = models.BooleanField(blank=True, default=False)
     featured_rank = models.IntegerField(blank=True, default=0, help_text='If featured is checked ON, higher numbers are displayed before lower numbers')
-    published = models.BooleanField(default=True, blank=True, help_text='Checking this ON will make the post visible')   
+    published = models.BooleanField(default=True, blank=True, help_text='Checking this ON will make the post visible')
 
     def __str__(self):
         return self.title

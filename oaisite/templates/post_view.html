@@ -6,16 +6,15 @@
 {% endblock page_header %}
 
 {% block content %}
-<h2> {{ post.title }} 
-	{% if user.is_staff %}
-		<a href="{% url 'post_update_view' post.pk %}" class="btn btn-link btn-sm">edit</a> 
-		<a href="{% url 'post_create_view' %}" class="btn btn-link btn-sm">add new post</a>
-	{% endif %} 
-	<span><a href="{% url 'post_list_view' %}" class="btn btn-link btn-sm">view all</a></span>
-</h2>
 <div class="row">
 	<div class="col-md-9">
-		<div class=" card border-5 border-start-0 border-top-0 border-end-0 border-bottom-1 border-secondary rounded-0">{{ post.content|safe }}</div>
+		<h2> {{ post.title }}</h2>
+		{% if user.is_staff %}
+			<a href="{% url 'post_update_view' post.pk %}" class="btn btn-link btn-sm">edit</a> 
+			<a href="{% url 'post_create_view' %}" class="btn btn-link btn-sm">add new post</a>
+			<a href="{% url 'post_list_view' %}" class="btn btn-link btn-sm">view all</a>
+		{% endif %} 		
+		<div class=" card mb-2 border-5 border-start-0 border-top-0 border-end-0 border-bottom-1 border-secondary rounded-0">{{ post.content|safe }}</div>
 	</div>
 	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
 </div>		

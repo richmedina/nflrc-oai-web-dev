@@ -6,16 +6,10 @@
 {% block page_header %}
 <h4><i class="fa fa-caret-left"></i> <a href="{% url 'previous_issues' %}" class="static_a_display">Previous Issues</a></h4>
 
-<h2>{{ issue.title }} {{ issue.date }} {% if user.is_staff %}<small><a class="btn btn-sm btn-default" href="{% url 'oai_collection' object.pk %}">Update</a></small>{% endif %}</h2>
-<h3><strong>{{ issue.subtitle }}</strong></h3>
-{% endblock page_header %}
-
-{% block content %}	
-
-	<div class="row">
-		<div class="col-md-6">
-			{% if toc.Preface %}<h4 class="border-space">&nbsp;</h4>{% endif %}
-
+{% if issue.subtitle %}
+	<div class="row pb-4">
+		<div class="col-md-3">{% include 'base-book-cover.html' %}</div>
+		<div class="col-md-9">
 			{% for sub_type, data in toc.Preface.items %} 
 				
 				{% for doc in data.records %}
@@ -30,6 +24,38 @@
 					</div>
 				{% endfor %}
 			{% endfor %}
+		</div>				
+	</div>
+{% else %}
+	<h2>{{ issue.title }} {{ issue.date }} {% if user.is_staff %}<small><a class="btn btn-sm btn-default" href="{% url 'oai_collection' object.pk %}">Update</a></small>{% endif %}</h2>
+	<h3><strong>{{ issue.subtitle }}</strong></h3>
+{% endif %}
+
+
+{% endblock page_header %}
+
+{% block content %}	
+
+	<div class="row">
+		<div class="col-md-6">
+			{% if not issue.subtitle %}
+				{% if toc.Preface %}<h4 class="border-space">&nbsp;</h4>{% endif %}
+
+				{% for sub_type, data in toc.Preface.items %} 
+					
+					{% for doc in data.records %}
+						<div class="row">
+							<div class="col-10"> 
+								<a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
+									<strong>{{ doc.0 }}</strong>
+									<p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
+								</a>
+							</div>
+							<div class="col-2"></div>
+						</div>
+					{% endfor %}
+				{% endfor %}
+			{% endif %}
 
 			{% if toc.Article %}<h4 class="border-space">Articles</h4>{% endif %}
 			{% for sub_type, data in toc.Article.items %} 

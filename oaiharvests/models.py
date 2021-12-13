@@ -106,7 +106,7 @@ class Collection(TimeStampedModel):
     def title_tuple(self):
         """Parses name of collection to enumerate 'special issue' titles if they exist.
         """
-        color_code = (self.get_collection_date().year % 7) % 3
+        color_code = 1 # alternative algorithmic color coding (self.get_collection_date().year % 7) % 3
         title = {'title': self.name, 'date': '', 'subtitle': '', 'object': self, 'editors': self.editor_list(), 'color_code': color_code}
         try:
             pos = self.name.lower().find(',')
