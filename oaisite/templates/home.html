@@ -24,8 +24,8 @@
             <!-- Latest article display -->
             {% if latest_article %}
             <div class="col-md pb-2">
-                <div class="card border-0 border-start-0 border-top-0 border-end-0 border-bottom-0 rounded-0 " style="height: 100%;">
-                    <div class="card-body llt-burgundy bg-llt-light-gold">
+                <div class="card border-0 border-start-0 border-top-0 border-end-0 border-bottom-0 rounded-0 " style="border-color: #E9CC81;height: 100%;">
+                    <div class="card-body text-secondary bg-llt-darkgray">
                         <span class="badge bg-llt-gold rounded-0">Latest Article</span>
                         <div class="card-title">{{ latest_article.0 }}</div>
                         <div class="card-text oai-micro-fs-8">
@@ -34,7 +34,7 @@
                             {% endfor %}
                         </div>                          
                     </div>
-                    <div class="card-footer llt-burgundy bg-llt-light-gold border-0 oai-micro-fs-8">{{ latest_article.4 }}</div>
+                    <div class="card-footer text-secondary bg-llt-darkgray border-0 oai-micro-fs-8">{{ latest_article.4 }}</div>
                     <a href="{{ latest_article.0.get_absolute_url }}" class="stretched-link"></a>               
                 </div>                         
             </div>
@@ -77,7 +77,7 @@
             
 
         <!-- Current Issue -->
-        <h3><a href="{% url 'collection' current_vol.object.identifier %}" class="static_a_display text-secondary">{{ current_vol.title }} {{ current_vol.date }}</a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' current_vol.object.pk %}">Update</a></small>{% endif %}</h3>
+        <h3><a href="{% url 'collection' current_vol.object.identifier %}" class="text-black static_a_display">{{ current_vol.title }} {{ current_vol.date }}</a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' current_vol.object.pk %}">Update</a></small>{% endif %}</h3>
         <h4><strong>{{ current_vol.subtitle }}</strong></h4>
 
         <div>
