@@ -2,18 +2,23 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
+<h4><a href="{% url 'post_list_view' %}" class="btn btn-lg text-start bg-llt-darkgray rounded-0 ps-1 static_a_display"><i class="fa fa-caret-left"></i> News & Announcements</a></h4>
+
 {% if post.featured %}<span class="badge bg-llt-gold rounded-0">Featured</span>{% endif %}<span class="badge bg-secondary rounded-0">News</span> <span class="oai-micro-fs-6">{{ post.modified|date:"M j Y" }}</span>
 {% endblock page_header %}
 
 {% block content %}
 <div class="row">
 	<div class="col-md-9">
-		<h2> {{ post.title }}</h2>
-		{% if user.is_staff %}
-			<a href="{% url 'post_update_view' post.pk %}" class="btn btn-link btn-sm">edit</a> 
-			<a href="{% url 'post_create_view' %}" class="btn btn-link btn-sm">add new post</a>
-			<a href="{% url 'post_list_view' %}" class="btn btn-link btn-sm">view all</a>
-		{% endif %} 		
+		<h2> {{ post.title }} </h2>
+		<div>
+			
+			{% if user.is_staff %}
+				<a href="{% url 'post_update_view' post.pk %}" class="btn btn-link btn-sm">edit</a> 
+				<a href="{% url 'post_create_view' %}" class="btn btn-link btn-sm">add new post</a>
+			{% endif %}
+		</div>
+
 		<div class=" card mb-2 border-5 border-start-0 border-top-0 border-end-0 border-bottom-1 border-secondary rounded-0">{{ post.content|safe }}</div>
 	</div>
 	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>

@@ -16,15 +16,16 @@
 		<div class="row">
 			{% for i in object_list %}
 			<div class="col-md-4 mb-4">
-				<div class="card shadow-sm p-2 position-relative border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0" style="height: 100%;">
-					<div class="card-title oai-micro-fs-8">
-						{% if i.featured %}<span class="badge bg-llt-gold rounded-0 oai-micro-fs-4">featured</span>{% endif %}
-						<h6>{{ i.title }}</h6>
-					</div>
+				<div class="card  p-2 position-relative border-0 bg-llt-darkgray rounded-0" style="height: 100%;">					
 					<div class="card-body p-0">
-						<div class="oai-micro-fs-8">{{ i.content|safe|truncatewords:18 }}</div>
+						<div class="card-title oai-micro-fs-8">
+							{% if i.featured %}<span class="badge bg-llt-gold rounded-0 oai-micro-fs-4">featured</span>{% endif %}
+							<span class="text-end oai-micro-fs-6 p-0">{{ i.modified|date:"M j Y" }}</span>
+							<h6>{{ i.title }}</h6>						
+						</div>
+						<div class="oai-micro-fs-8">{{ i.content|safe|truncatewords:24 }}</div>
 					</div>
-					<div class="card-footer text-start bg-white border-0 oai-micro-fs-6 p-0">{{ i.modified|date:"M j Y" }}</div>
+					
 					<a href="{% url 'post_view' i.pk %}" class="btn btn-link btn-sm stretched-link"></a>
 				</div>
 			</div>	

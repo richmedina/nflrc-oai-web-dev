@@ -1,8 +1,9 @@
 <!-- base-side-menu.html -->
 <div class="row">
 	<div class="col-md-12">
-		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'dorothy-chun-award' %}" class="btn btn-sm bg-llt-gold border-0 rounded-0" style="font-size: 1.2em; letter-spacing: 1px; font-weight: bold;"><i class="fa fa-star" aria-hidden="true"></i> Best Paper Award</a>       					
-		<p class="d-grid gap-2"><a href="{% url 'post_list_view' %}" class="btn btn-sm bg-llt-gold border-0 rounded-0">Announcements</a>
+		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'dorothy-chun-award' %}" class="btn btn-sm bg-llt-gold border-0 rounded-0" style="font-size: 1.2em; letter-spacing: 1px; font-weight: bold;"><i class="fa fa-star" aria-hidden="true"></i> Best Paper Award</a></p>       					
+		<p class="d-grid gap-2"><a href="{% url 'post_list_view' %}" class="btn btn-sm bg-llt-gold border-0 rounded-0">Announcements</a></p>
+		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'copy-editing' %}" class="btn btn-sm bg-llt-gold border-0 rounded-0">{% if curr_page == 18 %}<i class="fa fa-circle llt-burgundy"></i>{% endif %} Volunteer to Copy Edit</a></p>
 
 		<ul class="list-unstyled">
 			<li><a href="{% url 'page_slug_view' 'permissions' %}" class="btn btn-sm btn-link static_a_display border-0 rounded-0 d-grid gap-2 text-start {% if curr_page == 7 %}bg-llt-darkgray{% endif %}"> Permissions</a></li>
@@ -23,7 +24,6 @@
 			<li><a href="{% url 'special_issues' %}" class="btn btn-sm btn-link static_a_display border-0 rounded-0 d-grid gap-2 text-start {% if curr_page == 'special_issues' %}bg-llt-darkgray{% endif %}"> Special Issues</a></li>		
 		</ul>
 
-		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'copy-editing' %}" class="btn btn-sm bg-llt-gold border-0 rounded-0">{% if curr_page == 18 %}<i class="fa fa-circle llt-burgundy"></i>{% endif %} Volunteer to Copy Edit</a></p>
 		<p class="d-grid gap-2"><a href="https://listserv.hawaii.edu/cgi-bin/wa?SUBED1=LLT-L&A=1" class="btn btn-sm bg-llt-darkgray text-secondary border-0 rounded-0" target="_blank">Subscribe</a></p>
 		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'contribute' %}" class="btn btn-sm bg-llt-darkgray text-secondary border-0 rounded-0">Donate</a></p>
 	</div>

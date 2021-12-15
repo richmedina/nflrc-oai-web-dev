@@ -8,7 +8,7 @@
 {% endblock page_header %}
 
 {% block content %}    
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-10 offset-1">
         <form method="get" action="{% url 'haystack_search' %}" class="form-inline text-" role="search">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search for..." name="q" value="{{query}}">
@@ -19,17 +19,17 @@
         </form>
     </div>
 
-    <div class="col-md-10 col-md-offset-1" style="padding-top: 10px">
+    <div class="col-md-10 offset-1" style="padding-top: 10px">
         <ul class="nav nav-pills">
-            <li><a href="#keylist" class="btn btn-xs btn-default static_a_display filter-btn" data-toggle="collapse"> <i class="fa fa-caret-down"></i> <strong>Browse by keyword?</strong></a></li>
-            <li><a href="#authorlist" class="btn btn-xs btn-default static_a_display filter-btn" data-toggle="collapse"> <i class="fa fa-caret-down"></i> <strong>Browse by author?</strong></a></li>
+            <li><a href="#keylist" class="btn btn-xs btn-default static_a_display filter-btn" data-bs-toggle="collapse"> <i class="fa fa-caret-down"></i> <strong>Browse by keyword?</strong></a></li>
+            <li><a href="#authorlist" class="btn btn-xs btn-default static_a_display filter-btn" data-bs-toggle="collapse"> <i class="fa fa-caret-down"></i> <strong>Browse by author?</strong></a></li>
         </ul>        
         
         <!--keyword listing -->
         <p>
-            <div id="keylist" class="row well collapse filter-terms" style="background-color: #fff">
+            <div id="keylist" class="row collapse filter-terms" style="background-color: #fff">
                 {% for i in keytable %}
-                    <div class="col-md-3 text-left">
+                    <div class="col-md-3 text-start">
                         <ul class="list-unstyled center-block">
                         {% for j in i %}
                             <li><p><a href="{% url 'haystack_search' %}?q={{j}}" class="static_a_display">{{ j }}</a></p></li>
@@ -42,13 +42,14 @@
 
         <!--author listing -->
         <p>
-            <div id="authorlist" class="row well collapse filter-terms" style="background-color: #fff">
-
+            <div id="authorlist" class="row collapse" style="background-color: #fff">
+                <div class="col-md-12 text-left">
                 {% for i in authortable %}                       
                     {% ifchanged i.1|slice:":1"|upper %}
-                        <a href="#{{ i.1|slice:":1"|upper }}">{{ i.1|slice:":1"|upper }}</a>
+                        <span><a href="#{{ i.1|slice:":1"|upper }}">{{ i.1|slice:":1"|upper }}</a></span>
                     {% endifchanged %}
                 {% endfor %}
+                </div>
 
                 <div class="col-md-2 text-left">   
                     <ul class="list-unstyled center-block">               
@@ -73,10 +74,10 @@
             <p>
                 <dl>
                 {% for result in object_list %}
-                        <dt><a href="{{ result.object.get_absolute_url }}" class="static_a_display">{{ result.object }}</a> (in <a href="{% url 'collection' result.object.hdr_setSpec.identifier %}"> {{ result.object.hdr_setSpec.name|slice:"0:18" }}</a>)</dt>
+                        <dt><a href="{{ result.object.get_absolute_url }}" class="link-secondary">{{ result.object }}</a></dt>
                         <dd>
-                            <p>by {% for i in result.object.get_readable_authors %} <a href="{% url 'haystack_search' %}?q={{i}}" title="Search articles for this author.">{{ i }}</a>{% if not forloop.last %}, {% endif %} {% endfor %}
-                            </p>
+                            <p class="oai-micro-fs-8">{% for i in result.object.get_readable_authors %} <a href="{% url 'haystack_search' %}?q={{i}}" title="Search articles for this author.">{{ i }}</a>{% if not forloop.last %}, {% endif %} {% endfor %}
+                            <br><a href="{% url 'collection' result.object.hdr_setSpec.identifier %}" class=""> {{ result.object.hdr_setSpec.name|slice:"0:18" }}</a></p>
                         </dd>
                 {% empty %}
                     <p>No results found.</p>

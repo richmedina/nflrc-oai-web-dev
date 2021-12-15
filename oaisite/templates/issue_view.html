@@ -4,12 +4,16 @@
 
 
 {% block page_header %}
-<h4><i class="fa fa-caret-left"></i> <a href="{% url 'previous_issues' %}" class="static_a_display">Previous Issues</a></h4>
+<h4>
+	<a href="{% url 'previous_issues' %}" class="btn btn-lg bg-llt-darkgray rounded-0 ps-1 static_a_display"><i class="fa fa-caret-left"></i> Previous Issues</a>
+	{% if issue.subtitle %}<a href="{% url 'special_issues' %}" class="btn btn-sm btn-link rounded-0 static_a_display"> All Special Issues</a>{% endif %}
+</h4>
 
 {% if issue.subtitle %}
 	<div class="row pb-4">
-		<div class="col-md-3">{% include 'base-book-cover.html' %}</div>
+		<div class="col-md-3">{% include 'base-book-cover.html' %}</div>		
 		<div class="col-md-9">
+			<p class="">{% if user.is_staff %}<small><a class="btn btn-sm btn-link ps-1 text-start rounded-0 static_a_display" href="{% url 'oai_collection' issue.object.pk %}">Update</a></small>{% endif %}{{ issue.object.description|truncatewords:50 }}</p>
 			{% for sub_type, data in toc.Preface.items %} 
 				
 				{% for doc in data.records %}
@@ -24,7 +28,7 @@
 					</div>
 				{% endfor %}
 			{% endfor %}
-		</div>				
+			</div>		
 	</div>
 {% else %}
 	<h2>{{ issue.title }} {{ issue.date }} {% if user.is_staff %}<small><a class="btn btn-sm btn-default" href="{% url 'oai_collection' object.pk %}">Update</a></small>{% endif %}</h2>

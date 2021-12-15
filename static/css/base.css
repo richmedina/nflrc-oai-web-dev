@@ -41,6 +41,9 @@ dt.metadata {
 .bg-llt-gold { background: #DCAA3B; color: #7d0000; }
 .llt-gold {color: #DCAA3B; border-color: #DCAA3B;}
 
+.llt-light-gold {color: #E9CC81}
+.bg-llt-light-gold {background: #E9CC81}
+
 .lt-gray {color: #ddd;}
 .llt-darkgray {color: #dee2e6;}
 
@@ -69,9 +72,9 @@ dt.metadata {
 /******************************** End Centered Submenu **********************************************/
 
 /******************************** Custom Font Sizes **********************************************/
-.oai-micro-fs-4 {font-size: 0.4rem}
-.oai-micro-fs-6 {font-size: 0.6rem}
-.oai-micro-fs-8 {font-size: 0.8rem}
+.oai-micro-fs-4 {font-size: 0.4em}
+.oai-micro-fs-6 {font-size: 0.6em}
+.oai-micro-fs-8 {font-size: 0.8em}
 
 
 /******************************** End Font Sizes **********************************************/
