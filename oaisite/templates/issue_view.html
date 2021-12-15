@@ -4,9 +4,9 @@
 
 
 {% block page_header %}
-<h4>
+<h4 class="mb-4">
 	<a href="{% url 'previous_issues' %}" class="btn btn-lg bg-llt-darkgray rounded-0 ps-1 static_a_display"><i class="fa fa-caret-left"></i> Previous Issues</a>
-	{% if issue.subtitle %}<a href="{% url 'special_issues' %}" class="btn btn-sm btn-link rounded-0 static_a_display"> All Special Issues</a>{% endif %}
+	{% if issue.subtitle %}<a href="{% url 'special_issues' %}" class="btn btn-sm btn-link rounded-0 static_a_display"> Special Issue Archive</a>{% endif %}
 </h4>
 
 {% if issue.subtitle %}

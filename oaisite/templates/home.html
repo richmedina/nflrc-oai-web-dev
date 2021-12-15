@@ -19,7 +19,7 @@
     <div class="col-md-9">
         
         <!-- Recent article and/or special issue -->
-        <div class="row">
+        <div class="row mb-3">
 
             <!-- Latest article display -->
             {% if latest_article %}
@@ -80,13 +80,13 @@
         <h3><a href="{% url 'collection' current_vol.object.identifier %}" class="text-black static_a_display">{{ current_vol.title }} {{ current_vol.date }}</a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' current_vol.object.pk %}">Update</a></small>{% endif %}</h3>
         <h4><strong>{{ current_vol.subtitle }}</strong></h4>
 
-        <div>
-            <a href="#articles" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Articles <span class="badge bg-secondary  rounded-0">8</span></a> 
-            <a href="#columns" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Columns <span class="badge bg-secondary  rounded-0">2</span></a> 
-            <a href="#reviews" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Reviews <span class="badge bg-secondary  rounded-0">3</span></a>
+        <div class="mb-3" aria-label="Navigate to current issue sections">
+            <a href="#articles" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Articles <span class="badge bg-secondary rounded-0">8</span></a> 
+            <a href="#columns" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Columns <span class="badge bg-secondary rounded-0">2</span></a> 
+            <a href="#reviews" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Reviews <span class="badge bg-secondary rounded-0">3</span></a>
         </div>
 
-        {% if current_vol_toc.Preface %}<h4 class="border-space">&nbsp;</h4>{% endif %}
+        <!-- {% if current_vol_toc.Preface %}<h4 class="border-space">&nbsp;</h4>{% endif %} -->
 
         {% for sub_type, data in current_vol_toc.Preface.items %} 
             {% for doc in data.records %}
