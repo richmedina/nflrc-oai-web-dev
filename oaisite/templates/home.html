@@ -25,7 +25,7 @@
             {% if latest_article %}
             <div class="col-md pb-2">
                 <div class="card border-0 border-start-0 border-top-0 border-end-0 border-bottom-0 rounded-0 " style="border-color: #E9CC81;height: 100%;">
-                    <div class="card-body text-secondary bg-llt-darkgray">
+                    <div class="card-body bg-llt-darkgray bg-llt-light-gold llt-burgundy">
                         <span class="badge bg-llt-gold rounded-0">Latest Article</span>
                         <div class="card-title">{{ latest_article.0 }}</div>
                         <div class="card-text oai-micro-fs-8">
@@ -34,7 +34,7 @@
                             {% endfor %}
                         </div>                          
                     </div>
-                    <div class="card-footer text-secondary bg-llt-darkgray border-0 oai-micro-fs-8">{{ latest_article.4 }}</div>
+                    <div class="card-footer bg-llt-darkgray bg-llt-light-gold llt-burgundy border-0 oai-micro-fs-8">{{ latest_article.4 }}</div>
                     <a href="{{ latest_article.0.get_absolute_url }}" class="stretched-link"></a>               
                 </div>                         
             </div>
@@ -160,7 +160,7 @@
     <!-- RIGHT PANEL -->
     <div class="col-md-3">
         <div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
-            <div class="card-body p-2">
+            <div class="card-body">
                 <dt class="card-title">{{ byline.title }}</dt>
                 <dd class="card-text oai-micro-fs-8">{{ byline.content|safe }}</dd>
                 <a href="{% url 'page_slug_view' 'about' %}" class="stretched-link"></a>
@@ -168,7 +168,7 @@
         </div>
         {% for i in featured_posts %}
             <div class="card border-0 rounded-0 pb-2">
-                <div class="card-body text-secondary bg-llt-darkgray p-2">
+                <div class="card-body text-secondary bg-llt-darkgray">
                     <span class="badge bg-secondary rounded-0">News</span> <span class="oai-micro-fs-4">{{ i.modified | date:"M j Y"}}</span>                   
                     <dt class="card-title"> {{ i.title }}</dt>
                     <dd class="card-text oai-micro-fs-8">{{ i.content|safe|truncatewords:10 }}</dd>     
