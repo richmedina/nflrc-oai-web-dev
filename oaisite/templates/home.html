@@ -27,7 +27,7 @@
                 <div class="card border-0 border-start-0 border-top-0 border-end-0 border-bottom-0 rounded-0 " style="border-color: #E9CC81;height: 100%;">
                     <div class="card-body bg-llt-darkgray bg-llt-light-gold llt-burgundy">
                         <span class="badge bg-llt-gold rounded-0">Latest Article</span>
-                        <div class="card-title">{{ latest_article.0 }}</div>
+                        <div class="card-title fw-bolder">{{ latest_article.0 }}</div>
                         <div class="card-text oai-micro-fs-8">
                             {% for j in latest_article.1 %} 
                                 {{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}

@@ -18,8 +18,9 @@
 				<a href="{% url 'post_create_view' %}" class="btn btn-link btn-sm">add new post</a>
 			{% endif %}
 		</div>
-
+		<div class="row"><div class="col-md-10">
 		<div class=" card mb-2 border-5 border-start-0 border-top-0 border-end-0 border-bottom-1 border-secondary rounded-0">{{ post.content|safe }}</div>
+	</div></div>
 	</div>
 	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
 </div>		
