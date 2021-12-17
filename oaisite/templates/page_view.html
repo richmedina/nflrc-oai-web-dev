@@ -2,12 +2,12 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
-	<h2>{{ page.title }} {% if user.is_staff %}<small><a href="{% url 'page_update_view' page.pk %}" class="btn btn-link btn-sm">edit</a></small>{% endif %}</h2> 
+	<h2>{{ page.title }} {% if user.is_staff %}<a href="{% url 'page_update_view' page.pk %}" class="btn btn-link btn-sm">edit</a>{% endif %}</h2> 
 {% endblock page_header %}
 
 {% block content %}
 <div class="row">
-	<div class="col-md-9">{{ page.content|safe }}</div>
+	<div class="col-md-9"><div class="row"><div class="col-md-10">{{ page.content|safe }}</div></div></div>
 	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
 </div>		
 {% endblock content %}

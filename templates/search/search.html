@@ -1,5 +1,7 @@
 <!-- search.html -->
 {% extends 'base.html' %}
+{% load highlight %}
+{% load more_like_this %}
 
 
 
@@ -9,7 +11,7 @@
 
 {% block content %}    
     <div class="col-md-10 offset-1">
-        <form method="get" action="{% url 'haystack_search' %}" class="form-inline text-" role="search">
+        <form method="get" action="{% url 'haystack_search' %}" class="form-inline" role="search">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search for..." name="q" value="{{query}}">
                 <span class="input-group-btn">
@@ -68,16 +70,17 @@
         </p>
     </div>
 
-    <div class="col-md-10 col-md-offset-1">        
+    <div class="col-md-10 offset-1">        
         {% if query %}
-            <h3>Showing {{ object_list|length }} Search  Result{{ object_list|length|pluralize }} for <span class="label label-default">{{ query }}</span></h3>
+            <h3>Showing {{ object_list|length }} Search  Result{{ object_list|length|pluralize }} for <span class="badge text-white bg-success rounded-0">{{ query }}</span></h3>
             <p>
                 <dl>
                 {% for result in object_list %}
-                        <dt><a href="{{ result.object.get_absolute_url }}" class="link-secondary">{{ result.object }}</a></dt>
+                        <dt><a href="{% url 'item' result.pk %}" class="link-secondary">{{ result.object }}</a></dt>
                         <dd>
+                            <div class="oai-micro-fs-8">{% highlight result.object.full_text with query html_tag "span" css_class "text-success "%}</div>
                             <p class="oai-micro-fs-8">{% for i in result.object.get_readable_authors %} <a href="{% url 'haystack_search' %}?q={{i}}" title="Search articles for this author.">{{ i }}</a>{% if not forloop.last %}, {% endif %} {% endfor %}
-                            <br><a href="{% url 'collection' result.object.hdr_setSpec.identifier %}" class=""> {{ result.object.hdr_setSpec.name|slice:"0:18" }}</a></p>
+                            <br><a href="{% url 'collection' result.object.hdr_setSpec.identifier %}" class=""> {{ result.object.hdr_setSpec.name }}</a></p>
                         </dd>
                 {% empty %}
                     <p>No results found.</p>
