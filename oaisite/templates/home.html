@@ -126,8 +126,11 @@
             {% for doc in data.records %}
                 <div class="row">
                     <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
-                        <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
-                            <strong>{{ doc.0 }}</strong>
+                        {% if doc.0.pk == latest_column.pk %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Latest Column </span> {% endif %}<a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
+                            <strong>
+                                
+                                {{ doc.0 }}
+                            </strong>
                             <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
                         </a>
                     </div>
@@ -143,8 +146,11 @@
             {% for doc in data.records %}
                 <div class="row">
                     <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
+                        {% if forloop.first %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Latest Review </span> {% endif %}
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
-                            <strong>{{ doc.0 }}</strong>
+                            <strong>
+                                {{ doc.0 }}
+                            </strong>
                             <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
                         </a>
                     </div>
@@ -183,7 +189,7 @@
 <!-- ROW 3 -->
 <div class="row" class="prev_issues">
     <div class="col-12">
-        <h3 class="border-space">Previous Issues <a href="{% url 'previous_issues' %}" class="btn btn-small btn-link static_a_display">view all</a></h3>        
+        <h3 class="border-space pt-4">Previous Issues <a href="{% url 'previous_issues' %}" class="btn btn-small btn-link static_a_display">view all</a></h3>        
     </div>          
     {% for num, volume in volumes.items %}
         <div class="col-md-3">

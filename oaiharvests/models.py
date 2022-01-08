@@ -95,6 +95,7 @@ class Collection(TimeStampedModel):
     last_harvest = models.DateTimeField(auto_now=True)
     edited_by = models.TextField(default='', blank=True, help_text='Enter editor names (first then last). Separate multiple editor names with a comma.')
     description = models.TextField(default='', blank=True, help_text='Provide a short description of this collection.')
+    special_issue = models.BooleanField(default=False, help_text='Check on to indicate that this is a Special Issue')
 
     
     def editor_list(self):
@@ -141,6 +142,16 @@ class Collection(TimeStampedModel):
     def list_records(self):
         return self.record_set.all()
 
+    def list_records_by_type(self, filter_type=None):
+        records = []
+        for rec_obj in self.record_set.all():
+            try:
+                if rec_obj.get_metadata_item('type')[0][0] == filter_type:
+                    records.append(rec_obj)
+            except:
+                pass
+        return records
+
     def list_records_by_page_and_volume(self):
         records = []
         for i in self.record_set.all():
@@ -181,7 +192,7 @@ class Collection(TimeStampedModel):
                 t.append(record_data['volume'][0])
             except Exception as e:
                 t.append('0')
-            # print t, '\n'
+            
             records.append(t)
 
         return sorted(records, reverse=True, key=lambda rec: rec[1])
@@ -217,7 +228,7 @@ class Collection(TimeStampedModel):
         toc = defaultdict()
 
         d = self.get_collection_date()
-        is_cap = d.year > 2021
+        is_cap = d.year > 2020
 
         if is_cap:
             toc_item_list = self.list_records_by_date_and_volume()

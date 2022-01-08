@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -24,9 +25,12 @@ class HomeView(TemplateView):
             context['keywords'] =  journal.aggregate_keywords()
             context['volumes'] = journal.list_collections_by_volume()
             
-            current_vol = Collection.objects.all().order_by('-name')[0]
-            context['current_vol'] = current_vol.title_tuple()
-            context['current_vol_toc'] = current_vol.list_toc_by_page()
+            collection_list = Collection.objects.all().order_by('-name')
+            for i in collection_list:
+                if not i.special_issue:
+                    context['current_vol'] = i.title_tuple()
+                    context['current_vol_toc'] = i.list_toc_by_page()
+                    break
 
             latest_special_issue = journal.get_special_issues()[0]
             context['special_issue'] = latest_special_issue.title_tuple()
@@ -34,7 +38,9 @@ class HomeView(TemplateView):
             context['byline'] = OAISitePost.objects.get(pk=5)
 
             features = OAISitePost.objects.filter(featured=True).order_by('-featured_rank') 
-            if features: context['featured_posts'] = features[:2]
+            if features: 
+                context['featured_posts'] = features[:2]
+
         except Exception as e:
             messages.info(self.request, e)
 
@@ -47,10 +53,16 @@ class HomeView(TemplateView):
             pass
 
         try:
-            columns = context['current_vol_toc']['Column'].items()
-            context['column_count'] = 0
+            columns = context['current_vol']['object'].list_records_by_type('Column')
+            context['column_count'] = len(columns)
+            latest_column = columns[0]
             for i in columns:
-                context['column_count'] = context['column_count'] + len(i[1]['records'])
+                curr = datetime.strptime(i.get_metadata_item('date.accessioned')[0][0], '%Y-%m-%dT%H:%M:%SZ')
+                latest = datetime.strptime(latest_column.get_metadata_item('date.accessioned')[0][0], '%Y-%m-%dT%H:%M:%SZ')
+                if curr > latest:
+                    latest_column = i
+            context['latest_column'] = latest_column
+
         except:
             pass
 
@@ -59,11 +71,7 @@ class HomeView(TemplateView):
             reviews_data = next(iter(reviews))[1]
             context['review_count'] = len(reviews_data['records'])
         except:
-            pass
-
-
-
-        
+            pass        
         return context
 
 
