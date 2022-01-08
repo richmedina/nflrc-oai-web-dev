@@ -80,10 +80,10 @@
         <h3><a href="{% url 'collection' current_vol.object.identifier %}" class="text-black static_a_display">{{ current_vol.title }} {{ current_vol.date }}</a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' current_vol.object.pk %}">Update</a></small>{% endif %}</h3>
         <h4><strong>{{ current_vol.subtitle }}</strong></h4>
 
-        <div class="mb-3" aria-label="Navigate to current issue sections">
-            <a href="#articles" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Articles <span class="badge bg-secondary rounded-0">8</span></a> 
-            <a href="#columns" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Columns <span class="badge bg-secondary rounded-0">2</span></a> 
-            <a href="#reviews" class="btn btn-sm bg-llt-darkgray text-secondary rounded-0">Reviews <span class="badge bg-secondary rounded-0">3</span></a>
+        <div class="pb-4" aria-label="Navigate to current issue sections">
+            <a href="#articles" class="btn btn-sm bg-llt-darkgray text-secondary me-2 rounded-0">Articles <span class="badge bg-secondary rounded-0">{{article_count}}</span></a> 
+            <a href="#columns" class="btn btn-sm bg-llt-darkgray text-secondary me-2 rounded-0">Columns <span class="badge bg-secondary rounded-0">{{column_count}}</span></a> 
+            <a href="#reviews" class="btn btn-sm bg-llt-darkgray text-secondary me-2 rounded-0">Reviews <span class="badge bg-secondary rounded-0">{{review_count}}</span></a>
         </div>
 
         <!-- {% if current_vol_toc.Preface %}<h4 class="border-space">&nbsp;</h4>{% endif %} -->
@@ -102,7 +102,7 @@
             {% endfor %}
         {% endfor %}
 
-        {% if current_vol_toc.Article %}<h4 id="articles" class="border-space">Articles</h4>{% endif %}
+        {% if current_vol_toc.Article %}<h4 id="articles" class="border-space pt-4">Articles</h4>{% endif %}
         {% for sub_type, data in current_vol_toc.Article.items %} 
             <strong>{{ sub_type }}</strong>
             <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
@@ -110,10 +110,7 @@
                 <div class="row">
                     <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
-                            <div class="fs-6">
-                                <span class="badge rounded-0 bg-llt-gold"></span>
-                                <strong>{{ doc.0 }}</strong>
-                            </div>
+                            <strong>{{ doc.0 }}</strong>
                             <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
                         </a>
                     </div>
@@ -122,7 +119,7 @@
             {% endfor %}
         {% endfor %}
     
-        {% if current_vol_toc.Column %}<h4 id="columns" class="border-space">Columns</h4>{% endif %}
+        {% if current_vol_toc.Column %}<h4 id="columns" class="border-space pt-4">Columns</h4>{% endif %}
         {% for sub_type, data in current_vol_toc.Column.items %} 
             <strong>{{ sub_type }}</strong>
             <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
@@ -139,7 +136,7 @@
             {% endfor %}
         {% endfor %}
     
-        {% if current_vol_toc.Review %}<h4 id="reviews" class="border-space">Reviews</h4>{% endif %}
+        {% if current_vol_toc.Review %}<h4 id="reviews" class="border-space pt-4">Reviews</h4>{% endif %}
         {% for sub_type, data in current_vol_toc.Review.items %}
             <strong>{{ sub_type }}</strong>
             <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
@@ -188,20 +185,17 @@
     <div class="col-12">
         <h3 class="border-space">Previous Issues <a href="{% url 'previous_issues' %}" class="btn btn-small btn-link static_a_display">view all</a></h3>        
     </div>          
-
     {% for num, volume in volumes.items %}
         <div class="col-md-3">
-            <a class="btn btn-default" data-bs-toggle="collapse" href="#id-{{num}}-collapse" role="button" aria-expanded="false" aria-controls="id-{{num}}-collapse">
-                <i class="fa fa-caret-right"></i> {{ volume.0.name|slice:":9"}}</a>
-            <div>
-            <ul id="id-{{num}}-collapse" class="list-unstyled collapse">
-            {% for j in volume %}
-                <li><p><a href="{% url 'collection' j.identifier %}" class="static_a_display">{{ j.name }}</a></p></li>
-            {% endfor %}
-            </ul>
-            </div>
+                <a class="btn btn-default ps-0" data-bs-toggle="collapse" href="#id-{{num}}-collapse" role="button" aria-expanded="false" aria-controls="id-{{num}}-collapse"><i class="fas fa-caret-down"></i> {{ volume.0.name|slice:":9"}}</a>
+                <ul id="id-{{num}}-collapse" class="list-unstyled collapse ps-4 oai-micro-fs-8">
+                {% for j in volume %}
+                    <li><p><a href="{% url 'collection' j.identifier %}" class="static_a_display">{{ j.name }}</a></p></li>
+                {% endfor %}
+                </ul>
         </div>
-    {% endfor %}                    
+    {% endfor %}
+                   
 </div>
 
 {% endblock content %}

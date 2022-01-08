@@ -32,24 +32,26 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white sticky-lg-top">
         <div class="container-md">
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{%static 'img/logo-hdr.png'%}" class="" height="100px">
+                <img src="{%static 'img/logo-hdr.png'%}" class="" height="135px">
             </a>
-            <div class="nav navbar-text text-secondary pt-0" style="">
-                <h2 class="">Language Learning & Technology</h2>
-                <h6 class="fs-6">A refereed journal for second and <br>foreign language scholars and educators.</h6>
+            <div class="nav navbar-text text-secondary pe-5" style="">
+                <ul class="list-unstyled">
+                    <li><h2 class="">Language Learning & Technology</h2></li>
+                    <li><h6 class="">A refereed journal for second and foreign language scholars and educators.</h6></li>
+                </ul>
             </div> 
 
 
-            <div class="collapse navbar-collapse navbar-left p-0" id="lltmenu">
+            <div class="collapse navbar-collapse navbar-right p-0" id="lltmenu">
   
-                <div class="navbar-nav site-navigator p-0" style="font-size: .8em;">
+                <div class="navbar-nav  site-navigator oai-micro-fs-8">
                     
                         <a class="nav-link" href="{% url 'home' %}">Home</a>
                         <a class="nav-link" href="{% url 'page_slug_view' 'about' %}">About</a>
                         <a class="nav-link" href="{% url 'page_slug_view' 'people' %}">People</a>
                         <a class="nav-link" href="{% url 'page_slug_view' 'contact' %}">Contact</a>               
                 </div>
-                <div class="navbar-nav navbar-right p-0 pb-2">
+                <div class="navbar-nav  p-0 pb-2">
                     <form class="d-flex rounded-0 search-form" method="get" action="{% url 'haystack_search' %}">
                         <input type="search" size="30" class="form-control rounded-0" placeholder="Search" name="q" value="{{query}}">
                         <button type="submit" class="btn btn-sm text-secondary"><i class="fa fa-search"></i></button>
@@ -82,12 +84,12 @@
             </div>
         </div>
     
-        <div>{% block content %} {% endblock content %}</div>
+        <div class="">{% block content %} {% endblock content %}</div>
     </div>
 
     <!-- Footer -->
-    <div class="fixed-bottom bg-light static_a_display" role="navigation">
-        <div id="footer" class="container-fluid text-center text-muted border-start-0 border-top-1 border-end-0 border-bottom-0 border-secondary rounded-0" style="font-size: .7em;">
+    <div class="fixed-bottom bg-light static_a_display " role="navigation">
+        <div id="footer" class="container-fluid text-center text-muted border-start-0 border-top-1 border-end-0 border-bottom-0 border-secondary oai-micro-fs-8 rounded-0">
             <div><strong>ISSN 1094-3501</strong></div>
             <div>Published by the <a href="https://nflrc.hawaii.edu" class="link-secondary">National Foreign Language Resource Center</a> at the University of Hawai‘i at Mānoa (Honolulu, HI, U.S.A.) <br><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" class="link-secondary"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"  class="link-secondary">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</div>
 

@@ -27,11 +27,7 @@ class HomeView(TemplateView):
             current_vol = Collection.objects.all().order_by('-name')[0]
             context['current_vol'] = current_vol.title_tuple()
             context['current_vol_toc'] = current_vol.list_toc_by_page()
-    
-            articles = context['current_vol_toc']['Article'].items()
-            article_data = next(iter(articles))[1]
-            context['latest_article'] = article_data['records'][0]
-            
+
             latest_special_issue = journal.get_special_issues()[0]
             context['special_issue'] = latest_special_issue.title_tuple()
             
@@ -41,6 +37,32 @@ class HomeView(TemplateView):
             if features: context['featured_posts'] = features[:2]
         except Exception as e:
             messages.info(self.request, e)
+
+        try:    
+            articles = context['current_vol_toc']['Article'].items()
+            article_data = next(iter(articles))[1]
+            context['latest_article'] = article_data['records'][0]
+            context['article_count'] = len(article_data['records'])
+        except:
+            pass
+
+        try:
+            columns = context['current_vol_toc']['Column'].items()
+            context['column_count'] = 0
+            for i in columns:
+                context['column_count'] = context['column_count'] + len(i[1]['records'])
+        except:
+            pass
+
+        try:
+            reviews = context['current_vol_toc']['Review'].items()
+            reviews_data = next(iter(reviews))[1]
+            context['review_count'] = len(reviews_data['records'])
+        except:
+            pass
+
+
+
         
         return context
 

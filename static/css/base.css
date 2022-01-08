@@ -1,10 +1,9 @@
 html {
-  scroll-padding-top: 120px;
+  scroll-padding-top: 120px; /*adjust for placement of inline link targets*/
 }
 body {
-  /*height: 100%;*/
   background: #fff !important;
-  padding-bottom: 100px;
+  padding-bottom: 180px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
 }
@@ -82,14 +81,6 @@ dt.metadata {
 
 /******************************** End Font Sizes **********************************************/
 
-
-
-
-/******************************** Box Borders **********************************************/
-/*.row .my-inner {
-  padding: 5px;
-  margin: 10px 1px 1px 1px;
-}*/
 
 .list-group-item.hilite_row {
   background-color: #B2D1B2
