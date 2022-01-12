@@ -25,7 +25,7 @@
             {% if latest_article %}
             <div class="col-md pb-2">
                 <div class="card border-0 border-start-0 border-top-0 border-end-0 border-bottom-0 rounded-0 " style="border-color: #E9CC81;height: 100%;">
-                    <div class="card-body bg-llt-darkgray bg-llt-light-gold llt-burgundy">
+                    <div class="card-body bg-llt-light-gold llt-burgundy">
                         <span class="badge bg-llt-gold rounded-0">Latest Article</span>
                         <div class="card-title fw-bolder">{{ latest_article.0 }}</div>
                         <div class="card-text oai-micro-fs-8">
@@ -86,7 +86,8 @@
             <a href="#reviews" class="btn btn-sm bg-llt-darkgray text-secondary me-2 rounded-0">Reviews <span class="badge bg-secondary rounded-0">{{review_count}}</span></a>
         </div>
 
-        <!-- {% if current_vol_toc.Preface %}<h4 class="border-space">&nbsp;</h4>{% endif %} -->
+
+        <p><a href="{% url 'post_list_view' %}" class="btn btn-sm border-0 bg-llt-light-gold llt-burgundy rounded-0 ps-5 pe-5 fw-bold">News & Announcements</a></p>
 
         {% for sub_type, data in current_vol_toc.Preface.items %} 
             {% for doc in data.records %}
@@ -97,7 +98,7 @@
                             <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
                         </a>
                     </div>
-                    <div class="col-2"></div>
+                    <div class="col-1"></div>
                 </div>
             {% endfor %}
         {% endfor %}
@@ -162,13 +163,6 @@
 
     <!-- RIGHT PANEL -->
     <div class="col-md-3">
-        <div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
-            <div class="card-body">
-                <dt class="card-title">{{ byline.title }}</dt>
-                <dd class="card-text oai-micro-fs-8">{{ byline.content|safe }}</dd>
-                <a href="{% url 'page_slug_view' 'about' %}" class="stretched-link"></a>
-            </div>
-        </div>
         {% for i in featured_posts %}
             <div class="card border-0 rounded-0 pb-2">
                 <div class="card-body text-secondary bg-llt-darkgray">
@@ -179,7 +173,18 @@
                 <a href="{% url 'post_view' i.pk %}" class="stretched-link"></a>                               
             </div>
         {% endfor %}
+
+        <div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
+            <div class="card-body">
+                <dt class="card-title">{{ byline.title }}</dt>
+                <dd class="card-text oai-micro-fs-8">{{ byline.content|safe }}</dd>
+                <a href="{% url 'page_slug_view' 'about' %}" class="stretched-link"></a>
+            </div>
+        </div>
+
         {% include 'base-side-menu.html' %}
+
+
     </div>
 </div> <!-- End ROW 1 -->
 
