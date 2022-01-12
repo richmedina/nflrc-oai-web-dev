@@ -13,7 +13,8 @@
 	<div class="row pb-4">
 		<div class="col-md-3">{% include 'base-book-cover.html' %}</div>		
 		<div class="col-md-9">
-			<p class="">{% if user.is_staff %}<small><a class="btn btn-sm btn-link ps-1 text-start rounded-0 static_a_display" href="{% url 'oai_collection' issue.object.pk %}">Update</a></small>{% endif %}{{ issue.object.description|truncatewords:50 }}</p>
+			{% if user.is_staff %}<p><small><a class="btn btn-sm btn-link ps-1 text-start rounded-0 static_a_display" href="{% url 'oai_collection' issue.object.pk %}">Update</a></small></p>{% endif %}
+			<p class="">{{ issue.object.description|truncatewords:50 }}</p>
 			{% for sub_type, data in toc.Preface.items %} 
 				
 				{% for doc in data.records %}

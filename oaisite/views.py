@@ -92,11 +92,8 @@ class SpecialIssuesView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SpecialIssuesView, self).get_context_data(**kwargs)
-        journal = Community.objects.all()[0]
-        context['special_issues'] = []
-        for j in journal.get_special_issues():
-            context['special_issues'].append(j.title_tuple())
-
+        specials = Collection.objects.filter(special_issue=True).order_by('-name')
+        context['special_issues'] = [i.title_tuple() for i in specials]
         context['curr_page'] = 'special_issues'
         return context
 
