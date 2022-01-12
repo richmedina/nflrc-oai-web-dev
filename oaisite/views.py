@@ -14,7 +14,16 @@ from .models import OAISitePage, OAISitePost
 from .forms import PageUpdateForm, PostCreateForm, PostUpdateForm
 
 
-class HomeView(TemplateView):
+
+class BaseSideMenuMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(BaseSideMenuMixin, self).get_context_data(**kwargs)
+        context['byline'] = OAISitePage.objects.get(slug='byline')
+        context['impact_factor'] = OAISitePage.objects.get(slug='impact-factor')
+
+        return context
+
+class HomeView(BaseSideMenuMixin, TemplateView):
     template_name = 'home.html'
     queryset = None
 
@@ -35,8 +44,6 @@ class HomeView(TemplateView):
             latest_special_issue = journal.get_special_issues()[0]
             context['special_issue'] = latest_special_issue.title_tuple()
             
-            context['byline'] = OAISitePost.objects.get(pk=5)
-
             features = OAISitePost.objects.filter(featured=True).order_by('-featured_rank') 
             if features: 
                 context['featured_posts'] = features[:2]
@@ -75,7 +82,7 @@ class HomeView(TemplateView):
         return context
 
 
-class PreviousIssuesView(TemplateView):
+class PreviousIssuesView(BaseSideMenuMixin, TemplateView):
     template_name = 'previous_issues.html'
 
     def get_context_data(self, **kwargs):
@@ -87,7 +94,7 @@ class PreviousIssuesView(TemplateView):
         return context
 
 
-class SpecialIssuesView(TemplateView):
+class SpecialIssuesView(BaseSideMenuMixin, TemplateView):
     template_name = 'special_issues.html'
 
     def get_context_data(self, **kwargs):
@@ -175,7 +182,7 @@ class PageUpdateView(LoginRequiredMixin, UpdateView):
     form_class = PageUpdateForm
     
 
-class PageView(DetailView):
+class PageView(BaseSideMenuMixin, DetailView):
     model = OAISitePage
     template_name = 'page_view.html'
     context_object_name = 'page'
@@ -209,7 +216,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     form_class = PostCreateForm
 
 
-class PostListView(ListView):
+class PostListView(BaseSideMenuMixin, ListView):
     model = OAISitePost
     template_name = 'post_list_view.html'
 
@@ -233,7 +240,7 @@ class PostViewPrivate(LoginRequiredMixin, DetailView):
     context_object_name = 'post'
 
 
-class PostView(DetailView):
+class PostView(BaseSideMenuMixin, DetailView):
     model = OAISitePost
     template_name = 'post_view.html'
     context_object_name = 'post'

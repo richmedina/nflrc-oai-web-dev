@@ -1,6 +1,22 @@
 <!-- base-side-menu.html -->
 <div class="row">
 	<div class="col-md-12">
+		<div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
+            <div class="card-body">
+                <dt class="card-title oai-micro-fs-8">{{ byline.title }}</dt>
+                <dd class="card-text oai-micro-fs-6">{{ byline.content|safe }}</dd>
+                <a href="{% url 'page_slug_view' 'about' %}" class="stretched-link"></a>
+            </div>
+        </div>
+		<div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
+            <div class="card-body">
+                <dt class="card-title oai-micro-fs-8">{{ impact_factor.title }}</dt>
+                <dd class="card-text oai-micro-fs-6">{{ impact_factor.content|safe }}</dd>
+                <a href="{% url 'page_slug_view' 'about' %}" class="stretched-link"></a>
+            </div>
+        </div>
+
+
 		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'dorothy-chun-award' %}" class="btn btn-sm bg-llt-gold border-0 rounded-0" style="font-size: 1.2em; letter-spacing: 1px; font-weight: bold;"><i class="fa fa-star" aria-hidden="true"></i> Best Paper Award</a></p>       					
 		<p class="d-grid gap-2"><a href="{% url 'post_list_view' %}" class="btn btn-sm bg-llt-light-gold llt-burgundy border-0 rounded-0 fw-bold">News & Announcements</a></p>
 		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'copy-editing' %}" class="btn btn-sm bg-llt-light-gold llt-burgundy border-0 rounded-0 fw-bold">{% if curr_page == 18 %}<i class="fa fa-circle llt-burgundy"></i>{% endif %} Volunteer to Copy Edit</a></p>
