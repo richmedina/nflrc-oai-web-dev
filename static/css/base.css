@@ -46,7 +46,9 @@ dt.metadata {
 .llt-light-gold {color: #E9CC81}
 .bg-llt-light-gold {background: #E9CC81}
 
-.lt-gray {color: #ddd;}
+.lt-gray {color: #FBFBFB;}
+.bg-lt-gray {background-color: #FBFBFB;}
+
 .llt-darkgray {color: #dee2e6;}
 
 .bk-cover-bg-0 {background-color: #6c757d;} /* slate gray 607D8B*/
