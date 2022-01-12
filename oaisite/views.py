@@ -217,7 +217,7 @@ class PostListView(ListView):
         context = super(PostListView, self).get_context_data(**kwargs)
         if not self.request.user.is_staff:
             self.object_list = self.object_list.filter(published=True)
-        context['object_list'] = self.object_list.order_by('-modified')    
+        context['object_list'] = self.object_list.order_by('-featured', '-featured_rank', '-modified')    
         return context
     
 

@@ -29,9 +29,9 @@ class CommunityAdmin(admin.ModelAdmin):
         ]
 
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'identifier', 'name', 'special_issue', 'community',)
+    list_display = ('pk', 'name', 'special_issue',)
     list_display_links = ('pk',)
-    list_editable = ['identifier', 'name', 'special_issue', 'community',]
+    list_editable = ['name', 'special_issue',]
     list_filter = ('special_issue',)
     
     inlines = [
