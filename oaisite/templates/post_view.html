@@ -2,8 +2,11 @@
 {% extends 'base.html' %}
 
 {% block local_meta %} 
-<meta property="og:title" content="{{ post.title }}">
-<meta property="og:image" content="https://nflrc.hawaii.edu/static/nflrc-oai-pub-llt/img/logo-hdr.png">
+<meta property="og:title" content="{{ post.title }}" />
+<meta property="og:image" content="https://nflrc.hawaii.edu/static/nflrc-oai-pub-llt/img/logo-hdr.png" />
+<meta property="og:url"   content="{% url 'post_view' post.pk %}" />
+<meta property="og:type"  content="article" />
+<meta property="og:description" content="{{ post.content|safe|truncatewords:24 }}" />
 {% endblock local_meta %}
 
 
