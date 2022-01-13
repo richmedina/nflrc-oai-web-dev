@@ -22,7 +22,7 @@
 		<h2> {{ post.title }}</h2>
 		<div>
 			<div class="fb-share-button" data-href="{% url 'post_view' post.pk %}" data-layout="button" data-size=""><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-			<a href="https://twitter.com/intent/tweet?url={{ post.get_absolute_url|urlencode:'' }}" class="" data-show-count="false"><span class="badge bg-secondary fw-normal" style="font-family: Helvetica, Arial;"><i class="fab fa-twitter"></i> Tweet</span></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			<a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode:'' }}" class="" data-show-count="false"><span class="badge bg-secondary fw-normal" style="font-family: Helvetica, Arial;"><i class="fab fa-twitter"></i> Tweet</span></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 		</div>
 
 		{% if user.is_staff %}
