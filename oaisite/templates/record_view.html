@@ -18,7 +18,18 @@
 	<div class="col-md-3">
 		<h3><span class="badge bg-llt-darkgray text-secondary fs-6">{{item_data.type.0}}</span> {{ object }}</h3>
 		<div class="fb-share-button" data-href="{{ object.get_absolute_url }}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+		<a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet"
+  data-size="large"
+  data-text="custom share text"
+  data-url="https://dev.twitter.com/web/tweet-button"
+  data-hashtags="example,demo"
+  data-via="twitterdev"
+  data-related="twitterapi,twitter">
+<i class="fab fa-twitter"></i>
+</a>
+	
 		<dl>
 			<dt class="metadata">Author{{ item_data.author|pluralize }}</dt><dd>{% for i in item_data.author %}{{ i }}{% if not forloop.last %}; {% endif %}{% endfor %}</dt></dd>
 			<dt class="metadata">Volume</dt><dd>{{ object.hdr_setSpec }}</dd>
