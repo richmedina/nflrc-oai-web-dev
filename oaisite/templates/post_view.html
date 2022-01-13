@@ -1,6 +1,12 @@
 <!-- post_view.html -->
 {% extends 'base.html' %}
 
+{% block local_meta %} 
+<meta property="og:title" content="{{ post.title }}">
+<meta property="og:image" content="https://nflrc.hawaii.edu/static/nflrc-oai-pub-llt/img/logo-hdr.png">
+{% endblock local_meta %}
+
+
 {% block page_header %}
 <h2><a href="{% url 'post_list_view' %}" class="btn btn-lg text-start bg-llt-darkgray rounded-0 ps-1 static_a_display"><i class="fa fa-caret-left"></i> News & Announcements</a></h2>
 
