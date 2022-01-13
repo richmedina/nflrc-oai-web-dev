@@ -1,6 +1,14 @@
 <!-- record_view.html -->
 {% extends 'base.html' %}
 
+{% block local_meta %} 
+<meta property="og:title" content="{{ object }}" />
+<meta property="og:image" content="https://nflrc.hawaii.edu/static/nflrc-oai-pub-llt/img/logo-hdr.png" />
+<meta property="og:url"   content="{{ object.get_absolute_url }}" />
+<meta property="og:type"  content="article" />
+<meta property="og:description" content="{{ item_data.abstract.0|truncatewords:24 }}" />
+{% endblock local_meta %}
+
 {% block page_header %}
 <h4><i class="fa fa-caret-left"></i> <a href="{% url 'collection' object.hdr_setSpec.pk %}" class="static_a_display">{{ object.hdr_setSpec }}</a></h4>
 {% endblock page_header %}
@@ -9,7 +17,6 @@
 <div class="row">
 	<div class="col-md-3">
 		<h3><span class="badge bg-llt-darkgray text-secondary fs-6">{{item_data.type.0}}</span> {{ object }}</h3>
-		
 		<dl>
 			<dt class="metadata">Author{{ item_data.author|pluralize }}</dt><dd>{% for i in item_data.author %}{{ i }}{% if not forloop.last %}; {% endif %}{% endfor %}</dt></dd>
 			<dt class="metadata">Volume</dt><dd>{{ object.hdr_setSpec }}</dd>
