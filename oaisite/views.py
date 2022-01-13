@@ -23,6 +23,7 @@ class BaseSideMenuMixin(object):
 
         return context
 
+
 class HomeView(BaseSideMenuMixin, TemplateView):
     template_name = 'home.html'
     queryset = None

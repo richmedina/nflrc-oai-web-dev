@@ -20,7 +20,11 @@
 <div class="row">
 	<div class="col-md-9">
 		<h2> {{ post.title }}</h2>
-		<div class="fb-share-button" data-href="{% url 'post_view' post.pk %}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+		<div>
+			<div class="fb-share-button" data-href="{% url 'post_view' post.pk %}" data-layout="button" data-size=""><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+			<a href="https://twitter.com/intent/tweet?url={{ post.get_absolute_url|urlencode:'' }}" class="" data-show-count="false"><span class="badge bg-secondary fw-normal" style="font-family: Helvetica, Arial;"><i class="fab fa-twitter"></i> Tweet</span></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		</div>
+
 		{% if user.is_staff %}
 			<a href="{% url 'post_update_view' post.pk %}" class="btn btn-secondary btn-sm oai-micro-fs-6" title="Edit this post"><i class="fas fa-edit"></i> edit</a> 
 			<a href="{% url 'post_create_view' %}" class="btn btn-secondary btn-sm oai-micro-fs-6" title="Add new post"><i class="fas fa-plus"></i> post</a>
