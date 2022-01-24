@@ -77,11 +77,25 @@
                 <dl>
                 {% for result in object_list %}
                         <dt><a href="{% url 'item' result.pk %}" class="link-secondary">{{ result.object }}</a></dt>
-                        <dd>
-                            <div class="oai-micro-fs-8">{% highlight result.object.full_text with query html_tag "span" css_class "text-success "%}</div>
-                            <p class="oai-micro-fs-8">{% for i in result.object.get_readable_authors %} <a href="{% url 'haystack_search' %}?q={{i}}" title="Search articles for this author.">{{ i }}</a>{% if not forloop.last %}, {% endif %} {% endfor %}
-                            <br><a href="{% url 'collection' result.object.hdr_setSpec.identifier %}" class=""> {{ result.object.hdr_setSpec.name }}</a></p>
-                        </dd>
+                        {% if result.model_name == 'record' %} 
+                            <dd>
+                                <div class="oai-micro-fs-8">{% highlight result.object.full_text with query html_tag "span" css_class "text-success "%}</div>
+                                <p class="oai-micro-fs-8">{% for i in result.object.get_readable_authors %}{% if forloop.first %}by {% endif %}<a href="{% url 'haystack_search' %}?q={{i}}" title="Search articles for this author.">{{ i }}</a>{% if not forloop.last %}, {% else %} <br>{% endif %} {% endfor %}
+                                in <a href="{% url 'collection' result.object.hdr_setSpec.identifier %}" class=""> {{ result.object.hdr_setSpec.name }}</a></p>
+                            </dd>                        
+                        {% else %} 
+                            <dd>
+                                <div class="oai-micro-fs-8">{% highlight result.object.content with query html_tag "span" css_class "text-success "%}</div>
+                                {% if result.model_name == 'oaisitepost' %}
+                                <p class="oai-micro-fs-8">in <a href="{{ result.object.get_absolute_url }}">News & Announcements</a> </p>
+                                {% else %}
+                                <p class="oai-micro-fs-8">in <a href="{% url 'page_slug_view' result.object.slug %}">{{ result.object.title }}</a> </p>
+                                {% endif %}
+                            </dd>                            
+
+                        {% endif %}
+
+
                 {% empty %}
                     <p>No results found.</p>
                 {% endfor %}
