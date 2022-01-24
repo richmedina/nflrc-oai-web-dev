@@ -191,7 +191,7 @@ class PageView(BaseSideMenuMixin, DetailView):
     def get(self, request, *args, **kwargs):
         if not self.get_object().published:
             # will redirect to login required view
-            return redirect('staff_page_view', item=self.get_object().id)
+            return redirect('staff_page_view', pk=self.get_object().id)
         return super(PageView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -201,7 +201,7 @@ class PageView(BaseSideMenuMixin, DetailView):
         return context
 
 
-class PageViewPrivate(LoginRequiredMixin, DetailView):
+class PageViewPrivate(LoginRequiredMixin, BaseSideMenuMixin, DetailView):
     model = OAISitePage
     template_name = 'page_view.html'
     context_object_name = 'page'
