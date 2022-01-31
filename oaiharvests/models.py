@@ -229,7 +229,7 @@ class Collection(TimeStampedModel):
         toc = defaultdict()
 
         d = self.get_collection_date()
-        is_cap = d.year > 2020
+        is_cap = d.year > 2021
 
         if is_cap:
             toc_item_list = self.list_records_by_date_and_volume()
