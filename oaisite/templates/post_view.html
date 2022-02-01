@@ -20,9 +20,14 @@
 <div class="row">
 	<div class="col-md-9">
 		<h2> {{ post.title }}</h2>
+		<!-- Social media buttons -->
 		<div>
 			<div class="fb-share-button" data-href="{% url 'post_view' post.pk %}" data-layout="button" data-size=""><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+
 			<a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode:'' }}" class="" data-show-count="false"><span class="badge bg-secondary fw-normal" style="font-family: Helvetica, Arial;"><i class="fab fa-twitter"></i> Tweet</span></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+			<script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+			<script type="IN/Share" data-url="{{ request.build_absolute_uri }}"></script>
 		</div>
 
 		{% if user.is_staff %}
