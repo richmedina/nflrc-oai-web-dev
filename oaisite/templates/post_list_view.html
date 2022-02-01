@@ -4,7 +4,7 @@
 {% block page_header %}
 	<h2>News & Announcements
 		{% if user.is_staff %}
-			<a href="{% url 'post_create_view' %}" class="btn btn-secondary btn-sm" title="Add new post"><i class="fas fa-plus"></i> post</a>
+			<a href="{% url 'post_create_view' %}" class="btn btn-link btn-default btn-lg text-secondary" title="Add new post"><i class="fas fa-plus"></i></a>
 		{% endif %}
 	</h2>
 {% endblock page_header %}
