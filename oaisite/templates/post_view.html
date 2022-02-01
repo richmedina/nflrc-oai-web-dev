@@ -19,27 +19,34 @@
 {% block content %}
 <div class="row">
 	<div class="col-md-9">
-		<h2> {{ post.title }}</h2>
-		<!-- Social media buttons -->
-		<div>
-			<div class="fb-share-button" data-href="{% url 'post_view' post.pk %}" data-layout="button" data-size=""><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-
-			<a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode:'' }}" class="" data-show-count="false"><span class="badge bg-secondary fw-normal" style="font-family: Helvetica, Arial;"><i class="fab fa-twitter"></i> Tweet</span></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-			<script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-			<script type="IN/Share" data-url="{{ request.build_absolute_uri }}"></script>
-		</div>
-
+		<h2> {{ post.title }} 
+	
+	
 		{% if user.is_staff %}
-			<a href="{% url 'post_update_view' post.pk %}" class="btn btn-secondary btn-sm oai-micro-fs-6" title="Edit this post"><i class="fas fa-edit"></i> edit</a> 
-			<a href="{% url 'post_create_view' %}" class="btn btn-secondary btn-sm oai-micro-fs-6" title="Add new post"><i class="fas fa-plus"></i> post</a>
+		
+			<span class="">	<a href="{% url 'post_update_view' post.pk %}" class="btn btn-link btn-default btn-sm text-secondary" title="Edit this post"><i class="fas fa-edit"></i></a> 
+			<a href="{% url 'post_create_view' %}" class="btn btn-link btn-default btn-sm text-secondary" title="Add new post"><i class="fas fa-plus"></i></a></span>
+		
 		{% endif %}
+		</h2>
 
 
+		<div class="row">
+			<!-- Social media buttons -->
+			<div class="col">
+				<div class="fb-share-button" data-href="{% url 'post_view' post.pk %}" data-layout="button" data-size=""><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+
+				<a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode:'' }}" class="" data-show-count="false"><span class="badge bg-secondary fw-normal" style="font-family: Helvetica, Arial;"><i class="fab fa-twitter"></i> Tweet</span></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+				<script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+				<script type="IN/Share" data-url="{{ request.build_absolute_uri }}"></script>
+			</div>
+		</div>
 		<div class="row"><div class="col-md-10">
-			<div class=" card mb-2 border-5 border-start-0 border-top-0 border-end-0 border-bottom-1 border-secondary rounded-0">{{ post.content|safe }}</div>
+			<div class="card mb-2 border-5 border-start-0 border-top-0 border-end-0 border-bottom-1 border-secondary rounded-0">{{ post.content|safe }}</div>
 		</div></div>
 	</div>
+
 	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
 </div>		
 {% endblock content %}
