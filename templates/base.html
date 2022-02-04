@@ -48,7 +48,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white sticky-lg-top mb-0">
         <div class="container-md">
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{%static 'img/logo-hdr.png'%}" class="" height="135px">
+                <img src="{%static 'img/logo-hdr.png'%}" class="" height="135px" title="Language Learning & Technology logo">
             </a>
             <div class="nav navbar-text text-secondary pe-5" style="">
                 <ul class="list-unstyled">
@@ -115,9 +115,9 @@
                     <div>Site maintained by the <a href="https://clt.manoa.hawaii.edu" target="_blank"  class="link-secondary">Center for Language & Technology</a>, University of Hawai‘i at Mānoa {% if not user.is_authenticated %}<a href="{% url 'login' %}?next={{request.path}}" class="link-secondary"><i class="fas fa-lock"> </i></a>{% else %} <a href="{% url 'logout' %}?next=/" class="link-secondary"><i class="fas fa-unlock"> </i></a> {% endif %} {% if user.is_staff %}<a href="{% url 'oai_repository_list' %}" class="link-secondary"><i class="fas fa-book-open"></i></a>{% endif %}</div>
                 </div>
                 <div class="col-md-3 text-center">
-                    <a class="btn btn-lg btn btn-md bg-default" href="https://www.facebook.com/LLTJournal/" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
-                    <a class="btn btn-md bg-default" href="https://twitter.com/lltjournal" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
-                    <a href="https://listserv.hawaii.edu/cgi-bin/wa?SUBED1=LLT-L&A=1" target="_blank"><img src="https://listserv.hawaii.edu/archives/images/UH_seal.jpg" height="20px"></a>
+                    <a class="btn btn-lg btn btn-md bg-default" href="https://www.facebook.com/LLTJournal/" title="LLT Facebook page" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a class="btn btn-md bg-default" href="https://twitter.com/lltjournal" title="LLT Twitter page" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="https://listserv.hawaii.edu/cgi-bin/wa?SUBED1=LLT-L&A=1" title="LLT list serv subscription service" target="_blank"><img src="https://listserv.hawaii.edu/archives/images/UH_seal.jpg" height="20px"></a>
                 </div>
             </div>
         </div>

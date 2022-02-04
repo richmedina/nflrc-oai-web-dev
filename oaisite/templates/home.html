@@ -191,18 +191,43 @@
 <div class="row" class="prev_issues">
     <div class="col-12">
         <h3 class="border-space pt-4">Previous Issues <a href="{% url 'previous_issues' %}" class="btn btn-small btn-link static_a_display">view all</a></h3>        
-    </div>          
+    </div>
     {% for num, volume in volumes.items %}
         <div class="col-md-3">
-                <a class="btn btn-default ps-0" data-bs-toggle="collapse" href="#id-{{num}}-collapse" role="button" aria-expanded="false" aria-controls="id-{{num}}-collapse"><i class="fas fa-caret-down"></i> {{ volume.0.name|slice:":9"}}</a>
-                <ul id="id-{{num}}-collapse" class="list-unstyled collapse ps-4 oai-micro-fs-8">
+                <a class="btn btn-default ps-0 vol-list-toggler" data-bs-toggle="collapse" href="#id-{{num}}-collapse" role="button" aria-expanded="false" aria-controls="id-{{num}}-collapse"><i class="fas fa-caret-right"></i> {{ volume.0.name|slice:":9"}}</a>
+                <ul id="id-{{num}}-collapse" class="list-unstyled collapse ps-4 oai-micro-fs-8 vol-list">
                 {% for j in volume %}
                     <li><p><a href="{% url 'collection' j.identifier %}" class="static_a_display">{{ j.name }}</a></p></li>
                 {% endfor %}
                 </ul>
         </div>
-    {% endfor %}
-                   
+    {% endfor %}       
 </div>
 
 {% endblock content %}
+
+{% block js_script %} 
+<script type="text/javascript">
+    // script to control visibility of vol groups when toggled.
+    
+    const togglebtns = document.querySelectorAll('.vol-list-toggler')
+    togglebtns.forEach(function(toggler) {
+        toggler.addEventListener('click', function(e) {
+            if (document.querySelector('.fa-caret-down')) {
+                document.querySelector('.fa-caret-down').classList.replace("fa-caret-down", "fa-caret-right");
+            }
+
+            var curr_toggle_icon = this.querySelector('i');
+            if (!this.classList.contains('collapsed')) {
+                curr_toggle_icon.classList.replace("fa-caret-right", "fa-caret-down");
+            }
+
+            const vol_listings = document.querySelectorAll('.show');
+            vol_listings.forEach(function(listing) {
+                listing.classList.toggle('show');                
+            });
+        });
+    });
+
+</script>
+{% endblock js_script %}
