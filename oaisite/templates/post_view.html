@@ -13,7 +13,7 @@
 {% block page_header %}
 <h2><a href="{% url 'post_list_view' %}" class="btn btn-lg text-start bg-llt-darkgray rounded-0 ps-1 static_a_display"><i class="fa fa-caret-left"></i> News & Announcements</a></h2>
 
-{% if post.featured %}<span class="badge bg-llt-gold rounded-0">Featured</span>{% endif %}<span class="badge bg-secondary rounded-0">News</span> <span class="oai-micro-fs-6">{{ post.modified|date:"M j Y" }}</span> 
+{% if post.featured %}<span class="badge bg-llt-gold rounded-0">Featured</span>{% endif %}<span class="badge bg-secondary rounded-0">News</span> <span class="oai-micro-fs-6">{{ post.modified|date:"M j Y" }}</span> <span class="oai-micro-fs-4 fst-italic fw-light"> (modified {{ post.modified|date:"M j" }})</span>
 {% endblock page_header %}
 
 {% block content %}
