@@ -16,7 +16,7 @@
 {% block content %}
 <div class="row">
 	<div class="col-md-9 order-md-last">
-		<div class="text-center pb-2">{% for b, f in bitstreams %}<a href="{{ b }}" target="_blank" class="btn btn-light btn-sm fw-bold">{{ f }} <i class="fas fa-external-link-alt"></i></a>{% endfor %}</div>
+		<div class="text-center pb-2">{% for b, f in bitstreams %} <a href="{{ b }}" target="_blank" class="btn bg-llt-darkgray text-secondary btn-sm fw-bold rounded-0">View or download pdf <i class="fas fa-external-link-alt"></i></a> {% endfor %}</div>
 		<iframe width="100%" height="1200px" src="{{ bitstreams.0.0 }}" style="background-color: #fff"></iframe>	
 	</div>
 
