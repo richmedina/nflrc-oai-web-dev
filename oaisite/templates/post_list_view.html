@@ -19,8 +19,8 @@
 				<div class="card  p-2 position-relative border-0 bg-llt-darkgray rounded-0" style="height: 100%;">					
 					<div class="card-body p-0">
 						<div class="card-title oai-micro-fs-8">
-							{% if i.featured %}<span class="badge bg-llt-gold rounded-0 oai-micro-fs-4">featured</span>{% endif %}
-							<span class="oai-micro-fs-4 p-0 fw-bold">{{ i.created|date:"M j Y" }}</span> <span class="oai-micro-fs-4 fst-italic fw-light"> (modified {{ i.modified|date:"M j" }})</span>
+							{% if i.featured %}<span class="badge bg-llt-gold rounded-0 oai-micro-fs-6">featured</span>{% endif %}
+							<span class="oai-micro-fs-6 p-0 fw-bold">{{ i.created|date:"M j Y" }}</span> <span class="oai-micro-fs-6  fw-light"> (modified {{ i.modified|date:"M j" }})</span>
 							<h6 class="fw-bold">{{ i.title }} </h6>
 						</div>
 						<div class="oai-micro-fs-8">{{ i.content|safe|truncatewords:24 }}</div>
@@ -31,13 +31,13 @@
 			</div>	
 			{% endfor %}
 		</div>
-		<div class="row">
+		<div class="row ">
 			{% for i in object_list %}
-			<div class="col-md-10 mb-2">
+			<div class="col-md-10 mb-2 mt-2">
 				<div class="card p-2 position-relative border-0 {% cycle '' 'bg-lt-gray' %} rounded-0" style="height: 100%;">					
 					<div class="card-body p-0">
 						<div class="card-title oai-micro-fs-8">							
-							<h6 class="fw-bold">{{ i.title }} <span class="oai-micro-fs-6 p-0">{{ i.created|date:"M j Y" }}</span><span class="oai-micro-fs-4 fst-italic fw-light"> (modified {{ i.modified|date:"M j" }})</span> </h6>
+							<h6 class="fw-bold">{{ i.title }} <span class="oai-micro-fs-6 p-0">{{ i.created|date:"M j Y" }}</span><span class="oai-micro-fs-6 fw-light"> (modified {{ i.modified|date:"M j" }})</span> </h6>
 						</div>
 						<div class="oai-micro-fs-8 p-0">{{ i.content|safe|truncatewords:24 }}</div>
 						<a href="{% url 'post_view' i.pk %}" class="btn btn-link btn-sm stretched-link"></a>
