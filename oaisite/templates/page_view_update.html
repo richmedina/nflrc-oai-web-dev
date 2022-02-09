@@ -3,6 +3,8 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+
+
 {% block page_header %}
 	<h2>Updating {{ object.title }}</h2> 
 {% endblock page_header %}
@@ -16,7 +18,7 @@
 			<p class="text-right"><a href="{% url 'page_slug_view' object.slug %}" class="btn btn-md btn-link btn-default">Cancel</a> <button type="submit" class="btn btn-md btn-success">Save</button></p>
 		</form>
 	</div>
-	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
+	
 </div>		
 {% endblock content %}
 

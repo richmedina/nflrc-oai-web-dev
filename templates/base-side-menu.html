@@ -1,20 +1,27 @@
 <!-- base-side-menu.html -->
 <div class="row">
 	<div class="col-md-12">
+		
 		<div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
             <div class="card-body">
-                <dt class="card-title oai-micro-fs-8">{{ byline.title }}</dt>
+                <dt class="card-title oai-micro-fs-8">{{ byline.title }} </dt>
                 <dd class="card-text oai-micro-fs-6">{{ byline.content|safe }}</dd>
-                <a href="{% url 'page_slug_view' 'people' %}" class="stretched-link"></a>
+                <a href="{% url 'page_slug_view' 'people' %}" class="stretched-link"></a>                
             </div>
+            {% if user.is_staff %} <span class="text-end"><a href="{% url 'page_update_view' byline.pk %}" class="btn btn-link btn-default btn-sm text-secondary rounded-0" style="position: relative;z-index: 1000" title="Edit this content"><i class="fas fa-edit"></i></a></span>{% endif %}
         </div>
+        
+
+        
 		<div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
             <div class="card-body">
-                <dt class="card-title oai-micro-fs-8">{{ impact_factor.title }}</dt>
+                <dt class="card-title oai-micro-fs-8">{{ impact_factor.title }} </dt>
                 <dd class="card-text oai-micro-fs-6">{{ impact_factor.content|safe }}</dd>
                 <a href="{% url 'page_slug_view' 'about' %}#rankings" class="stretched-link"></a>
             </div>
+            {% if user.is_staff %} <div class="text-end"><a href="{% url 'page_update_view' impact_factor.pk %}" class="btn btn-link btn-default btn-sm text-secondary rounded-0" style="position: relative; z-index: 1000" title="Edit this content"><i class="fas fa-edit"></i></a></div> {% endif %}
         </div>
+
 
 
 		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'dorothy-chun-award' %}" class="btn btn-sm bg-llt-gold border-0 rounded-0" style="font-size: 1.2em; letter-spacing: 1px; font-weight: bold;"><i class="fa fa-star" aria-hidden="true"></i> Best Paper Award</a></p>       					

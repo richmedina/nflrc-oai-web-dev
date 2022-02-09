@@ -1,6 +1,8 @@
 <!-- post_list_view.html -->
 {% extends 'base.html' %}
 
+{% block page_title %}News & Announcements{% endblock page_title %} 
+
 {% block page_header %}
 	<h2>News & Announcements
 		{% if user.is_staff %}

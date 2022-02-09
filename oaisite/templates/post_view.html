@@ -1,6 +1,8 @@
 <!-- post_view.html -->
 {% extends 'base.html' %}
 
+{% block page_title %}{{ post.title }}{% endblock page_title %}
+
 {% block local_meta %} 
 <meta property="og:title" content="{{ post.title }}" />
 <meta property="og:image" content="https://nflrc.hawaii.edu/static/nflrc-oai-pub-llt/img/logo-hdr.png" />
