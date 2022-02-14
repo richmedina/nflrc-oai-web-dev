@@ -326,6 +326,7 @@ class Record(TimeStampedModel):
     hdr_datestamp = models.DateTimeField()
     hdr_setSpec = models.ForeignKey(Collection, on_delete=models.CASCADE)
     full_text = models.TextField(default='')
+    slug = models.SlugField(blank=True)
 
     def remove_data(self):
         MetadataElement.objects.filter(record=self).delete()
@@ -444,7 +445,13 @@ class Record(TimeStampedModel):
         return '%s'%(title)    
 
     def get_absolute_url(self):
-        return reverse('item', args=[str(self.id)])
+        if not self.slug:
+            s = self.get_metadata_item('identifier.uri')[0][0]
+            s = s[22:]
+            self.slug = s.replace('/', '-')
+            self.save()
+
+        return reverse('item_slug_view', args=[self.slug])
     
 
 class MetadataElement(models.Model):
