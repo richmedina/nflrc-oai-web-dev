@@ -185,7 +185,7 @@ class Collection(TimeStampedModel):
             t = [i]
             
             try:
-                t.append(int(record_data['date.accessioned'][0]))
+                t.append(int(record_data['date.issued'][0]))
             except Exception as e:
                 t.append(0)
 
@@ -276,7 +276,7 @@ class Collection(TimeStampedModel):
                     # Get date issued
                     try:
                         if is_cap:
-                            d = datetime.strptime(rec_data['date.accessioned'][0], '%Y-%m-%dT%H:%M:%SZ')
+                            d = datetime.strptime(rec_data['date.issued'][0], '%Y-%m-%d')
                             toc_item[4] = d.strftime('%b %-d')
                         else:
                             toc_item[4] = toc_item[3]
