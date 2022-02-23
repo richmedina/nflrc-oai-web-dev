@@ -183,9 +183,10 @@ class Collection(TimeStampedModel):
         for i in self.record_set.all():
             record_data = i.as_display_dict()
             t = [i]
-            
             try:
-                t.append(int(record_data['date.issued'][0]))
+                d = record_data['issued'][0]
+                t.append(datetime.strptime(d, '%Y-%m-%d'))
+                
             except Exception as e:
                 t.append(0)
 
@@ -402,9 +403,9 @@ class Record(TimeStampedModel):
 
     def get_keyword_list(self):
         try:
-            return rec.get_metadata_item('subject')[0][0]
+            return ', '.join(self.get_metadata_item('subject')[0])
         except:
-            return []
+            return ''
 
     def get_readable_authors(self):
         try:

@@ -8,12 +8,15 @@ from .models import Record, MetadataElement
 class RecordIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     identifier = indexes.CharField(model_attr='identifier')
-    hdr_datestamp = indexes.CharField(model_attr='hdr_datestamp')
+    hdr_datestamp = indexes.DateTimeField(model_attr='hdr_datestamp')
     hdr_setSpec = indexes.CharField(model_attr='hdr_setSpec')
 
     def get_model(self):
         return Record
 
+    def get_updated_field(self):
+        return 'modified'
+        
     def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
         return self.get_model().objects.all()	
