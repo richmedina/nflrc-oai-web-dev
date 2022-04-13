@@ -122,7 +122,7 @@ class Collection(TimeStampedModel):
             if pos >= 0:
                 title['date'] = vol_date[:pos].strip()  # collection date segment up to "Special Issue"
                 title['subtitle'] = vol_date[pos:].strip()  # remaining title string
-                title['color_code'] = len(title['subtitle']) % 1# 1 # alternative algorithmic color coding len(title['subtitle']) % 3
+                title['color_code'] = self.get_collection_date().year % 2# 1 # alternative algorithmic color coding len(title['subtitle']) % 3
         except:
             pass
             
@@ -131,10 +131,10 @@ class Collection(TimeStampedModel):
     def get_collection_date(self):
         try:
             r = self.list_records()[0]
-            d = r.get_metadata_item('date.accessioned')[0][0]
-            return datetime.strptime(d, '%Y-%m-%dT%H:%M:%SZ')
+            d = r.get_metadata_item('date.issued')[0][0]
+            return datetime.strptime(d, '%Y-%m-%d')
         except Exception as e:
-            # print(e)
+            print(e)
             return ''
 
     def count_records(self):

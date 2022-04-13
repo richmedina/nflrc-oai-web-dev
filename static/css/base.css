@@ -51,11 +51,11 @@ dt.metadata {
 
 .llt-darkgray {color: #dee2e6;}
 
-.bk-cover-bg-0 {background-color: #6c757d;} /* slate gray 607D8B*/
+.bk-cover-bg-2 {background-color: #6c757d; color: #E9CC81} /* slate gray 607D8B*/
 
-.bk-cover-bg-1 {background-color: #7d0000;} /* llt burgundy */
+.bk-cover-bg-1 {background-color: #7d0000; color: #E9CC81} /* llt burgundy */
 
-.bk-cover-bg-2 {background-color: #DCAA3B;} /* llt gold */
+.bk-cover-bg-0 {background-color: #E9CC81; color: #7d0000} /* llt gold */
 
 /******************************** End Colors **********************************************/
 

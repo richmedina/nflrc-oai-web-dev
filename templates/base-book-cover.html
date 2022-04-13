@@ -1,16 +1,23 @@
+{% load static %}
 <!-- base-book-cover.html -->
-<div class="card rounded-0 bk-cover-bg-{{issue.color_code}} text-white lh-sm shadow-sm " style="height: 320px; max-width: 240px;">
+<div class="card rounded-0 border-0 bk-cover-bg-{{issue.color_code}} lh-sm shadow-sm " style="height: 320px; max-width: 240px;">
+    <div class="card-header border-0 bk-cover-bg-{{issue.color_code}} oai-micro-fs-6">{{issue.title}}<br>{{issue.date}}</div>
     <div class="card-body">
-		<div style="height: 70%" class="mb-3"><strong>{{issue.subtitle}}</strong></div>
-    	<div class="oai-micro-fs-6">
-            {% if issue.editors %}
-        		Edited by <br>
-                {% for editor in issue.editors %}
-                    {{editor}}<br>
-                {% endfor %}
-            {% endif %}            
-        </div>
-    </div>        
-    <div class="card-footer border-0 bk-cover-bg-{{issue.color_code}} text-white oai-micro-fs-6">{{issue.title}}<br>{{issue.date}}</div>
+        <div class="pb-2"><img src="{% static 'img/llt_logo-300x300.png'%}" style="width: 30%;"></div>
+		<div style="height: 60%" class="mb-3"><strong>{{issue.subtitle}}</strong></div>
+    	
+    </div>
+    <div class="card-footer border-0 bk-cover-bg-{{issue.color_code}} oai-micro-fs-6">
+        <!-- <div style=" background-repeat: no-repeat; background-position: left; background-image: url('{% static "img/llt_logo-300x300-50_percent.png" %}');"> &nbsp;</div> -->
+
+        <!-- {{issue.color_code}} -->
+        {% if issue.editors %}
+            Edited by <br>
+            {% for editor in issue.editors %}
+                {{editor}}<br>
+            {% endfor %}
+        {% endif %}            
+    </div>      
+    
     <a href="{% url 'collection' issue.object.pk %}" class="stretched-link"></a>
 </div>
