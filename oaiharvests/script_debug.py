@@ -13,11 +13,11 @@ try:
     sickle = Sickle(collection.community.repository.base_url)        
     sickle.class_mapping['GetRecord'] = LltRecordBitstream
     record = sickle.GetRecord(metadataPrefix='ore', identifier=record.identifier)
-    print type(record)
+    print (type(record))
     # print record.metadata['bitstream'][0].replace('+', '%20')
 
 except Exception as e:
-    print e, 'Unable to construct bitstream url.'
+    print (e, 'Unable to construct bitstream url.')
 
 
 
