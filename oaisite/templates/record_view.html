@@ -17,12 +17,13 @@
 
 {% block content %}
 <div class="row">
-	<div class="col-md-9 order-md-last">
+	<div class="col-md-6 order-md-last">
 		<div class="text-center pb-2">{% for b, f in bitstreams %} <a href="{{ b }}" target="_blank" class="btn bg-llt-darkgray text-secondary btn-sm fw-bold rounded-0">View or download pdf <i class="fas fa-external-link-alt"></i></a> {% endfor %}</div>
-		<iframe width="100%" height="1200px" src="{{ bitstreams.0.0 }}" style="background-color: #fff"></iframe>	
+		{% if item_data.abstract %}<div class="p-2"><dt class="metadata">Abstract</dt><dd>{{item_data.abstract.0}}</dd></div>{% endif %}
+		<!--<iframe width="100%" height="1200px" src="{{ bitstreams.0.0 }}" style="background-color: #fff"></iframe>-->
 	</div>
 
-	<div class="col-md-3">
+	<div class="col-md-6">
 		<h2 class="fs-6 fw-bold"><span class="badge bg-llt-darkgray text-secondary rounded-0 oai-micro-fs-6 mt-2 mb-2">{{item_data.type.0}}</span><br> {{ object }}</h2>
 
 		<!-- Social media buttons -->
