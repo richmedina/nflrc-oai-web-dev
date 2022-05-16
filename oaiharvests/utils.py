@@ -52,7 +52,7 @@ def get_bitstream_url(collection, record_in):
     """
 
     sickle = Sickle(collection.community.repository.base_url)        
-    sickle.class_mapping['GetRecord'] = LltRecordBitstream
+    sickle.class_mapping['GetRecord'] = LltRecordBitstream_v2
     record = sickle.GetRecord(metadataPrefix='ore', identifier=record_in.header.identifier)
 
     bitstreams = {'bitstream': None, 'bitstream_txt': None}
