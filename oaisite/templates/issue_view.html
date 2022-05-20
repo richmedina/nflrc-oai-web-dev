@@ -105,7 +105,7 @@
 
 
 		
-			{% if toc.Review %}<h4 class="border-space pt-4">Reviews</h4>{% endif %}
+			{% if toc.Review %}<h4 class="border-space pt-4">Media Reviews</h4>{% endif %}
 			{% for sub_type, data in toc.Review.items %}
 				<strong>{{ sub_type }}</strong>
 				<p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
