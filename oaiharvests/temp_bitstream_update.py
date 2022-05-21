@@ -11,9 +11,6 @@ dc_ns = '{http://purl.org/dc/terms/}'
 base_url = 'http://scholarspace.manoa.hawaii.edu/dspace-oai/request'
 sickle = Sickle(base_url)
 sickle.class_mapping['GetRecord'] = LltRecordBitstream_v2
-recs = Record.objects.all()
-bitstreams = sickle.GetRecord(metadataPrefix='ore', identifier=recs[300].identifier)
-
 
 def bitstream_update(record_obj=None):
 	try:
@@ -36,17 +33,14 @@ def bitstream_update(record_obj=None):
 		print(record_obj, ex)
 
 
-# if __name__ == '__main__':
+# Temp update script/snippet - Use in django shell
+
 # from oaiharvests.models import *
 # from oaiharvests import temp_bitstream_update as update
 # recs = Record.objects.all()
-# 	for r in recs:
-# 	  update.bitstream_update(r)
+# for r in recs:
+#   update.bitstream_update(r)
 
 
-
-# c = Collection.objects.get(identifier='col_10125_81528')
-# r = c.list_records()[0]
-
-
-
+# r = Record.objects.get(pk=1016)
+# update.bitstream_update(r)

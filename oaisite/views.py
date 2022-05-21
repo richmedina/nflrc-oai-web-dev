@@ -147,22 +147,13 @@ class ItemView(DetailView):
         context = super(ItemView, self).get_context_data(**kwargs)
         context['item_data'] = self.get_object().as_display_dict()
         bitstream = context['item_data']['bitstream'][0]
-        
-        # PATCH to handle two different data structures in db (list or string)
-        #   related to introduced modification to collect bitstreams as la ist 
-        #   in utils/get_bitstream_url()
 
         context['bitstreams'] = []
-        if not isinstance(bitstream, list):
-            bitstream = [bitstream]    
         
         for bit_url in bitstream:
-            if not bit_url.startswith('https:'): 
-                bit_url = bit_url.replace('http://', 'https://', 1)
-            bit_url_name = bit_url[bit_url.rfind('/')+1:]
-            context['bitstreams'].append((bit_url, bit_url_name))
-        
-        # END PATCH
+            if not bit_url[0].startswith('https:'): 
+                bit_url[0] = bit_url[0].replace('http://', 'https://', 1)
+            context['bitstreams'].append((bit_url[0], bit_url[1]))
         
         return context
 
@@ -176,21 +167,12 @@ class ItemSlugView(DetailView):
         context['item_data'] = self.get_object().as_display_dict()
         bitstream = context['item_data']['bitstream'][0]
         
-        # PATCH to handle two different data structures in db (list or string)
-        #   related to introduced modification to collect bitstreams as la ist 
-        #   in utils/get_bitstream_url()
-
         context['bitstreams'] = []
-        if not isinstance(bitstream, list):
-            bitstream = [bitstream]    
         
         for bit_url in bitstream:
-            if not bit_url.startswith('https:'): 
-                bit_url = bit_url.replace('http://', 'https://', 1)
-            bit_url_name = bit_url[bit_url.rfind('/')+1:]
-            context['bitstreams'].append((bit_url, bit_url_name))
-        
-        # END PATCH
+            if not bit_url[0].startswith('https:'): 
+                bit_url[0] = bit_url[0].replace('http://', 'https://', 1)
+            context['bitstreams'].append((bit_url[0], bit_url[1]))
         
         return context
 

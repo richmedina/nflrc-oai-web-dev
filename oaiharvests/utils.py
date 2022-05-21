@@ -268,7 +268,7 @@ class LltRecordBitstream_v2(Record):
                 ftype = i.get('type')
                 ftitle = i.get('title')
                 # To do: determine if supplemental file based on 'supplemental' key
-                doc_bitstreams.append(href)
+                doc_bitstreams.append((href, ftitle))
 
         for i in txt_urls:
             link_type = i.find(rdf_ns+'type').get(rdf_ns+'resource')
@@ -280,7 +280,7 @@ class LltRecordBitstream_v2(Record):
                 except Exception as e:
                     pass
                 if ftype == 'TEXT':
-                    txt_bitstreams.append(href)
+                    txt_bitstreams.append((href, 'full_text'))
 
         self.metadata.clear() # clear the metadata. we're only interested in fishing out the bitstream info.
         self.metadata['bitstream'] = doc_bitstreams
@@ -298,7 +298,7 @@ class OAIUtils(object):
         self.collections = []
 
     def list_oai_community_sets(self, repository):
-        """ Contructs list of tuples of communities (a grouping concept in OAI) 
+        """ Constructs list of tuples of communities (a grouping concept in OAI) 
         for the given repository.
         Utilizes OAI-PMH verb: ListSets
         """
