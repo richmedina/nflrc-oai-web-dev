@@ -418,10 +418,11 @@ class Record(TimeStampedModel):
     def load_full_text(self, local_dir=None):
         url = None
         meta_data = self.as_dict()
-        if local_dir:            
+
+        if local_dir:   # if accessing locally downloaded archive of raw text.         
             try:
-                bitstream_txt = meta_data.get('bitstream_txt')[0]
-                url = os.path.join(local_dir, bitstream_txt.split('/')[-1])
+                bitstream_txt = meta_data.get('bitstream_txt')[0][0][0]
+                url = os.path.join(local_dir, bitstream_txt[1])
                 with io.open(url, 'r', encoding='utf8') as f:
                     t = f.read()
                     self.full_text = t.replace(u'\x00', '')
@@ -430,7 +431,7 @@ class Record(TimeStampedModel):
                 return (self.pk, url, e)
         else:
             try:
-                url = meta_data.get('bitstream_txt')[0]
+                url = meta_data.get('bitstream_txt')[0][0][0]                
                 url = url.replace('http://', 'https://')
                 r = requests.get(url, timeout=1.0)
                 self.full_text = r.text

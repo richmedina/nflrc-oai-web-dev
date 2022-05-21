@@ -63,7 +63,7 @@ def get_bitstream_url(collection, record_in):
         print (e, 'Unable to construct bitstream url for', record_in.header.identifier)
 
     try:
-        bitstreams['bitstream_txt'] = record.metadata['bitstream_txt'][0].replace('+', '%20')
+        bitstreams['bitstream_txt'] = record.metadata['bitstream_txt']
     except Exception as e:
         print(e, 'Unable to construct bitstream_txt url for', record_in.header.identifier)
     

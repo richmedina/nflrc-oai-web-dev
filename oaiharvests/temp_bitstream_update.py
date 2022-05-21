@@ -34,12 +34,14 @@ def bitstream_update(record_obj=None):
 
 
 # Temp update script/snippet - Use in django shell
+from oaiharvests import temp_bitstream_update as update
+from oaiharvests.models import *
 
-# from oaiharvests.models import *
-# from oaiharvests import temp_bitstream_update as update
-# recs = Record.objects.all()
-# for r in recs:
-#   update.bitstream_update(r)
+r = Record.objects.get(pk=1016)
+r.load_full_text()
+recs = Record.objects.all()
+for r in recs:
+  update.bitstream_update(r)
 
 
 # r = Record.objects.get(pk=1016)
