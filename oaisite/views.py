@@ -79,6 +79,14 @@ class HomeView(BaseSideMenuMixin, TemplateView):
             reviews_data = next(iter(reviews))[1]
             context['review_count'] = len(reviews_data['records'])
         except:
+            pass
+
+        try:
+            # article_reviews = context['current_vol_toc']['Article_Review'].items()
+            # article_reviews_data = next(iter(article_reviews))[1]
+            # context['article_review_count'] = len(article_reviews_data['records'])
+            context['article_review_count'] = 0
+        except:
             pass        
         return context
 
