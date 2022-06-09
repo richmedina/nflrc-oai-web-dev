@@ -454,6 +454,9 @@ class Record(TimeStampedModel):
             self.save()
 
         return reverse('item_slug_view', args=[self.slug])
+
+    class Meta:
+        ordering = ['-hdr_datestamp']
     
 
 class MetadataElement(models.Model):
