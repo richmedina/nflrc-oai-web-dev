@@ -154,14 +154,17 @@ class ItemView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ItemView, self).get_context_data(**kwargs)
         context['item_data'] = self.get_object().as_display_dict()
-        bitstream = context['item_data']['bitstream'][0]
+        try:
+            bitstream = context['item_data']['bitstream'][0]
 
-        context['bitstreams'] = []
-        
-        for bit_url in bitstream:
-            if not bit_url[0].startswith('https:'): 
-                bit_url[0] = bit_url[0].replace('http://', 'https://', 1)
-            context['bitstreams'].append((bit_url[0], bit_url[1]))
+            context['bitstreams'] = []
+            
+            for bit_url in bitstream:
+                if not bit_url[0].startswith('https:'): 
+                    bit_url[0] = bit_url[0].replace('http://', 'https://', 1)
+                context['bitstreams'].append((bit_url[0], bit_url[1]))
+        except:
+            pass
         
         return context
 
@@ -173,15 +176,18 @@ class ItemSlugView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ItemSlugView, self).get_context_data(**kwargs)
         context['item_data'] = self.get_object().as_display_dict()
-        bitstream = context['item_data']['bitstream'][0]
-        
-        context['bitstreams'] = []
-        
-        for bit_url in bitstream:
-            if not bit_url[0].startswith('https:'): 
-                bit_url[0] = bit_url[0].replace('http://', 'https://', 1)
-            context['bitstreams'].append((bit_url[0], bit_url[1]))
-        
+        try:
+            bitstream = context['item_data']['bitstream'][0]
+            
+            context['bitstreams'] = []
+            
+            for bit_url in bitstream:
+                if not bit_url[0].startswith('https:'): 
+                    bit_url[0] = bit_url[0].replace('http://', 'https://', 1)
+                context['bitstreams'].append((bit_url[0], bit_url[1]))
+        except:
+            pass
+            
         return context
 
 

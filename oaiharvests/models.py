@@ -237,6 +237,8 @@ class Collection(TimeStampedModel):
         else:
             toc_item_list = self.list_records_by_page_and_volume()
 
+        if self.special_issue:
+            toc_item_list = self.list_records_by_page_and_volume()
 
         for rec in toc_item_list:  # Returns a list of [ [REC OBJ, PAGE START, PAGE END, VOL NUM], ... ]
             rec_obj = rec[0]       # Record object
@@ -281,6 +283,10 @@ class Collection(TimeStampedModel):
                             toc_item[4] = d.strftime('%b %-d')
                         else:
                             toc_item[4] = toc_item[3]
+                        
+                        if self.special_issue:
+                            toc_item[4] = toc_item[3]
+
                     except:
                         pass
 
@@ -448,8 +454,8 @@ class Record(TimeStampedModel):
 
     def get_absolute_url(self):
         if not self.slug:
-            s = self.get_metadata_item('identifier.uri')[0][0]
-            s = s[22:]
+            s = self.identifier.split(':')
+            s = s[len(s)-1]
             self.slug = s.replace('/', '-')
             self.save()
 
