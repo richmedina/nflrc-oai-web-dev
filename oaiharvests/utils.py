@@ -72,8 +72,25 @@ def get_bitstream_url(collection, record_in):
     
     return bitstreams
 
+def get_bitstream_urls_from_collection(collection):
+    """Build a look up table for bitstream data specific to a collection. Lookup is on record identifier. 
+    To be used primarily with batch harvest articles."""
+    sickle = Sickle(collection.community.repository.base_url)
+    recs = sickle.ListRecords(metadataPrefix='ore', ignore_deleted=True, set=collection.identifier)
+    bitstream_lookup = {}
+    for oai_rec in recs:
+        lrec = LltRecordBitstream_v2(oai_rec.xml, strip_ns=True)
+        bitstream_data = {'bitstream': None, 'bitstream_txt': None}
+        bitstream_data['bitstream'] = lrec.metadata['bitstream']
+        bitstream_data['bitstream_txt'] = lrec.metadata['bitstream_txt']
+        bitstream_lookup[lrec.header.identifier] = bitstream_data
+    
+    return bitstream_lookup  
+
 def batch_harvest_articles(collection_obj):
     oai = OAIUtils()
+    
+    bitstream_lookup = get_bitstream_urls_from_collection(collection_obj)
     records = oai.harvest_oai_collection_records_sickle(collection_obj)
 
     for record in records:
@@ -104,18 +121,25 @@ def batch_harvest_articles(collection_obj):
                 element.save()
 
             #  Add in bitstream urls
-            bitstreams = get_bitstream_url(collection_obj, record)
-            element = MetadataElement()
-            element.record = record_obj
-            element.element_type = 'bitstream'
-            element.element_data = json.dumps([bitstreams['bitstream']])
-            element.save()
+            # bitstreams = get_bitstream_url(collection_obj, record)
 
-            element = MetadataElement()
-            element.record = record_obj
-            element.element_type = 'bitstream_txt'
-            element.element_data = json.dumps([bitstreams['bitstream_txt']])
-            element.save()
+            try:
+                bstr = bitstream_lookup[record.header.identifier]
+                
+                element = MetadataElement()
+                element.record = record_obj
+                element.element_type = 'bitstream'
+                element.element_data = json.dumps([bstr['bitstream']])
+                element.save()
+            
+                element = MetadataElement()
+                element.record = record_obj
+                element.element_type = 'bitstream_txt'            
+                element.element_data = json.dumps([bstr['bitstream_txt']])
+                element.save()
+            except:
+                pass
+           
             record_obj.load_full_text()
         else:
             try:
