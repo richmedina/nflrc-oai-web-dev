@@ -2,9 +2,10 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
-
 # TimeStampedModel adds 'created' and 'modified' fields to each inherited class.
 from model_utils.models import TimeStampedModel
+
+from oaiharvests.models import Collection
 
 class OAISitePage(TimeStampedModel):
     title = models.CharField(max_length=512, blank=True)
@@ -31,3 +32,16 @@ class OAISitePost(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse('post_view', args=[str(self.id)])
+
+
+class OAISiteSupplementaryCollection(TimeStampedModel):
+    title = models.CharField(max_length=512, blank=False, help_text='Enter a display title for this collection.')
+    collection_id = models.ForeignKey(Collection, on_delete=models.CASCADE)
+    collection_type = models.CharField(max_length=512, blank=False, help_text='Enter a short string to indicate the type of items in this collection (E.g., podcasts, media, reports)')
+    slug = models.SlugField(max_length=1024, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('media_collection', args=[self.slug])

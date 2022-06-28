@@ -10,7 +10,7 @@ from braces.views import LoginRequiredMixin
 from haystack.generic_views import SearchView
 
 from oaiharvests.models import Community, Collection, Record, MetadataElement
-from .models import OAISitePage, OAISitePost
+from .models import OAISitePage, OAISitePost, OAISiteSupplementaryCollection
 from .forms import PageUpdateForm, PostCreateForm, PostUpdateForm
 
 
@@ -33,7 +33,10 @@ class HomeView(BaseSideMenuMixin, TemplateView):
         try:
             journal = Community.objects.all()[0]
             context['keywords'] =  journal.aggregate_keywords()
-            context['volumes'] = journal.list_collections_by_volume()
+            try:
+                context['volumes'] = journal.list_collections_by_volume()
+            except Exception as e:
+                print(e, 'Cannot load all collections')
             
             collection_list = Collection.objects.all().order_by('-name')
             for i in collection_list:
@@ -140,9 +143,12 @@ class CollectionView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(CollectionView, self).get_context_data(**kwargs)
-        context['toc'] = self.get_object().list_toc_by_page()
-        context['size'] = len(context['toc'])
-        context['issue'] = self.get_object().title_tuple()
+        try:
+            context['toc'] = self.get_object().list_toc_by_page()
+            context['size'] = len(context['toc'])
+            context['issue'] = self.get_object().title_tuple()
+        except:
+            context['issue'] = self.get_object().title_tuple()
         
         return context
 
@@ -198,6 +204,24 @@ class ItemViewFull(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ItemViewFull, self).get_context_data(**kwargs)
         context['item_data'] = self.get_object().as_dict()
+        return context
+
+
+class MediaCollectionView(BaseSideMenuMixin, DetailView):
+    model = OAISiteSupplementaryCollection
+    template_name = 'media_collection_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MediaCollectionView, self).get_context_data(**kwargs)
+        items = self.get_object().collection_id.list_records()
+
+        context['items'] = []
+        for i in items:
+            r = i.as_dict()
+            r['issue_date'] = datetime.strptime(r['date.issued'][0], '%Y-%m-%d')
+            context['items'].append(r)
+        print(context['items'])
+        context['curr_page'] = 'media'
         return context
 
 

@@ -50,22 +50,21 @@ class Community(TimeStampedModel):
         # TODO: return collections grouped by volume number.
         volumes_group = OrderedDict()
         volumes = self.collection_set.all().order_by('-name')
-        for i in volumes:
-            # get a record from the volume
-            rec = i.list_records()[0]
-            
+        for i in volumes:            
             # get volume number from record
             try:
-                # print '===>', rec, rec[2]
+                # get a record from the volume
+                rec = i.list_records()[0]
                 vol_num = int(rec.get_metadata_item('volume')[0][0])
             except Exception as e:
                 vol_num = 0
 
-            # add volume num as dict key
-            if vol_num in volumes_group:
-                volumes_group[vol_num].append(i)
-            else:
-                volumes_group[vol_num] = [i]
+            if vol_num > 0:
+                # add volume num as dict key
+                if vol_num in volumes_group:
+                    volumes_group[vol_num].append(i)
+                else:
+                    volumes_group[vol_num] = [i]
 
         return volumes_group
 

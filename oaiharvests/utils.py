@@ -121,8 +121,6 @@ def batch_harvest_articles(collection_obj):
                 element.save()
 
             #  Add in bitstream urls
-            # bitstreams = get_bitstream_url(collection_obj, record)
-
             try:
                 bstr = bitstream_lookup[record.header.identifier]
                 
@@ -286,15 +284,14 @@ class LltRecordBitstream_v2(Record):
 
         doc_bitstreams = [] # url for primary document/article pdf
         txt_bitstreams = [] # url for ocr'ed pdf documents
-        extra_bitstreams = [] # urls for secondary data files.
-
+        
         for i in doc_urls:
             link_type = i.get('rel')
             if link_type == 'http://www.openarchives.org/ore/terms/aggregates':
                 href = i.get('href')
                 ftype = i.get('type')
                 ftitle = i.get('title')
-                # To do: determine if supplemental file based on 'supplemental' key
+                # To do: determine a differentiation between main article and supplementals
                 doc_bitstreams.append((href, ftitle))
 
         for i in txt_urls:
