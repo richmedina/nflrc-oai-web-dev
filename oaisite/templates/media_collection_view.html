@@ -1,0 +1,49 @@
+<!-- media_collection_view.html -->
+{% extends 'base.html' %}
+
+{% block page_title %}{{ object.title }}{% endblock page_title %} 
+
+{% block page_header %}
+	<h2>{{ object.title }}</h2>
+{% endblock page_header %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-9">
+
+		<div class="row">
+			{% for i in items %}
+			<meta property="og:title" content="Voices from the LLT - {{ i.title.0 }}" />
+			<meta property="og:image" content="https://nflrc.hawaii.edu/static/nflrc-oai-pub-llt/img/logo-hdr.png" />
+			<meta property="og:url"   content="{{request.get_full_path}}#media-{{forloop.counter}}" />
+			<meta property="og:type"  content="media" />
+			<meta property="og:description" content="{{ i.description.0|truncatewords:24 }}" />
+
+			<div class="col-md-12 mb-4" id="media-{{forloop.counter}}">
+				<div class="card m-2 p-2 position-relative border-0 bg-llt-darkgray rounded-0" style="height: 100%;">					
+					<div class="card-body p-0">
+						<div><audio  style="width: 100%" controls="true" autoplay="" src="{{ i.bitstream.0.0.0 }}" type="audio/mpeg" class="audio"></audio></div>
+						<div class="card-title oai-micro-fs-8">
+							<span class="oai-micro-fs-6 p-0 fw-bold">{{ i.issue_date|date:"M j Y" }}</span>
+							<h6 class="fw-bold">{{ i.title.0 }} </h6>
+						</div>
+						<div class="oai-micro-fs-8">{{ i.description.0 }}</div>
+						<a class="btn btn-link btn-sm" data-bs-toggle="collapse" href="#meta-{{forloop.counter}}">more</a>
+						<div class="collapse" id="meta-{{forloop.counter}}">
+							<dl class="">
+							{% for j, k in i.items %}
+								<dt class="metadata">{{ j }}:</dt><dd>{{k.0}}</dd>
+							{% endfor %}
+							</dl>						
+						</div>
+					</div>				
+				</div>
+
+			</div>	
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
+</div>		
+{% endblock content %}
