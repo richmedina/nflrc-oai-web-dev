@@ -218,9 +218,19 @@ class MediaCollectionView(BaseSideMenuMixin, DetailView):
         context['items'] = []
         for i in items:
             r = i.as_dict()
-            r['issue_date'] = datetime.strptime(r['date.issued'][0], '%Y-%m-%d')
-            context['items'].append(r)
-        print(context['items'])
+            cleaned = {}
+            try:
+                cleaned['date_issued'] = [datetime.strptime(r['date.issued'][0], '%Y-%m-%d')]
+                cleaned['title'] = r['title']
+                cleaned['description'] = r['description']
+                cleaned['bitstream'] = r['bitstream'][0][0]
+                cleaned['external_url'] = r['relation.uri']
+                cleaned['citation'] = r['identifier.citation']
+                cleaned['length'] = r['format.extent']
+            except:
+                pass          
+            context['items'].append(cleaned)
+        
         context['curr_page'] = 'media'
         return context
 
