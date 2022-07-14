@@ -227,6 +227,9 @@ class MediaCollectionView(BaseSideMenuMixin, DetailView):
                 cleaned['external_url'] = r['relation.uri']
                 cleaned['citation'] = r['identifier.citation']
                 cleaned['length'] = r['format.extent']
+                raw_txt = r['bitstream_txt'][0][0]
+                # raw_txt.replace('\n', '<br/>')
+                cleaned['bitstream_txt'] = raw_txt
             except:
                 pass          
             context['items'].append(cleaned)

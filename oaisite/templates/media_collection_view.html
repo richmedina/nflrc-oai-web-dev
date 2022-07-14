@@ -1,11 +1,13 @@
 <!-- media_collection_view.html -->
 {% extends 'base.html' %}
+{% load static %}
 {% load oaisite_filters %}
 
 {% block page_title %}{{ object.title }}{% endblock page_title %} 
 
 {% block page_header %}
 	<h2>{{ object.title }}</h2>
+	<h5>A podcast series highlighting stories from the community</h5>
 {% endblock page_header %}
 
 {% block content %}
@@ -20,25 +22,38 @@
 			<meta property="og:type"  content="media" />
 			<meta property="og:description" content="{{ i.description.0|truncatewords:24 }}" />
 
-			<div class="col-md-12 mb-4" id="media-{{forloop.counter}}">
+			<div class="col-md-12 mb-2" id="media-{{forloop.counter}}">
 				<div class="card m-2 p-2 position-relative border-0  rounded-0" style="height: 100%;">					
 					<div class="card-body p-0">
-								
-						{% if i.external_url.0 %}
-						<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1263787729&color=%23b44b19&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/nflrc" title="NFLRC" target="_blank" style="color: #cccccc; text-decoration: none;"></a><a href="" title="{{ i.title.0 }}" target="_blank" style="color: #cccccc; text-decoration: none;"></a></div>
-						{% else %}
-							<div><audio style="width: 100%" controls="true" autoplay="" src="{{ i.bitstream.0 }}" type="audio/mpeg" class="audio"></audio></div>
-						{% endif %}
-
+						
 						<div class="card-title oai-micro-fs-8">
-							<span class="p-0 fw-bold oai-micro-fs-8">{{ i.date_issued.0|date:"M j Y" }}</span> <span class="oai-micro-fs-6">({{ i.length.0}})</span>
+							<span class="p-0 fw-bold">{{ i.date_issued.0|date:"M j Y" }}</span> <span class="oai-micro-fs-6">({{ i.length.0}})</span>
 						</div>
-						<h6 class="fw-bold">{{ i.title.0 }} </h6>
-						<div class="oai-micro-fs-8">{{ i.description.0 }}</div>
-						<a class="btn btn-default btn-sm" data-bs-toggle="collapse" href="#meta-{{forloop.counter}}"></a>
-						<div class="collapse show oai-micro-fs-8 fw-bold" id="meta-{{forloop.counter}}">
+						<a href="{{ i.external_url.0 }}" target="_blank" class="static_a_display">
+						<h6 class="fw-bold llt-darkestgray">{{ i.title.0 }} </h6>
+						<div class="oai-micro-fs-8">{{ i.description.0|linebreaks }}</div>
+						
+
+
+						<div class="mt-2">
+							{% if i.external_url.0 %}
+								<div style="display: inline-block; position: relative" class="">
+									<div class="p-0">
+										
+										<span class="text-black oai-fs-xlg"><i class="fa-solid fa-caret-right"></i></span> 
+										<img src="{% static 'img/soundcloud-icon.png' %}" height="60px" class="pb-4">
+									</div>
+								</div>
+							{% endif %}							
+						</div>
+						</a>
+						<p class=""><a class="btn btn-default ps-0 info-toggler text-black " data-bs-toggle="collapse" href="#meta-{{forloop.counter}}"><span class="oai-micro-fs-6 fst-italic">TRANSCRIPT</span> <i class="state fa-solid fa-angle-down"></i></a></p>
+
+						<div class="collapse oai-micro-fs-8" id="meta-{{forloop.counter}}">				
+							<div class="shadow-sm rounded-0 p-2">{{ i.bitstream_txt|linebreaks }}</div>
 							<div class="">{{ i.citation.0 }}</div>
 						</div>
+
 						
 					</div>				
 				</div>
@@ -51,3 +66,20 @@
 	<div class="col-md-3">{% include 'base-side-menu.html' %}</div>
 </div>		
 {% endblock content %}
+
+{% block js_include %}
+<script type="text/javascript">
+const togglebtns = document.querySelectorAll('.info-toggler')
+togglebtns.forEach(function(toggler) {
+    toggler.addEventListener('click', function(e) {
+        var curr_toggle_icon = this.querySelector('.state');
+        if (curr_toggle_icon.classList.contains('fa-angle-down')) {
+            curr_toggle_icon.classList.replace("fa-angle-down", "fa-angle-up");
+        } else {
+        	curr_toggle_icon.classList.replace("fa-angle-up", "fa-angle-down");
+        }
+    });
+});
+</script>
+{% endblock js_include %}
+
