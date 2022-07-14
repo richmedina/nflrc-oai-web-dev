@@ -8,6 +8,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 
 from braces.views import LoginRequiredMixin
 from haystack.generic_views import SearchView
+import requests
 
 from oaiharvests.models import Community, Collection, Record, MetadataElement
 from .models import OAISitePage, OAISitePost, OAISiteSupplementaryCollection
@@ -226,11 +227,9 @@ class MediaCollectionView(BaseSideMenuMixin, DetailView):
                 cleaned['bitstream'] = r['bitstream'][0][0]
                 cleaned['external_url'] = r['relation.uri']
                 cleaned['citation'] = r['identifier.citation']
-                cleaned['length'] = r['format.extent']
-                raw_txt = r['bitstream_txt'][0][0]
-                # raw_txt.replace('\n', '<br/>')
-                cleaned['bitstream_txt'] = raw_txt
-            except:
+                cleaned['length'] = r['format.extent']            
+                cleaned['full_text'] = i.full_text
+            except Exception as e:
                 pass          
             context['items'].append(cleaned)
         
