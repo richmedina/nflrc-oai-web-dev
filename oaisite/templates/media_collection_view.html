@@ -16,7 +16,7 @@
 
 		<div class="row">
 			{% for i in items %}
-			<meta property="og:title" content="Voices from the LLT - {{ i.title.0 }}" />
+			<meta property="og:title" content="Voices from LLT - {{ i.title.0 }}" />
 			<meta property="og:image" content="https://nflrc.hawaii.edu/static/nflrc-oai-pub-llt/img/logo-hdr.png" />
 			<meta property="og:url"   content="{{request.get_full_path}}#media-{{forloop.counter}}" />
 			<meta property="og:type"  content="media" />
@@ -29,19 +29,15 @@
 						<div class="card-title oai-micro-fs-8">
 							<span class="p-0 fw-bold">{{ i.date_issued.0|date:"M j Y" }}</span> <span class="oai-micro-fs-6">({{ i.length.0}})</span>
 						</div>
-						<h6 class="fw-bold llt-darkestgray">{{ i.title.0 }} </h6>
+						<h6 class="fw-bold llt-darkestgray"> <i class="fa-solid fa-podcast"></i> {{ i.title.0 }} </h6>
 						<div class="oai-micro-fs-8">{{ i.description.0|safe|linebreaks }}</div>
 						</a>
 						<div class="mt-2">
-						{% if i.external_url.1 %}	
-
-						<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ i.external_url.1 }}&color=%237d0000&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/lltjournal" title="Language Learning &amp; Technology" target="_blank" style="color: #cccccc; text-decoration: none;">Language Learning &amp; Technology</a> · <a href="{{ i.external_url.0 }}" title="About the Language Learning &amp; Technology Journal" target="_blank" style="color: #cccccc; text-decoration: none;">About the Language Learning &amp; Technology Journal</a></div>
+						{% if i.external_url.1 %}
+							<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ i.external_url.1 }}&color=%237d0000&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/lltjournal" title="Language Learning &amp; Technology" target="_blank" style="color: #cccccc; text-decoration: none;">Language Learning &amp; Technology</a> · <a href="{{ i.external_url.0 }}" title="About the Language Learning &amp; Technology Journal" target="_blank" style="color: #cccccc; text-decoration: none;">About the Language Learning &amp; Technology Journal</a></div>
 						{% else %}
 							<audio  style="width: 100%" controls="true" autoplay="" src="{{ i.bitstream.0 }}" type="audio/mpeg" class="audio"></audio>
-						
-						{% endif %}
-
-													
+						{% endif %}													
 						</div>
 						
 						<div class="oai-micro-fs-6">{{ i.citation.0 }}</div>
@@ -52,7 +48,6 @@
 							<div class="collapse oai-micro-fs-8 bg-llt-light-gold" id="meta-{{forloop.counter}}">		
 								<div class="shadow-sm rounded-0 p-2">{{ i.full_text|linebreaks }}</div>
 							</div>
-
 						{% endif %}						
 					</div>				
 				</div>
