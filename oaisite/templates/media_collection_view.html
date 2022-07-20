@@ -45,7 +45,7 @@
 						{% if i.full_text %}
 							<p class=" text-center"><a class="btn btn-default ps-0 info-toggler text-black " data-bs-toggle="collapse" href="#meta-{{forloop.counter}}"><span class="oai-micro-fs-6 fst-italic">TRANSCRIPT</span> <i class="state fa-solid fa-angle-down"></i></a></p>
 
-							<div class="collapse oai-micro-fs-8 bg-llt-light-gold" id="meta-{{forloop.counter}}">		
+							<div class="collapse oai-micro-fs-8" id="meta-{{forloop.counter}}">		
 								<div class="shadow-sm rounded-0 p-2">{{ i.full_text|linebreaks }}</div>
 							</div>
 						{% endif %}						
