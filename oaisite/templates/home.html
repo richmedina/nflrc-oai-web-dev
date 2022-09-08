@@ -59,10 +59,10 @@
                 <!-- Special Issue Book cover -->
                 <div class="card border-0 rounded-0 bk-cover-bg-{{special_issue.color_code}} lh-sm" style="height: 100%;">
                     <div class="card-body">
-                        <span class="badge bg-llt-gold rounded-0 mb-1">Latest Special Issue</span><br>
+                        <span class="badge bg-llt-gold rounded-0 mb-1">Latest Special Issue</span> 
+                        <br>
                         <div class="oai-micro-fs-6 pb-2">{{special_issue.title}}<br>{{special_issue.date}}</div>
                         <div style="height: 36%" class="card-title"><strong>{{special_issue.subtitle|slice:"14:"}}</strong></div>
-
                     </div>        
                     <div class="card-footer border-0 bk-cover-bg-{{special_issue.color_code}} oai-micro-fs-6">
                             {% if special_issue.editors %}
@@ -70,7 +70,11 @@
                             {% endif %}     
                     </div>
                     <a href="{% url 'collection' special_issue.object.pk %}" class="stretched-link"></a>
+                    
                 </div>
+                <!-- <div>
+                    <span class="badge llt-burgundy rounded-0 oai-micro-fs-8"><a href="http://localhost:8000/media/voices-from-llt/" class="llt-burgundy"><i class="fa-solid fa-podcast fa-xl"></i></a></span>
+                </div> -->
             </div>
             {% endif %}
 

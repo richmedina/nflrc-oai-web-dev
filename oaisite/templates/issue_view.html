@@ -17,7 +17,7 @@
 		<div class="col-md-9">
 			{% if user.is_staff %}<p><small><a class="btn btn-sm btn-link ps-1 text-start rounded-0 static_a_display" href="{% url 'oai_collection' issue.object.pk %}">Update</a></small></p>{% endif %}
 			{% if issue.object.description %}
-				<blockquote class="blockquote"><i class="fas fa-quote-left fa-2x llt-darkgray"></i> <p class="bg-llt-darkgray p-2 oai-micro-fs-8">{{ issue.object.description|truncatewords:50 }}</p></blockquote>
+				<p class="bg-llt-darkgray p-2 oai-micro-fs-8">{{ issue.object.description|safe }}</p>
 			{% endif %}
 			{% for sub_type, data in toc.Preface.items %} 
 				
