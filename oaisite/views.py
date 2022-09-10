@@ -15,6 +15,24 @@ from .models import OAISitePage, OAISitePost, OAISiteSupplementaryCollection
 from .forms import PageUpdateForm, PostCreateForm, PostUpdateForm
 
 
+def get_related_item(handle=''):
+    """Returns a related object from the db based handle. Searches Record and Collection
+    Handle is in the format: 'https://hdl.handle.net/nnnnn/nnnnnn'"""
+    try:    
+        handle = handle.split('/')[-2:]
+        query = 'oai:scholarspace.manoa.hawaii.edu:' + '/'.join(handle)
+        relobj = Record.objects.filter(identifier=query)
+        if not relobj:
+            query = 'col_' + '_'.join(handle)
+            relobj = Collection.objects.filter(identifier=query)
+
+        if relobj:
+            return relobj[0].get_absolute_url()
+
+    except Exception as e:
+        print(e)
+        pass
+    return ''
 
 class BaseSideMenuMixin(object):
     def get_context_data(self, **kwargs):
@@ -219,6 +237,7 @@ class MediaCollectionView(BaseSideMenuMixin, DetailView):
         context['items'] = []
         for i in items:
             r = i.as_dict()
+
             cleaned = {}
             try:
                 cleaned['date_issued'] = [datetime.strptime(r['date.issued'][0], '%Y-%m-%d')]
@@ -229,6 +248,10 @@ class MediaCollectionView(BaseSideMenuMixin, DetailView):
                 cleaned['citation'] = r['identifier.citation']
                 cleaned['length'] = r['format.extent']            
                 cleaned['full_text'] = i.full_text
+                cleaned['related'] = r['relation.isbasedon']
+                if cleaned['related']:
+                    cleaned['related'] = get_related_item(handle=cleaned['related'][0])
+
             except Exception as e:
                 pass          
             context['items'].append(cleaned)

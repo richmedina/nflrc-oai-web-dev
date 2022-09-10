@@ -29,7 +29,12 @@
 						<div class="card-title oai-micro-fs-8">
 							<span class="p-0 fw-bold">{{ i.date_issued.0|date:"M j Y" }}</span> <span class="oai-micro-fs-6">({{ i.length.0}})</span>
 						</div>
-						<h6 class="fw-bold llt-darkestgray"> <i class="fa-solid fa-podcast"></i> {{ i.title.0 }} </h6>
+						<h6 class="fw-bold llt-darkestgray"> 
+							<i class="fa-solid fa-podcast"></i> {{ i.title.0 }} 
+							{% if i.related %}
+							<span><a href="{{i.related}}" class="static_a_display badge bg-llt-darkgray text-secondary oai-micro-fs-6">Related Resource</a></span>
+							{% endif %}
+						</h6>
 						<div class="oai-micro-fs-8">{{ i.description.0|safe|linebreaks }}</div>
 						</a>
 						<div class="mt-2">
