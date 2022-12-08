@@ -23,7 +23,7 @@
 			<meta property="og:description" content="{{ i.description.0|truncatewords:24 }}" />
 
 			<div class="col-md-12 mb-2" id="media-{{forloop.counter}}">
-				<div class="card m-2 p-2 pb-0 position-relative border-0  rounded-0" style="height: 100%;">					
+				<div class="card m-0 p-2 pb-0 position-relative border-0 rounded-0 bg-llt-darkgray" style="height: 100%;">					
 					<div class="card-body p-0">
 						<a href="{{ i.external_url.0 }}" target="_blank" class="static_a_display">
 						<div class="card-title oai-micro-fs-8">
@@ -32,25 +32,24 @@
 						<h6 class="fw-bold llt-darkestgray"> 
 							<i class="fa-solid fa-podcast"></i> {{ i.title.0 }} 
 							{% if i.related %}
-							<span><a href="{{i.related}}" class="static_a_display badge bg-llt-darkgray text-secondary oai-micro-fs-6">Related Resource</a></span>
+							<span><a href="{{i.related}}" class="static_a_display badge bg-lt-gray text-secondary oai-micro-fs-6">Related Resource</a></span>
 							{% endif %}
 						</h6>
 						<div class="oai-micro-fs-8">{{ i.description.0|safe|linebreaks }}</div>
 						</a>
 						<div class="mt-2">
-						{% if i.external_url.1 %}
-							<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ i.external_url.1 }}&color=%237d0000&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/lltjournal" title="Language Learning &amp; Technology" target="_blank" style="color: #cccccc; text-decoration: none;">Language Learning &amp; Technology</a> · <a href="{{ i.external_url.0 }}" title="About the Language Learning &amp; Technology Journal" target="_blank" style="color: #cccccc; text-decoration: none;">About the Language Learning &amp; Technology Journal</a></div>
+						{% if i.external_url.1 %}			
+							<iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ i.external_url.1 }}&color=%23a23d11&inverse=false&auto_play=false&show_user=true"></iframe>
 						{% else %}
 							<audio  style="width: 100%" controls="true" autoplay="" src="{{ i.bitstream.0 }}" type="audio/mpeg" class="audio"></audio>
 						{% endif %}													
 						</div>
 						
-						<div class="oai-micro-fs-6">{{ i.citation.0 }}</div>
-
 						{% if i.full_text %}
-							<p class=" text-center"><a class="btn btn-default ps-0 info-toggler text-black " data-bs-toggle="collapse" href="#meta-{{forloop.counter}}"><span class="oai-micro-fs-6 fst-italic">TRANSCRIPT</span> <i class="state fa-solid fa-angle-down"></i></a></p>
+							<div class=" text-center"><a class="btn btn-default ps-0 info-toggler text-black " data-bs-toggle="collapse" href="#meta-{{forloop.counter}}"><span class="oai-micro-fs-6 fst-italic">TRANSCRIPT</span> <i class="state fa-solid fa-caret-down"></i></a></div>
 
-							<div class="collapse oai-micro-fs-8" id="meta-{{forloop.counter}}">		
+							<div class="collapse oai-micro-fs-8" id="meta-{{forloop.counter}}">
+								<div class="oai-micro-fs-6">{{ i.citation.0 }}</div>
 								<div class="shadow-sm rounded-0 p-2">{{ i.full_text|linebreaks }}</div>
 							</div>
 						{% endif %}						
@@ -71,10 +70,10 @@ const togglebtns = document.querySelectorAll('.info-toggler')
 togglebtns.forEach(function(toggler) {
     toggler.addEventListener('click', function(e) {
         var curr_toggle_icon = this.querySelector('.state');
-        if (curr_toggle_icon.classList.contains('fa-angle-down')) {
-            curr_toggle_icon.classList.replace("fa-angle-down", "fa-angle-up");
+        if (curr_toggle_icon.classList.contains('fa-caret-down')) {
+            curr_toggle_icon.classList.replace("fa-caret-down", "fa-caret-up");
         } else {
-        	curr_toggle_icon.classList.replace("fa-angle-up", "fa-angle-down");
+        	curr_toggle_icon.classList.replace("fa-caret-up", "fa-caret-down");
         }
     });
 });

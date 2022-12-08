@@ -37,6 +37,7 @@ from oaisite.views import (
     PostViewPrivate,
     PageViewPrivate,
     SearchHaystackView,
+    LatestArticleFeed,
     # KeywordBrowseView,
 )
 
@@ -127,6 +128,9 @@ urlpatterns = [
     path('oaiharvester/collection/harvest/<str:pk>',
      OaiCollectionHarvestView.as_view(
      ), name='oai_harvest_collection'),
+
+
+    path('feedlet/', LatestArticleFeed()),
 
     path('editor-access/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

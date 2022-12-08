@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 from django.contrib import messages
+from django.contrib.syndication.views import Feed
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
@@ -375,5 +376,37 @@ class SearchHaystackView(SearchView):
         context['keytable'] = keytable
         return context
 
+class LatestArticleFeed(Feed):
+    title = "Language Learning & Technology Publication Feed"
+    link = "/feedlet/"
+    description = "Updates when new content is published in the journal."
 
+    def items(self):
+        return Record.objects.all().order_by('-hdr_datestamp')[:10]
+
+    def item_title(self, item):
+        try:
+            return item.get_metadata_item('title')[0][0]
+        except:
+            return ''
+
+    def item_link(self, item):
+        if item.hdr_setSpec.name == 'Voices from LLT':
+            return reverse('media_collection', args=[item.slug])
+        return item.get_absolute_url()
+
+    def item_description(self, item):
+        try:
+            dt = datetime.strptime(item.get_metadata_item('date.issued')[0][0], '%Y-%m-%d')
+            dstr = datetime.strftime(dt, '%b %d %Y')
+            if item.hdr_setSpec.name == 'Voices from LLT':
+                desc = dstr + ' - ' + item.get_metadata_item('description')[0][0]
+            else:
+                desc = dstr + ' - ' + item.get_metadata_item('description.abstract')[0][0]
+            return desc
+        except:
+            return ''
+
+    def item_guid(self, item):
+        return item.get_absolute_url()        
 
