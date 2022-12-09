@@ -400,7 +400,7 @@ class LatestArticleFeed(Feed):
             dt = datetime.strptime(item.get_metadata_item('date.issued')[0][0], '%Y-%m-%d')
             dstr = datetime.strftime(dt, '%b %d %Y')
             if item.hdr_setSpec.name == 'Voices from LLT':
-                desc = dstr + ' - ' + item.get_metadata_item('description')[0][0]
+                desc = dstr + ' - ' + '[podcast] ' + item.get_metadata_item('description')[0][0]
             else:
                 desc = dstr + ' - ' + item.get_metadata_item('description.abstract')[0][0]
             return desc
