@@ -17,6 +17,20 @@ TYPES = ['publisher', 'description.provenance', 'identifier.doi', 'title', 'bits
 DISPLAY_TYPE_ORDER = ['title', 'contributor.author', 'description', 'description.abstract', 'bitstream', 'bitstream_txt', 'subject', 'publisher', 'type', 'relation.ispartofseries', 'date.issued', 'identifier.doi', 'identifier.uri', 'identifier.citation', 'volume', 'startingpage', 'endingpage', 'relation.uri']
 
 
+class RecordManagerEmergingTech(models.Manager):
+    def get_queryset(self):
+        et_recs = super().get_queryset().all().order_by('-hdr_setSpec__name')
+        records = []
+        
+        for i in et_recs:
+            try:
+                if i.get_metadata_item('llt.topic')[0][0] == 'Emerging Technologies':
+                    records.append(i.as_display_dict())
+            except:
+                pass
+        return records
+
+
 class Repository(TimeStampedModel):
 
     """ A institutional digital library OAI service provider -- e.g., ScholarSpace """
@@ -202,7 +216,7 @@ class Collection(TimeStampedModel):
         toc = defaultdict(list)
         for i in self.list_records():
             d = i.as_dict()
-            print(d, '\n')
+            # print(d, '\n')
             try:
                 for j in d['type']:  # Build toc data.
                     try:
@@ -460,9 +474,12 @@ class Record(TimeStampedModel):
 
         return reverse('item_slug_view', args=[self.slug])
 
+    objects = models.Manager()
+    et_objects = RecordManagerEmergingTech()
+
     class Meta:
         ordering = ['-hdr_datestamp']
-    
+
 
 class MetadataElement(models.Model):
 
