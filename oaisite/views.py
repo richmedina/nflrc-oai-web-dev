@@ -233,22 +233,21 @@ class MediaCollectionView(BaseSideMenuMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(MediaCollectionView, self).get_context_data(**kwargs)
-        items = self.get_object().collection_id.list_records()
+        items = self.get_object().collection_id.list_records_by_date_and_volume()
 
         context['items'] = []
         for i in items:
-            r = i.as_dict()
-
+            r = i[0].as_dict()
             cleaned = {}
             try:
                 cleaned['date_issued'] = [datetime.strptime(r['date.issued'][0], '%Y-%m-%d')]
                 cleaned['title'] = r['title']
                 cleaned['description'] = r['description']
-                cleaned['bitstream'] = r['bitstream'][0][0]
+                cleaned['bitstream'] = r['bitstream']
                 cleaned['external_url'] = r['relation.uri']
                 cleaned['citation'] = r['identifier.citation']
                 cleaned['length'] = r['format.extent']            
-                cleaned['full_text'] = i.full_text
+                cleaned['full_text'] = i[0].full_text
                 cleaned['related'] = r['relation.isbasedon']
                 if cleaned['related']:
                     cleaned['related'] = get_related_item(handle=cleaned['related'][0])
