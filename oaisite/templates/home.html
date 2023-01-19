@@ -177,7 +177,7 @@
                 <div class="card-body text-secondary bg-llt-darkgray">
                     <span class="badge bg-secondary rounded-0">News</span> <span class="oai-micro-fs-6">{{ i.created | date:"M j Y"}}</span>                   
                     <dt class="card-title"> {{ i.title }}</dt>
-                    <dd class="card-text oai-micro-fs-8">{{ i.content|safe|truncatewords:10 }}</dd>     
+                    <dd class="card-text oai-micro-fs-8">{{ i.content|safe|truncatewords:30 }}</dd>     
                 </div>
                 <a href="{% url 'post_view' i.pk %}" class="stretched-link"></a>                               
             </div>
