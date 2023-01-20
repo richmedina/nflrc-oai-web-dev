@@ -167,7 +167,23 @@
                     <div class="col-2 oai-micro-fs-8">{{ doc.4 }}</div>
                 </div>
             {% endfor %}
-        {% endfor %}            
+        {% endfor %}
+        <div class="row" class="prev_issues">
+            <div class="col-12">
+                <h3 class="border-space pt-4">Previous Issues <a href="{% url 'previous_issues' %}" class="btn btn-small btn-link static_a_display">view all</a></h3>        
+            </div>
+            {% for num, volume in volumes.items %}
+                <div class="col-md-3">
+                        <a class="btn btn-default ps-0 vol-list-toggler oai-micro-fs-8" data-bs-toggle="collapse" href="#id-{{num}}-collapse" role="button" aria-expanded="false" aria-controls="id-{{num}}-collapse"><i class="fas fa-caret-right"></i> {{volume.0.get_collection_date.year}} | {{ volume.0.name|slice:":9"}}</a>
+                        <ul id="id-{{num}}-collapse" class="list-unstyled collapse ps-3 oai-micro-fs-6 vol-list">
+                        {% for j in volume %}
+                            <li><p class=""><a href="{% url 'collection' j.identifier %}" class="static_a_display">{{ j.name }}</a></p></li>
+                        {% endfor %}
+                        </ul>
+                </div>
+                
+            {% endfor %}       
+        </div>         
     </div>
 
     <!-- RIGHT PANEL -->
@@ -195,22 +211,7 @@
 <div class="row"></div>
 
 <!-- ROW 3 -->
-<div class="row" class="prev_issues">
-    <div class="col-12">
-        <h3 class="border-space pt-4">Previous Issues <a href="{% url 'previous_issues' %}" class="btn btn-small btn-link static_a_display">view all</a></h3>        
-    </div>
-    {% for num, volume in volumes.items %}
-        <div class="col-md-3">
-                <a class="btn btn-default ps-0 vol-list-toggler" data-bs-toggle="collapse" href="#id-{{num}}-collapse" role="button" aria-expanded="false" aria-controls="id-{{num}}-collapse"><i class="fas fa-caret-right"></i> {{ volume.0.name|slice:":9"}}</a>
-                <ul id="id-{{num}}-collapse" class="list-unstyled collapse ps-3 oai-micro-fs-6 vol-list">
-                {% for j in volume %}
-                    <li><p class=""><a href="{% url 'collection' j.identifier %}" class="static_a_display">{{ j.name }}</a></p></li>
-                {% endfor %}
-                </ul>
-        </div>
-        
-    {% endfor %}       
-</div>
+
 
 {% endblock content %}
 
