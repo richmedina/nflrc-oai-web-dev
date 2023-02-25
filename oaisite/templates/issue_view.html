@@ -17,7 +17,6 @@
 		<div class="col-md-9">
 			{% if user.is_staff %}<p><small><a class="btn btn-sm btn-link ps-1 text-start rounded-0 static_a_display" href="{% url 'oai_collection' issue.object.pk %}">Update</a></small></p>{% endif %}
 			<div class="row">
-				<div class="col-11"><h4 class="border-space pt-4 oai-micro-fs-8">Preface</h4></div>
 				{% for sub_type, data in toc.Preface.items %} 
 					{% for doc in data.records %}					
 						<div class="col-11"> 
