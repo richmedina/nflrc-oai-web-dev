@@ -25,7 +25,6 @@
 							<span class="oai-micro-fs-6 p-0 fw-bold">{{ i.created|date:"M j Y" }}</span> <span class="oai-micro-fs-6  fw-light"> (modified {{ i.modified|date:"M j" }})</span>
 							<h6 class="fw-bold">{{ i.title }} </h6>
 						</div>
-						<div class="oai-micro-fs-8">{{ i.content|safe|truncatewords:24 }}</div>
 						<a href="{% url 'post_view' i.pk %}" class="btn btn-link btn-sm stretched-link"></a>
 					</div>					
 				</div>
