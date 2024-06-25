@@ -16,6 +16,7 @@
 
 		<div class="row">
 			{% for i in items %}
+			
 			<meta property="og:title" content="Voices from LLT - {{ i.title.0 }}" />
 			<meta property="og:image" content="https://nflrc.hawaii.edu/static/nflrc-oai-pub-llt/img/logo-hdr.png" />
 			<meta property="og:url"   content="{{request.get_full_path}}#media-{{forloop.counter}}" />
@@ -25,7 +26,7 @@
 			<div class="col-md-12 mb-2" id="media-{{forloop.counter}}">
 				<div class="card m-0 p-2 pb-0 position-relative border-0 rounded-0 bg-llt-darkgray" style="height: 100%;">					
 					<div class="card-body p-0">
-						<a href="{{ i.external_url.0 }}" target="_blank" class="static_a_display">
+						
 						<div class="card-title oai-micro-fs-8">
 							<span class="p-0 fw-bold">{{ i.date_issued.0|date:"M j Y" }}</span> <span class="oai-micro-fs-6">({{ i.length.0}})</span>
 						</div>
@@ -35,20 +36,27 @@
 							<span><a href="{{i.related}}" class="static_a_display badge bg-lt-gray text-secondary oai-micro-fs-6">Related Resource</a></span>
 							{% endif %}
 						</h6>
-						</a>
+						
 						
 						<div class="oai-micro-fs-8">{{ i.description.0|safe|linebreaks }}</div>
 						
-						<div class="mt-2">
+						<div class="mt-1 oai-micro-fs-10 fw-bold">
+							<p>Listen</p>
 						{% if i.external_url.1 %}			
-							<iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ i.external_url.1 }}&color=%23a23d11&inverse=false&auto_play=false&show_user=true"></iframe>
+							<iframe width="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ i.external_url.1 }}&color=%23a23d11&inverse=true&auto_play=false&show_user=true"></iframe>
 						{% else %}
 							<audio  style="width: 100%" controls="true" autoplay="" src="{{ i.bitstream.0 }}" type="audio/mpeg" class="audio"></audio>
 						{% endif %}													
 						</div>
+						{% if i.external_url.2 %}
+						<div class="mt-1 oai-micro-fs-10 fw-bold">
+							<p>Watch</p>
+							<a href="{{i.external_url.2}}" target="_blank" style="text-align: right;"><img src="{% static 'img/yt_logo_mono_light.png' %}" style="height: 20px;"></a>
+						</div>
+						{% endif %}
 						
 						{% if i.full_text %}
-							<div class=" text-center"><a class="btn btn-default ps-0 info-toggler text-black " data-bs-toggle="collapse" href="#meta-{{forloop.counter}}"><span class="oai-micro-fs-6 fst-italic">TRANSCRIPT</span> <i class="state fa-solid fa-caret-down"></i></a></div>
+							<div class="mt-2"><a class="btn btn-default ps-0 info-toggler text-black " data-bs-toggle="collapse" href="#meta-{{forloop.counter}}"><span class="oai-micro-fs-10 fw-bold">Read Transcript</span> <i class="state fa-solid fa-caret-right"></i></a></div>
 
 							<div class="collapse oai-micro-fs-8" id="meta-{{forloop.counter}}">
 								<div class="oai-micro-fs-6">{{ i.citation.0 }}</div>
@@ -72,10 +80,10 @@ const togglebtns = document.querySelectorAll('.info-toggler')
 togglebtns.forEach(function(toggler) {
     toggler.addEventListener('click', function(e) {
         var curr_toggle_icon = this.querySelector('.state');
-        if (curr_toggle_icon.classList.contains('fa-caret-down')) {
-            curr_toggle_icon.classList.replace("fa-caret-down", "fa-caret-up");
+        if (curr_toggle_icon.classList.contains('fa-caret-up')) {
+            curr_toggle_icon.classList.replace("fa-caret-up", "fa-caret-right");
         } else {
-        	curr_toggle_icon.classList.replace("fa-caret-up", "fa-caret-down");
+        	curr_toggle_icon.classList.replace("fa-caret-right", "fa-caret-up");
         }
     });
 });
