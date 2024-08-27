@@ -58,8 +58,13 @@
             </div> 
 
 
-            <div class="collapse navbar-collapse navbar-right p-0" id="lltmenu">
-  
+            <div class="collapse navbar-collapse navbar-right p-0" id="lltmenu" style="flex-direction: column; flex-flow: d;">
+                <div class="navbar-nav pb-2">
+                    <form class="d-flex rounded-0 search-form" method="get" action="{% url 'haystack_search' %}">
+                        <input type="search" size="30" class="form-control rounded-0" placeholder="Search" name="q" value="{{query}}">
+                        <button type="submit" class="btn btn-sm text-secondary"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
                 <div class="navbar-nav  site-navigator oai-micro-fs-8">
                     
                         <a class="nav-link" href="{% url 'home' %}">Home</a>
@@ -67,12 +72,7 @@
                         <a class="nav-link" href="{% url 'page_slug_view' 'people' %}">People</a>
                         <a class="nav-link" href="{% url 'page_slug_view' 'contact' %}">Contact</a>               
                 </div>
-                <div class="navbar-nav  p-0 pb-2">
-                    <form class="d-flex rounded-0 search-form" method="get" action="{% url 'haystack_search' %}">
-                        <input type="search" size="30" class="form-control rounded-0" placeholder="Search" name="q" value="{{query}}">
-                        <button type="submit" class="btn btn-sm text-secondary"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>           
+                           
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#lltmenu" aria-controls="lltmenu" aria-expanded="false" aria-label="Toggle navigation">
