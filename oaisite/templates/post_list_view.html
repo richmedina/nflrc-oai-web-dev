@@ -1,10 +1,10 @@
 <!-- post_list_view.html -->
 {% extends 'base.html' %}
 
-{% block page_title %}News & Announcements{% endblock page_title %} 
+{% block page_title %}LLT Announcements{% endblock page_title %} 
 
 {% block page_header %}
-	<h2>News & Announcements
+	<h2>Announcements
 		{% if user.is_staff %}
 			<a href="{% url 'post_create_view' %}" class="btn btn-link btn-default btn-lg text-secondary" title="Add new post"><i class="fas fa-plus"></i></a>
 		{% endif %}
