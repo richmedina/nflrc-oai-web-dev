@@ -75,13 +75,27 @@ class HomeView(BaseSideMenuMixin, TemplateView):
         except Exception as e:
             messages.info(self.request, e)
 
-        try:    
+        review_articles = ''
+        try:
+            review_articles = context['current_vol_toc']['Article']['Review Articles']
+        except:
+            pass
+
+        try:
+            if review_articles:
+                context['article_review_count'] = len(review_articles['records'])
+            else:
+                context['article_review_count'] = 0
+
+            regular_articles = context['current_vol_toc']['Article']['']
+            context['article_count'] = len(regular_articles['records'])
+            
             articles = context['current_vol_toc']['Article'].items()
             article_data = next(iter(articles))[1]
             context['latest_article'] = article_data['records'][0]
-            context['article_count'] = len(article_data['records'])
-        except:
-            pass
+            
+        except Exception as e:
+            print(e)
 
         try:
             columns = context['current_vol']['object'].list_records_by_type('Column')
@@ -104,13 +118,6 @@ class HomeView(BaseSideMenuMixin, TemplateView):
         except:
             context['review_count'] = 0
 
-        try:
-            # article_reviews = context['current_vol_toc']['Article_Review'].items()
-            # article_reviews_data = next(iter(article_reviews))[1]
-            # context['article_review_count'] = len(article_reviews_data['records'])
-            context['article_review_count'] = 0
-        except:
-            pass        
         return context
 
 
