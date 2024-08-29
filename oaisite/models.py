@@ -27,6 +27,21 @@ class OAISitePost(TimeStampedModel):
     featured_rank = models.IntegerField(blank=True, default=0, help_text='If featured is checked ON, higher numbers are displayed before lower numbers')
     published = models.BooleanField(default=True, blank=True, help_text='Checking this ON will make the post visible')
 
+    BLANK  = ''
+    CFPPLS = 'Call for Proposals'
+    CFPPRS = 'Call for Papers'
+    CFVOLS = 'Call for Volunteers'
+    AWARDS = 'Awards'
+    
+    POST_TAGS = [
+        (BLANK, ''),
+        (CFPPLS, 'Call for Proposals'),
+        (CFPPRS, 'Call for Papers'),
+        (CFVOLS, 'Call for Volunteers'),
+        (AWARDS, 'Awards'),
+    ]
+    post_tag = models.CharField(blank=True, max_length=48, choices=POST_TAGS, default=BLANK,)
+
     def __str__(self):
         return self.title
 

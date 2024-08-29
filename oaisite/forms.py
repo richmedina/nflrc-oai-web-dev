@@ -10,21 +10,21 @@ class PageUpdateForm(ModelForm):
     
     class Meta:
         model = OAISitePage
-        fields = ['title', 'content', 'published']
+        fields = ['title', 'content', 'published', ]
 
 
 class PostCreateForm(ModelForm):
     
     class Meta:
         model = OAISitePost
-        fields = ['title', 'content', 'featured', 'featured_rank',]
+        fields = ['title', 'content', 'featured', 'featured_rank', 'post_tag']
 
 
 class PostUpdateForm(ModelForm):
     
     class Meta:
         model = OAISitePost
-        fields = ['title', 'content', 'featured', 'featured_rank']
+        fields = ['title', 'content', 'featured', 'featured_rank', 'post_tag']
 
 
 
