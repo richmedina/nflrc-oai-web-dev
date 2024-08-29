@@ -314,7 +314,7 @@ class PostListView(BaseSideMenuMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
         context['feature_list'] = self.object_list.filter(featured=True).order_by('-featured_rank', '-modified')
-        context['object_list'] = self.object_list.filter(featured=False).order_by('-modified')    
+        context['object_list'] = self.object_list.filter(featured=False).order_by('-created')    
         if not self.request.user.is_staff:
             context['feature_list'] = context['feature_list'].filter(published=True)
             context['object_list'] = context['object_list'].filter(published=True)
