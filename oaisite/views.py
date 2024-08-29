@@ -349,9 +349,13 @@ class PostView(BaseSideMenuMixin, DetailView):
 
 
 class SearchHaystackView(SearchView):
+    paginate_by = 20
+
     def get_context_data(self, *args, **kwargs):
         context = super(SearchHaystackView, self).get_context_data(*args, **kwargs)
-
+        paginator = context['paginator'].get_page(self.request.GET.get("page"))
+        context['page_obj'] = paginator
+        
         keylist = ['Assessment/Testing','Behavior-tracking Technology','Blended/Hybrid Learning and Teaching','Code Switching','Collaborative Learning','Computer-Mediated Communication','Concordancing','Corpus','Culture','Data-driven Learning','Digital Literacies','Discourse Analysis','Distance/Open Learning and Teaching','Eye Tracking','Feedback','Game-based Learning and Teaching','Grammar','Human-Computer Interaction','Indigenous Languages','Instructional Context','Instructional Design','Language for Special Purposes','Language Learning Strategies','Language Maintenance','Language Teaching Methodology','Learner Attitudes','Learner Autonomy','Learner Identity','Less Commonly Taught Languages','Listening','Meta Analysis','Mobile Learning','MOOCs','Multiliteracies','Natural Language Processing','Open Educational Resources','Pragmatics','Pronunciation','Reading','Research Methods','Social Context','Sociocultural Theory','Social Networking','Speaking','Speech Recognition','Speech Synthesis','Task-based Learning and Teaching','Teacher Education','Telecollaboration','Ubiquitous Learning and Teaching','Virtual Environments','Vocabulary','Writing']
 
         cols_length = len(keylist) // 3

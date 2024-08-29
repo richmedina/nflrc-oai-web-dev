@@ -72,7 +72,7 @@
 
     <div class="col-md-10 offset-1">        
         {% if query %}
-            <h3>Showing {{ object_list|length }} Search  Result{{ object_list|length|pluralize }} for <span class="badge text-white bg-success rounded-0">{{ query }}</span></h3>
+            <h3>Showing {{ page_obj.start_index }} - {{ page_obj.end_index }} results of {{ page_obj.paginator.count }} for <span class="badge text-white bg-success rounded-0">{{ query }}</span></h3>
             <p>
                 <dl>
                 {% for result in object_list %}
@@ -98,10 +98,28 @@
                             </dd>
                         {% endif %}
 
+
                 {% empty %}
                     <p>No results found.</p>
                 {% endfor %}
                 </dl>
+                <div class="pagination">
+                    <span class="">
+                        {% if page_obj.has_previous %}
+                            <a href="?q={{ query }}&page=1">&laquo; first</a>
+                            <a href="?q={{ query }}&page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?q={{ query }}&page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?q={{ query }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
             </p>            
         {% else %}
             {# Show some example queries to run, maybe query syntax, something else? #}
