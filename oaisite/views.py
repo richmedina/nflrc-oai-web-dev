@@ -349,7 +349,7 @@ class PostView(BaseSideMenuMixin, DetailView):
 
 
 class SearchHaystackView(SearchView):
-    paginate_by = 20
+    paginate_by = 10
 
     def get_context_data(self, *args, **kwargs):
         context = super(SearchHaystackView, self).get_context_data(*args, **kwargs)
