@@ -70,8 +70,8 @@
 
 			{% if toc.Article %}<h4 class="border-space pt-4">Articles</h4>{% endif %}
 			{% for sub_type, data in toc.Article.items %} 
-				{% if sub_type %} <div id="syntheses"><strong>Research Syntheses</strong></div>{% endif %}
-				<p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
+				{% if sub_type %}<h4 id="syntheses" class="border-space pt-4">Research Syntheses</h4>{% endif %}
+            	<p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
 				{% for doc in data.records %}
 					<div class="row">
 						<div class="{% if sub_type %}col-9 offset-1 {% else %}col-md-10{% endif %}"> 
