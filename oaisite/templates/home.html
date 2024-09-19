@@ -89,7 +89,7 @@
             
                 <a href="{% url 'post_list_view' %}" class="btn btn-sm bg-llt-gold m-2 rounded-0 fw-bold ms-0"><span class=""><i class="fas fa-info-circle"></i></span> Announcements</a>
                 <a href="#articles" class="btn btn-sm bg-llt-darkgray text-secondary m-2 rounded-0">Articles <span class="badge bg-secondary rounded-0">{{article_count}}</span></a>
-                <a href="#" class="btn btn-sm bg-llt-darkgray text-secondary m-2 rounded-0">Research Syntheses <span class="badge bg-secondary rounded-0">{{article_review_count}}</span></a>
+                <a href="#syntheses" class="btn btn-sm bg-llt-darkgray text-secondary m-2 rounded-0">Research Syntheses <span class="badge bg-secondary rounded-0">{{article_review_count}}</span></a>
                 <a href="#columns" class="btn btn-sm bg-llt-darkgray text-secondary m-2 rounded-0">Columns <span class="badge bg-secondary rounded-0">{{column_count}}</span></a> 
                 <a href="#reviews" class="btn btn-sm bg-llt-darkgray text-secondary m-2 rounded-0">Media Reviews <span class="badge bg-secondary rounded-0">{{review_count}}</span></a>
                 
@@ -113,13 +113,13 @@
 
         {% if current_vol_toc.Article %}<h4 id="articles" class="border-space pt-4">Articles</h4>{% endif %}
         {% for sub_type, data in current_vol_toc.Article.items %} 
-            
+            {% if sub_type %} <div id="syntheses"><span class="badge bg-llt-darkgray text-secondary oai-micro-fs-8 rounded-0">Research Syntheses</span></div>{% endif %}
             {% for doc in data.records %}
 
                 <div class="row">
                     <div class="col-10"> 
                         {% if latest_article == doc %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Latest Article </span> {% endif %}
-                        {% if sub_type %} <span class="badge bg-llt-darkgray text-secondary oai-micro-fs-6 rounded-0">Research Synthesis</span> {% endif %}
+                        
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <strong>{{ doc.0 }}</strong>
                             <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em>{% endfor %}{% if data.editors %} | Edited by{% endif %} {% for j in data.editors%} {{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %} {% endfor %}
