@@ -5,7 +5,7 @@
 <meta property="og:title" content="{{ object }}" />
 <meta property="og:image" content="https://nflrc.hawaii.edu/static/nflrc-oai-pub-llt/img/logo-hdr.png" />
 <meta property="og:url"   content="{{ request.build_absolute_uri }}" />
-<meta property="og:type"  content="article" />
+<meta property="og:type"  content="{{item_data.type.0}}" />
 <meta property="og:description" content="{{ item_data.abstract.0|truncatewords:24 }}" />
 {% endblock local_meta %}
 
