@@ -84,11 +84,13 @@ class HomeView(BaseSideMenuMixin, TemplateView):
         try:
             if review_articles:
                 context['article_review_count'] = len(review_articles['records'])
+                context['review_articles'] = review_articles
             else:
                 context['article_review_count'] = 0
 
             regular_articles = context['current_vol_toc']['Article']['']
             context['article_count'] = len(regular_articles['records'])
+            context['regular_articles'] = regular_articles
             
             articles = context['current_vol_toc']['Article'].items()
             article_data = next(iter(articles))[1]

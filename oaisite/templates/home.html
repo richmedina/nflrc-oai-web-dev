@@ -112,18 +112,15 @@
         {% endfor %} -->
 
         {% if current_vol_toc.Article %}<h4 id="articles" class="border-space pt-4">Articles</h4>{% endif %}
-        {% for sub_type, data in current_vol_toc.Article.items %} 
-            {% if sub_type %}<h4 id="syntheses" class="border-space pt-4">Research Syntheses</h4>{% endif %}
-            <p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
-            {% for doc in data.records %}
 
+        {% for editors, records in regular_articles.items %} 
+            {% for doc in records %}
                 <div class="row">
                     <div class="col-10"> 
-                        {% if latest_article == doc %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Latest Article </span> {% endif %}
-                        
+                        {% if latest_article == doc %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Latest Article</span>{% endif %}{% if sub_type %}<span class="badge bg-secondary oai-micro-fs-6 rounded-0">Research Syntheses</span>{% endif %}
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <strong>{{ doc.0 }}</strong>
-                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em>{% endfor %}
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em>{% endfor %}{% if data.editors %}; Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}
                             </p>
                         </a>
                         <p class="small"></p>
@@ -132,6 +129,24 @@
                 </div>
             {% endfor %}
         {% endfor %}
+
+        {% if review_articles %}<h4 id="syntheses" class="border-space pt-4">Research Syntheses</h4>{% endif %}
+            {% if review_articles.editors %}<p class="small">Edited by {% for j in review_articles.editors %} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %} </p>{% endif %}
+            
+            {% for doc in review_articles.records %}
+                <div class="row">
+                    <div class="col-10"> 
+                        {% if latest_article == doc %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Latest Article</span>{% endif %}
+                        <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
+                            <strong>{{ doc.0 }}</strong>
+                            <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em>{% endfor %}
+                            </p>
+                        </a>
+                    </div>
+                    <div class="col-2 oai-micro-fs-8">{{ doc.4 }}</div>
+                </div>
+            {% endfor %}
+        
     
         {% if current_vol_toc.Column %}<h4 id="columns" class="border-space pt-4">Columns</h4>{% endif %}
         {% for sub_type, data in current_vol_toc.Column.items %} 
