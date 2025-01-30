@@ -11,7 +11,7 @@
             {% if user.is_staff %} <span class="text-end"><a href="{% url 'page_update_view' byline.pk %}" class="btn btn-link btn-default btn-sm text-secondary rounded-0" style="position: relative;z-index: 1000" title="Edit this content"><i class="fas fa-edit"></i></a></span>{% endif %}
         </div>
         
-
+        <p class="d-grid gap-2"><a href="https://giving.uhfoundation.org/funds/12553704" target="_blank" class="btn btn-sm bg-llt-darkgray text-secondary border-0 rounded-0">Make a Gift <i class="fa-solid fa-arrow-up-right-from-square"></i> </a></p>
         
 		<div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
             <div class="card-body">
@@ -55,6 +55,6 @@
 		</ul>
 
 		<p class="d-grid gap-2"><a href="https://listserv.hawaii.edu/cgi-bin/wa?SUBED1=LLT-L&A=1" class="btn btn-sm bg-llt-darkgray text-secondary border-0 rounded-0" target="_blank">Subscribe</a></p>
-		<p class="d-grid gap-2"><a href="{% url 'page_slug_view' 'contribute' %}" class="btn btn-sm bg-llt-darkgray text-secondary border-0 rounded-0">Donate</a></p>
+		
 	</div>
 </div>
