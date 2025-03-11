@@ -70,7 +70,7 @@ class HomeView(BaseSideMenuMixin, TemplateView):
             
             features = OAISitePost.objects.filter(featured=True).order_by('-featured_rank') 
             if features: 
-                context['featured_posts'] = features[:2]
+                context['featured_posts'] = features[:3]
 
         except Exception as e:
             messages.info(self.request, e)
