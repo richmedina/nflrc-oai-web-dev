@@ -43,8 +43,9 @@
 			<dt class="metadata">Date Issued</dt><dd>{% for i in item_data.issued %}{{ i }}{% if not forloop.last %}; {% endif %}{% endfor %}</dd>
 			<dt class="metadata">Keywords</dt><dd>{% for i in item_data.subject %}{{ i }}{% if not forloop.last %}; {% endif %}{% endfor %}</dt></dd>
 			<dt class="metadata">Publisher</dt><dd>{% for i in item_data.publisher %}{{ i }}{% if not forloop.last %}; {% endif %}{% endfor %}</dd>
-			{% if item_data.doi %}<dt class="metadata">DOI</dt><dd>{{ item_data.doi.0 }}</dd>{% endif %}
-			<dt class="metadata">URI/DOI</dt><dd>{{ item_data.uri.0|slice:'22:' }}</dd>
+			{% if item_data.doi.0 %}<dt class="metadata">DOI</dt><dd>{{ item_data.doi.0 }}</dd>
+			{% else %}<dt class="metadata">URI</dt><dd>{{ item_data.uri.0 }}</dd>
+			{% endif %}			
 			<dt class="metadata">PDF</dt>
 			{% for b, f in bitstreams %}
 			<dd><a href="{{ b }}">{{ f }}</a></dd>
