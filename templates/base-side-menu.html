@@ -2,6 +2,19 @@
 <div class="row">
 	<div class="col-md-12">
 		
+		<p class="d-grid gap-2"><a href="https://giving.uhfoundation.org/funds/12553704" target="_blank" class="btn btn-lg bg-llt-burgundy text-white border-0 rounded-0">Make a Gift <i class="fa-solid fa-arrow-up-right-from-square"></i> </a></p>
+
+		{% for i in featured_posts %}
+            <div class="card border-0 rounded-0 pb-2">
+                <div class="card-body text-secondary bg-llt-darkgray">
+                    <span class="badge bg-secondary rounded-0">{% if i.post_tag %} {{ i.post_tag }} {% else %} Announcement {% endif %}</span> <span class="oai-micro-fs-6">{{ i.created | date:"M j Y"}}</span>                   
+                    <dt class="card-title oai-micro-fs-8"> {{ i.title }}</dt>
+                    <dd></dd>
+                </div>
+                <a href="{% url 'post_view' i.pk %}" class="stretched-link"></a>                               
+            </div>
+        {% endfor %}
+
 		<div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
             <div class="card-body">
                 <dt class="card-title oai-micro-fs-8">{{ byline.title }} </dt>
@@ -10,9 +23,7 @@
             </div>
             {% if user.is_staff %} <span class="text-end"><a href="{% url 'page_update_view' byline.pk %}" class="btn btn-link btn-default btn-sm text-secondary rounded-0" style="position: relative;z-index: 1000" title="Edit this content"><i class="fas fa-edit"></i></a></span>{% endif %}
         </div>
-        
-        <p class="d-grid gap-2"><a href="https://giving.uhfoundation.org/funds/12553704" target="_blank" class="btn btn-sm bg-llt-darkgray text-secondary border-0 rounded-0">Make a Gift <i class="fa-solid fa-arrow-up-right-from-square"></i> </a></p>
-        
+            
 		<div class="card p-1 mb-2 border-0 rounded-0 text-secondary bg-llt-darkgray" >
             <div class="card-body">
                 <dt class="card-title oai-micro-fs-8">{{ impact_factor.title }} </dt>

@@ -40,6 +40,9 @@ class BaseSideMenuMixin(object):
         context = super(BaseSideMenuMixin, self).get_context_data(**kwargs)
         context['byline'] = OAISitePage.objects.get(slug='byline')
         context['impact_factor'] = OAISitePage.objects.get(slug='impact-factor')
+        features = OAISitePost.objects.filter(featured=True).order_by('-featured_rank') 
+        if features: 
+            context['featured_posts'] = features[:3]
 
         return context
 
@@ -68,9 +71,6 @@ class HomeView(BaseSideMenuMixin, TemplateView):
             latest_special_issue = journal.get_special_issues()[0]
             context['special_issue'] = latest_special_issue.title_tuple()
             
-            features = OAISitePost.objects.filter(featured=True).order_by('-featured_rank') 
-            if features: 
-                context['featured_posts'] = features[:3]
 
         except Exception as e:
             messages.info(self.request, e)
