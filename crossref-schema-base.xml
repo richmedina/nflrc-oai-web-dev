@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<doi_batch version="5.3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.crossref.org/schema/5.3.1" xsi:schemaLocation="http://www.crossref.org/schema/5.3.1 https://www.crossref.org/schemas/crossref5.3.1.xsd" xmlns:jats="http://www.ncbi.nlm.nih.gov/JATS1" xmlns:fr="http://www.crossref.org/fundref.xsd" xmlns:ai="http://www.crossref.org/AccessIndicators.xsd" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+    <head>
+        <doi_batch_id></doi_batch_id>
+        <timestamp></timestamp>
+        <depositor>
+            <depositor_name>nlfr/nlfr</depositor_name>
+            <email_address>rmedina@hawaii.edu</email_address>
+        </depositor>
+        <registrant>NFLRC</registrant>
+    </head>
+    <body>
+        <journal>
+            <journal_metadata>
+                <full_title>Language Learning &amp; Technology</full_title>
+                <abbrev_title>LLT</abbrev_title>
+                <issn media_type="electronic">1094-3501</issn>
+                <doi_data>
+                    <doi>10.64152/10125/27123</doi>
+                    <resource>https://www.lltjournal.org/</resource>
+                </doi_data>
+            </journal_metadata>
+        </journal>
+    </body>
+</doi_batch>
