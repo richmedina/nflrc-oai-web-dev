@@ -43,7 +43,7 @@
 			<dt class="metadata">Date Issued</dt><dd>{% for i in item_data.issued %}{{ i }}{% if not forloop.last %}; {% endif %}{% endfor %}</dd>
 			<dt class="metadata">Keywords</dt><dd>{% for i in item_data.subject %}{{ i }}{% if not forloop.last %}; {% endif %}{% endfor %}</dt></dd>
 			<dt class="metadata">Publisher</dt><dd>{% for i in item_data.publisher %}{{ i }}{% if not forloop.last %}; {% endif %}{% endfor %}</dd>
-			{% if item_data.doi.0 %}<dt class="metadata">DOI</dt><dd>{{ item_data.doi.0 }}</dd>
+			{% if item_data.doi.0 %}<dt class="metadata">DOI</dt><dd><a href="{{ item_data.doi.0 }}" target="_blank">{{ item_data.doi.0 }}</a></dd>
 			{% else %}<dt class="metadata">URI</dt><dd>{{ item_data.uri.0 }}</dd>
 			{% endif %}			
 			<dt class="metadata">PDF</dt>
