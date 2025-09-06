@@ -10,7 +10,7 @@ ALLOWED_HOSTS = []
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nflrc-llt-dev-db',
+        'NAME': 'nflrc-llt-dev-db-v3',
         'USER': os.environ['DJANGODBUSER'],
         'PASSWORD': os.environ['DJANGODBUSER_PASSWORD'],
         'HOST': '127.0.0.1',

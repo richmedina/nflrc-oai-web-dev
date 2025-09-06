@@ -48,6 +48,7 @@ class RecordAdmin(admin.ModelAdmin):
 
 class MetadataElementAdmin(admin.ModelAdmin):
     list_display = ('record', 'element_type', 'element_data',)
+    list_editable = ['element_type', 'element_data',]
     list_filter = ('record',)
 
 
