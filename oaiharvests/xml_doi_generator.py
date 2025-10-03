@@ -1,6 +1,7 @@
 import datetime
 import uuid
 import json
+import csv
 from bs4 import BeautifulSoup
 from oaiharvests.models import Collection
 
@@ -295,6 +296,10 @@ def generate_crossref_xml(base_xml_file, collection):
     with open(filename, 'w') as file:
         file.write(str(base))
 
+
+               
+
+
 if __name__ == "__main__":
     for i in Collection.objects.all():
         generate_crossref_xml('crossref-schema-base.xml', i)
@@ -315,4 +320,8 @@ from oaiharvests import xml_doi_generator as gen
 from oaiharvests.models import Record
 record = Record.objects.get(pk=1190)
 gen.generate_crossref_doi_xml_submission('crossref-schema-base.xml', record)
+
+OR
+
+
 """

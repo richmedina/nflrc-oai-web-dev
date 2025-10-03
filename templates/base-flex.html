@@ -45,44 +45,51 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=849311455108932&autoLogAppEvents=1" nonce="0qRggt8m"></script>
 
     <!-- UH Banner -->
-    <nav class="navbar navbar-expand-md bg-black">
-        <div class="container-md justify-content-start align-items-start"><img src="{%static 'img/UH-Manoa-Wordmark-White.png'%}" class="" height="18px" title="UH Manoa logo"></div>
-    </nav>
+    <!-- <nav class="navbar navbar-expand-md bg-black mb-0">
+        <div class="container-md"><img src="{%static 'img/UH-Manoa-Wordmark-White.png'%}" class="" height="18px" title="UH Manoa logo"></div>
+    </nav> -->
     <!-- End UH Banner -->
-    
-    <!-- Fixed navbar content -->
-    <nav class="navbar navbar-expand bg-white sticky-md-top">
-        <div class="container-md">
-            <div class="d-md-flex bg-llt-burgundy">
-            <!-- COL NFLRC LOGO -->
-                <div class="nflrc-logo-wrap bg-white">
-                    <img id="nflrc-logo" src="{%static 'img/nflrc-logomark-rounded.png'%}" class="resp-image pt-4 pe-4" style="height:100px" title="NFLRC logo" data-large-src="{% static 'img/nflrc-logomark-rounded.png' %}" data-small-src="{% static 'img/nflrc-full-logo.png' %}">
-                </div>
-                
-            <!-- COL LLT LOGO/TITLE -->
-                <div class="d-md-flex justify-content-center align-items-center text-center text-md-start bg-llt-burgundy p-4" style="">
-                    <div class="">
-                        <a href="{% url 'home' %}"><img src="{%static 'img/logo-hdr.png'%}" class="" style="height: 72px" title="Language Learning & Technology logo"></a>
-                    </div>
-                    <div class="d-flex flex-column ps-2" style="">
-                        <div class="resp-title" style="font-size: 1.2rem; font-weight: 500; font-family:'Times New Roman', Times, serif">LANGUAGE LEARNING & TECHNOLOGY</div>
-                        <div class="resp-tagline" style="font-size: 0.8rem;">A refereed journal for L2 researchers and educators interested in the role of technology in advancing language learning and teaching.</div>
-                    </div>
-                </div>
+<div class="container-fluid bg-black">   
+  <div class="d-md-flex text-center text-md-start">
+    <div class="p-2 flex-fill"><img src="{%static 'img/UH-Manoa-Wordmark-White.png'%}" class="" height="18px" title="UH Manoa logo"></div>
+  </div>
+</div>
 
-            <!-- COL SEARCH/NAVIGATION -->
-                <div class="d-md-flex justify-content-end align-items-right">
-                    <div class="d-flex justify-content-center align-items-center resp-navmenu pe-3 gap-0" style="padding-left: 200px">             
-                        <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
-                        <a class="nav-link text-white" href="{% url 'page_slug_view' 'about' %}">About</a>
-                        <a class="nav-link text-white" href="{% url 'page_slug_view' 'people' %}">People</a>
-                        <a class="nav-link text-white" href="{% url 'page_slug_view' 'contact' %}">Contact</a>            
-                        <a class="nav-link btn btn-link btn-md text-white" href="{% url 'haystack_search' %}"><i class="fa fa-search"></i></a> 
-                    </div> 
-                </div>
-            </div> 
-        </div>
-    </nav><!--PARENT NAV-->
+<div class="container-md">
+  <div class="d-md-flex" style="padding: 1.0rem 0 1.0rem 0">
+  <!-- COL 1 NFLRC LOGO -->
+    <div class="d-md-flex text-center text-md-start ps-4 pt-4 pe-4 pb-4">
+      <img src="{%static 'img/nflrc-logomark-rounded.png'%}" class="resp-image" style="max-height: 72px" title="NFLRC logo">
+    </div>
+    
+  <!-- COL 2 LLT LOGO/TITLE -->
+    <div class="d-md-flex text-center text-md-start bg-llt-burgundy ps-4 pt-4 pe-4 pb-1">
+      <div class="text-center text-md-start">
+        <img src="{%static 'img/logo-hdr.png'%}" class="pb-2" style="height: 72px" title="Language Learning & Technology logo">
+      </div>
+      <div class="d-flex flex-column ps-2">
+        <div class="" style="font-size: 1rem; font-weight: 500; font-family:'Times New Roman', Times, serif">LANGUAGE LEARNING & TECHNOLOGY</div>
+        <p class="tagline" style="font-size: 0.7rem;">A refereed journal for L2 researchers and educators interested in the role of technology in advancing language learning and teaching.</p>
+      </div>
+    </div>
+
+  <!-- COL 3 SEARCH/NAVIGATION -->
+    <div class="bg-llt-burgundy ps-4 pt-4 pe-4 pb-4" style="">
+      <div class="d-flex justify-content-center align-items-center" style="">             
+          <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
+          <a class="nav-link text-white" href="{% url 'page_slug_view' 'about' %}">About</a>
+          <a class="nav-link text-white" href="{% url 'page_slug_view' 'people' %}">People</a>
+          <a class="nav-link text-white" href="{% url 'page_slug_view' 'contact' %}">Contact</a>            
+          <a class="nav-link btn btn-link btn-md text-white" href="{% url 'haystack_search' %}"><i class="fa fa-search"></i></a> 
+      </div> 
+    </div>
+  </div> <!--PARENT NAV-->
+</div>
+
+
+
+
+
 
     <!-- Page content -->
     <div class="container-md pt-5">
@@ -133,29 +140,6 @@
 
     <!-- Placeholder for page level javascript includes -->
     {% block js_include %} {% endblock js_include %}
-
-    <script>
-      (function(){
-        function swapImages(){
-          var useSmall = window.innerWidth < 768;
-          ['nflrc-logo',].forEach(function(id){
-            var el = document.getElementById(id);
-            if(!el) return;
-            var large = el.getAttribute('data-large-src');
-            var small = el.getAttribute('data-small-src');
-            var target = useSmall ? (small || large) : (large || small);
-            if (target && el.src !== target) el.src = target;
-          });
-        }
-        // run on load and on resize (debounced)
-        window.addEventListener('load', swapImages);
-        var _t;
-        window.addEventListener('resize', function(){
-          clearTimeout(_t);
-          _t = setTimeout(swapImages, 120);
-        });
-      })();
-    </script>
 
     <!-- Placeholder for page level javascript code -->
     {% block js_script %} {% endblock js_script %}

@@ -4,8 +4,8 @@ html {
 body {
   background: #fff !important;
   padding-bottom: 240px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
+  font-family: 'Avenir', 'Open Sans', sans-serif;
+  font-weight: 300;
 }
 
 .static_a_display:link {color: #666; text-decoration: none;}
@@ -37,10 +37,10 @@ dt.metadata {
 .bg-llt-gray { background: #eeeeee; color: #666;}
 .bg-llt-white { background: #fff; color: #666;}
 
-.bg-llt-burgundy { background: #7d0000; color: #fff; }
-.llt-burgundy {color: #7d0000; border-color: #7d0000;}
+.bg-llt-burgundy { background: #742042; color: #fff; }
+.llt-burgundy {color: #742042; border-color: #742042;}
 
-.bg-llt-gold { background: #DCAA3B; color: #7d0000; }
+.bg-llt-gold { background: #DCAA3B; color: #742042; }
 .llt-gold {color: #DCAA3B; border-color: #DCAA3B;}
 
 .llt-light-gold {color: #E9CC81}
@@ -55,9 +55,9 @@ dt.metadata {
 
 .bk-cover-bg-2 {background-color: #6c757d; color: #E9CC81} /* slate gray 607D8B*/
 
-.bk-cover-bg-1 {background-color: #7d0000; color: #E9CC81} /* llt burgundy */
+.bk-cover-bg-1 {background-color: #742042; color: #E9CC81} /* llt burgundy */
 
-.bk-cover-bg-0 {background-color: #E9CC81; color: #7d0000} /* llt gold */
+.bk-cover-bg-0 {background-color: #E9CC81; color: #742042} /* llt gold */
 
 /******************************** End Colors **********************************************/
 
@@ -81,6 +81,8 @@ dt.metadata {
 .oai-micro-fs-4 {font-size: 0.4em}
 .oai-micro-fs-6 {font-size: 0.6em}
 .oai-micro-fs-8 {font-size: 0.8em}
+.oai-fs-rg {font-size: 1.0em}
+.oai-fs-md {font-size: 1.2em}
 .oai-fs-lg {font-size: 1.5em}
 .oai-fs-xlg {font-size: 2.0em}
 
@@ -92,3 +94,42 @@ dt.metadata {
   background-color: #B2D1B2
 }
 /******************************** End Box Borders **********************************************/
+
+
+.resp-tagline {
+  padding-top: .4rem
+}
+
+@media (max-width: 1400px) and (min-width: 768px) {
+  
+  .resp-tagline {
+    display: none
+  }  
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  img.resp-image {
+    width: 20rem!important;
+    height: auto!important;
+    padding-top: 0rem!important;
+    padding-bottom: 0.8rem!important;
+  }
+  .resp-title {
+    padding-top: 1.0rem;
+    font-size: 1.0rem!important;
+  }
+  .resp-tagline {
+    padding-top: 0.8rem;
+  }
+  .resp-navmenu {
+    padding-bottom: 1.0rem;
+    padding-right: 0rem!important;
+    padding-left: 0rem!important;
+    /* gap: 0.2rem!important; */
+  }
+  .resp-mast{
+    align-items: center!important; 
+    justify-content: center!important;
+  }
+}

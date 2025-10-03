@@ -46,46 +46,55 @@
 
     <!-- UH Banner -->
     <nav class="navbar navbar-expand-md bg-black">
-        <div class="container-md justify-content-start align-items-start"><img src="{%static 'img/UH-Manoa-Wordmark-White.png'%}" class="" height="18px" title="UH Manoa logo"></div>
+        <div class="container-md justify-content-start align-items-left"><img src="{%static 'img/UH-Manoa-Wordmark-White.png'%}" class="" height="18px" title="UH Manoa logo"></div>
     </nav>
     <!-- End UH Banner -->
-    
-    <!-- Fixed navbar content -->
-    <nav class="navbar navbar-expand bg-white sticky-md-top">
-        <div class="container-md">
-            <div class="d-md-flex bg-llt-burgundy">
-            <!-- COL NFLRC LOGO -->
-                <div class="nflrc-logo-wrap bg-white">
-                    <img id="nflrc-logo" src="{%static 'img/nflrc-logomark-rounded.png'%}" class="resp-image pt-4 pe-4" style="height:100px" title="NFLRC logo" data-large-src="{% static 'img/nflrc-logomark-rounded.png' %}" data-small-src="{% static 'img/nflrc-full-logo.png' %}">
-                </div>
-                
-            <!-- COL LLT LOGO/TITLE -->
-                <div class="d-md-flex justify-content-center align-items-center text-center text-md-start bg-llt-burgundy p-4" style="">
-                    <div class="">
-                        <a href="{% url 'home' %}"><img src="{%static 'img/logo-hdr.png'%}" class="" style="height: 72px" title="Language Learning & Technology logo"></a>
-                    </div>
-                    <div class="d-flex flex-column ps-2" style="">
-                        <div class="resp-title" style="font-size: 1.2rem; font-weight: 500; font-family:'Times New Roman', Times, serif">LANGUAGE LEARNING & TECHNOLOGY</div>
-                        <div class="resp-tagline" style="font-size: 0.8rem;">A refereed journal for L2 researchers and educators interested in the role of technology in advancing language learning and teaching.</div>
-                    </div>
-                </div>
 
-            <!-- COL SEARCH/NAVIGATION -->
-                <div class="d-md-flex justify-content-end align-items-right">
-                    <div class="d-flex justify-content-center align-items-center resp-navmenu pe-3 gap-0" style="padding-left: 200px">             
-                        <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
-                        <a class="nav-link text-white" href="{% url 'page_slug_view' 'about' %}">About</a>
-                        <a class="nav-link text-white" href="{% url 'page_slug_view' 'people' %}">People</a>
-                        <a class="nav-link text-white" href="{% url 'page_slug_view' 'contact' %}">Contact</a>            
-                        <a class="nav-link btn btn-link btn-md text-white" href="{% url 'haystack_search' %}"><i class="fa fa-search"></i></a> 
-                    </div> 
+    <!--NFLRC BANNER-->
+    <nav class="navbar navbar-expand-md bg-white pt-3 pb-3">
+      <div class="container-md justify-content-start align-items-left" style=""><a href="https://nflrc.hawaii.edu" target="_blank" class="text-start" ><img src="{%static 'img/nflrc-full-logo.png'%}" title="NFLRC wide logo" style="width: 20rem; height: auto;"></a></div>
+    </nav>
+    <!--END NFLRC BANNER-->
+
+    <!--LLT BANNER-->
+    <nav class="navbar navbar-expand-md mb-0 pt-4 pb-0 bg-llt-burgundy">        
+        <div class="container resp-mast" style="width: 40rem; display: flex; align-items: flex-start; justify-content: left; gap: 0.5rem;">
+                <a class="nav navbar-brand" href="{% url 'home' %}" style="padding-top: 1.0rem">
+                    <img src="{%static 'img/logo-hdr.png'%}" class="" height="70px" style="padding: 0.2em 0 0 0.2rem" title="Language Learning & Technology logo">
+                </a>
+                <div class="nav navbar-text text-center text-md-start" style="padding-top: 1.0rem" >
+                  <ul class="list-unstyled">
+                      <li><h2 class="" style="font-size: 1.5rem; font-family:'Times New Roman', Times, serif">LANGUAGE LEARNING & TECHNOLOGY</h2></li>
+                      <li><h6 class="" style="font-size: 0.8rem">A refereed journal for L2 researchers and educators interested in the role of technology in advancing language learning and teaching.</h6></li>
+                  </ul>
                 </div>
-            </div> 
         </div>
-    </nav><!--PARENT NAV-->
+    </nav>
+    <!--END LLT BANNER-->
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-md mb-0 pt-0 bg-llt-burgundy">
+      <div class="container-md resp-navmenu" style="width: 38rem; font-size: 1.0rem; border-top: 1px solid white; border-bottom: 1px solid white; display: flex; align-items: flex-center; justify-content: center; gap: 0rem;">                    
+        <a class="nav-link text-white" href="{% url 'page_slug_view' 'submit-manuscript' %}">Submit</a>
+        <a class="nav-link text-white" href="{% url 'page_slug_view' 'about' %}">About</a>
+        <a class="nav-link text-white" href="{% url 'page_slug_view' 'people' %}">People</a>
+        <a class="nav-link text-white" href="{% url 'page_slug_view' 'contact' %}">Contact</a> 
+        <a class="btn btn-link btn-md text-white" href="{% url 'haystack_search' %}"><i class="fa fa-search"></i></a>              
+      </div><!-- /.container-md -->      
+    </nav>
+    <!-- END NAVIGATION BAR -->
+
+    <!-- CALL TO ACTION BAR -->
+    <nav class="navbar navbar-expand-md mb-0 pb-4 bg-llt-burgundy" role="navigation">
+        <div class="container-md" style="display: flex; align-items: flex-start; justify-content: center; gap: 1.5rem; padding: .5rem">
+            <a class="btn btn-md bg-llt-light-gold llt-burgundy fw-bold" href="https://giving.uhfoundation.org/funds/12553704" target="_blank" role="button" style="width: 10.0rem">Make a Gift <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <a class="btn btn-md bg-llt-light-gold llt-burgundy fw-bold" href="#current" role="button" style="width: 10.0rem">Current Issue</a>
+        </div>
+    </nav>
+    <!-- END CALL TO ACTION BAR -->
 
     <!-- Page content -->
-    <div class="container-md pt-5">
+    <div class="container-md">
         {% block submenu %}<div class="row"><div class="col-md-12 submenu"></div></div>{% endblock %} 
         
         <div class="row">
@@ -133,29 +142,6 @@
 
     <!-- Placeholder for page level javascript includes -->
     {% block js_include %} {% endblock js_include %}
-
-    <script>
-      (function(){
-        function swapImages(){
-          var useSmall = window.innerWidth < 768;
-          ['nflrc-logo',].forEach(function(id){
-            var el = document.getElementById(id);
-            if(!el) return;
-            var large = el.getAttribute('data-large-src');
-            var small = el.getAttribute('data-small-src');
-            var target = useSmall ? (small || large) : (large || small);
-            if (target && el.src !== target) el.src = target;
-          });
-        }
-        // run on load and on resize (debounced)
-        window.addEventListener('load', swapImages);
-        var _t;
-        window.addEventListener('resize', function(){
-          clearTimeout(_t);
-          _t = setTimeout(swapImages, 120);
-        });
-      })();
-    </script>
 
     <!-- Placeholder for page level javascript code -->
     {% block js_script %} {% endblock js_script %}

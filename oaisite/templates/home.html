@@ -1,5 +1,5 @@
 <!-- home.html -->
-{% extends 'base.html' %}
+{% extends 'home-base.html' %}
 {% load static %}
 {% if messages %}
 <ul class="messages">
@@ -15,19 +15,20 @@
 {% block content %}
 <!-- ROW 1 -->
 <div class="row">
+    <div class="col-md-12"></div>
+    <div class="col-md-12"></div>
     <!-- LEFT PANEL -->
     <div class="col-md-9">
         
         <!-- Recent article and/or special issue -->
         <div class="row mb-3">
-
             <!-- Latest article display -->
             {% if latest_article %}
-            <div class="col-md pb-2">
-                <div class="card border-0 border-start-0 border-top-0 border-end-0 border-bottom-0 rounded-0 " style="border-color: #E9CC81;height: 100%;">
+            <div class="col-md p-1">
+                <div class="card border-0" style="height: 100%;">
                     <div class="card-body bg-llt-gold llt-burgundy">
-                        <span class="badge bg-llt-burgundy llt-light-gold rounded-0">Recent</span>
-                        <div class="card-title fw-bolder">{{ latest_article.0 }}</div>
+                        <span class="badge bg-llt-burgundy llt-light-gold rounded-0 fw-normal oai-micro-fs-6 ">Recent</span>
+                        <div class="card-title fw-normal">{{ latest_article.0 }}</div>
                         <div class="card-text oai-micro-fs-8">
                             {% for j in latest_article.1 %} 
                                 {{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}
@@ -38,31 +39,18 @@
                     <a href="{{ latest_article.0.get_absolute_url }}" class="stretched-link"></a>               
                 </div>                         
             </div>
-            {% else %}
-            <!-- Display a Featured Post -->
-            <div class="col-md pb-2">
-                <div class="card border-5 border-start-1 border-top-0 border-end-0 border-bottom-0 border-secondary rounded-0" style="height: 100%;">
-                    <div class="card-body text-secondary bg-llt-darkgray">
-                        <span class="badge bg-secondary rounded-0">News</span>
-                        <div class="card-title" >{{ featured_posts.1.title }}</div>
-                        <div class="card-text oai-micro-fs-8">{{ featured_posts.1.content|safe|truncatewords:20 }}</div>     
-                    </div>
-                    <div class="card-footer border-0 text-secondary bg-llt-darkgray oai-micro-fs-6">{{ featured_posts.1.modified | date:"M j Y"}}</div>
-                    <a href="{% url 'post_view' featured_posts.1.pk %}" class="stretched-link"></a>
-                </div> 
-            </div>           
             {% endif %}
 
             <!-- Special Issue display -->
             {% if special_issue %}
-            <div class="col-md pb-2 ">
+            <div class="col-md p-1">
                 <!-- Special Issue Book cover -->
-                <div class="card border-0 rounded-0 bk-cover-bg-{{special_issue.color_code}} lh-sm" style="height: 100%;">
+                <div class="card bk-cover-bg-{{special_issue.color_code}} rounded-0" style="height: 100%;">
                     <div class="card-body">
-                        <span class="badge bg-llt-gold rounded-0 mb-1">Recent Special Issue</span> 
+                        <span class="badge bg-llt-gold rounded-0 mb-2 fw-normal oai-micro-fs-6">Recent Special Issue</span> 
                         <br>
                         <div class="oai-micro-fs-6 pb-2">{{special_issue.title}}<br>{{special_issue.date}}</div>
-                        <div style="height: 36%" class="card-title"><strong>{{special_issue.subtitle|slice:"14:"}}</strong></div>
+                        <div style="" class="card-title"><strong>{{special_issue.subtitle|slice:"14:"}}</strong></div>
                     </div>        
                     <div class="card-footer border-0 bk-cover-bg-{{special_issue.color_code}} oai-micro-fs-6">
                             {% if special_issue.editors %}
@@ -77,17 +65,16 @@
                 </div> -->
             </div>
             {% endif %}
-
         </div>
 
 
         <!-- Current Issue -->
-        <h3><a href="{% url 'collection' current_vol.object.identifier %}" class="text-black static_a_display">{{ current_vol.title }} {{ current_vol.date }}</a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' current_vol.object.pk %}">Update</a></small>{% endif %}</h3>
+        <h3 id="current"><a href="{% url 'collection' current_vol.object.identifier %}" class="text-black static_a_display">{{ current_vol.title }} {{ current_vol.date }}</a> {% if user.is_staff %}<small><a class="btn btn-xs btn-default" href="{% url 'oai_collection' current_vol.object.pk %}">Update</a></small>{% endif %}</h3>
         <h4><strong>{{ current_vol.subtitle }}</strong></h4>
 
-        <div class="pb-4" aria-label="Navigate to current issue sections">
+        <div class=" pb-4" aria-label="Navigate to current issue sections">
             
-                <a href="{% url 'post_list_view' %}" class="btn btn-sm bg-llt-gold m-2 rounded-0 fw-bold ms-0"><span class=""><i class="fas fa-info-circle"></i></span> Announcements</a>
+                <a href="{% url 'post_list_view' %}" class="btn btn-sm bg-llt-gold m-2 rounded-0 fw-normal ms-0"><span class=""><i class="fas fa-info-circle"></i></span> Announcements</a>
                 <a href="#articles" class="btn btn-sm bg-llt-darkgray text-secondary m-2 rounded-0">Articles <span class="badge bg-secondary rounded-0">{{article_count}}</span></a>
                 <a href="#syntheses" class="btn btn-sm bg-llt-darkgray text-secondary m-2 rounded-0">Research Syntheses <span class="badge bg-secondary rounded-0">{{article_review_count}}</span></a>
                 <a href="#columns" class="btn btn-sm bg-llt-darkgray text-secondary m-2 rounded-0">Columns <span class="badge bg-secondary rounded-0">{{column_count}}</span></a> 
@@ -117,7 +104,7 @@
             {% for doc in records %}
                 <div class="row">
                     <div class="col-10"> 
-                        {% if latest_article == doc %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Recent</span>{% endif %}{% if sub_type %}<span class="badge bg-secondary oai-micro-fs-6 rounded-0">Research Syntheses</span>{% endif %}
+                        {% if latest_article == doc %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0 fw-normal">Recent</span>{% endif %}{% if sub_type %}<span class="badge bg-secondary oai-micro-fs-6 rounded-0">Research Syntheses</span>{% endif %}
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <strong>{{ doc.0 }}</strong>
                             <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em>{% endfor %}{% if data.editors %}; Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}
@@ -136,7 +123,7 @@
             {% for doc in review_articles.records %}
                 <div class="row">
                     <div class="col-10"> 
-                        {% if latest_article == doc %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Recent</span>{% endif %}
+                        {% if latest_article == doc %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0 fw-normal">Recent</span>{% endif %}
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <strong>{{ doc.0 }}</strong>
                             <p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em>{% endfor %}
@@ -155,7 +142,7 @@
             {% for doc in data.records %}
                 <div class="row">
                     <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
-                        {% if doc.0.pk == latest_column.pk %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Recent Column </span> {% endif %}<a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
+                        {% if doc.0.pk == latest_column.pk %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0 fw-normal">Recent Column </span> {% endif %}<a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <strong>
                                 
                                 {{ doc.0 }}
@@ -175,7 +162,7 @@
             {% for doc in data.records %}
                 <div class="row">
                     <div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
-                        {% if forloop.first %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0">Recent Review </span> {% endif %}
+                        {% if forloop.first %}<span class="badge bg-llt-gold oai-micro-fs-6 rounded-0 fw-normal">Recent Review </span> {% endif %}
                         <a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
                             <strong>
                                 {{ doc.0 }}
