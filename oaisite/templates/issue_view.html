@@ -74,7 +74,7 @@
             	<p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
 				{% for doc in data.records %}
 					<div class="row">
-						<div class="{% if sub_type %}col-9 offset-1 {% else %}col-md-10{% endif %}"> 
+						<div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
 							<a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
 								<strong>{{ doc.0 }}</strong>
 								<p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
@@ -93,7 +93,7 @@
 				<p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
 				{% for doc in data.records %}
 					<div class="row">
-						<div class="{% if sub_type %}col-9 offset-1 {% else %}col-md-10{% endif %}"> 
+						<div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
 							<a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
 								<strong>{{ doc.0 }}</strong>
 								<p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
@@ -113,7 +113,7 @@
 				<p class="small">{% if data.editors %}Edited by{% endif %} {% for j in data.editors%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
 				{% for doc in data.records %}
 					<div class="row">
-						<div class="{% if sub_type %}col-9 offset-1 {% else %}col-md-10{% endif %}"> 
+						<div class="{% if sub_type %}col-9 offset-1 {% else %}col-10{% endif %}"> 
 							<a href="{{ doc.0.get_absolute_url }}" class="static_a_display">
 								<strong>{{ doc.0 }}</strong>
 								<p class="small">{% for j in doc.1%} <em>{{ j }}{% if not forloop.last %}{% if forloop.revcounter0 > 1 %}, {% else  %} & {% endif %}{% endif %}</em> {% endfor %}</p>
