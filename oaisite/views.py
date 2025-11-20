@@ -58,6 +58,8 @@ class HomeView(BaseSideMenuMixin, TemplateView):
             context['keywords'] =  journal.aggregate_keywords()
             try:
                 context['volumes'] = journal.list_collections_by_volume()
+                current_issues = next(iter(context['volumes'].values()))
+                context['curr_special_issues'] = [i.title_tuple() for i in current_issues if i.special_issue]
             except Exception as e:
                 print(e, 'Cannot load all collections')
             

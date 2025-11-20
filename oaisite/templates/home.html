@@ -24,7 +24,7 @@
         <div class="row mb-3">
             <!-- Latest article display -->
             {% if latest_article %}
-            <div class="col-md p-1">
+            <div class="col-md-6 p-1">
                 <div class="card border-0" style="height: 100%;">
                     <div class="card-body bg-llt-gold llt-burgundy">
                         <span class="badge bg-llt-burgundy llt-light-gold rounded-0 fw-normal oai-micro-fs-6 ">Recent</span>
@@ -42,29 +42,30 @@
             {% endif %}
 
             <!-- Special Issue display -->
-            {% if special_issue %}
-            <div class="col-md p-1">
-                <!-- Special Issue Book cover -->
-                <div class="card bk-cover-bg-{{special_issue.color_code}} rounded-0" style="height: 100%;">
-                    <div class="card-body">
-                        <span class="badge bg-llt-gold rounded-0 mb-2 fw-normal oai-micro-fs-6">Recent Special Issue</span> 
-                        <br>
-                        <div class="oai-micro-fs-6 pb-2">{{special_issue.title}}<br>{{special_issue.date}}</div>
-                        <div style="" class="card-title"><strong>{{special_issue.subtitle|slice:"14:"}}</strong></div>
-                    </div>        
-                    <div class="card-footer border-0 bk-cover-bg-{{special_issue.color_code}} oai-micro-fs-6">
-                            {% if special_issue.editors %}
-                                Edited by <br>{% for e in special_issue.editors %}{{e}}<br>{% endfor %} 
-                            {% endif %}     
+            {% for special_issue in curr_special_issues %}
+           
+                <div class="col-md p-1">
+                    <!-- Special Issue Book cover -->
+                    <div class="card bk-cover-bg-{{special_issue.color_code}} rounded-0" style="height: 100%;">
+                        <div class="card-body">
+                            <span class="badge bg-llt-gold rounded-0 mb-2 fw-normal oai-micro-fs-6">Special Issue</span> 
+                            <br>
+                            <div class="oai-micro-fs-6 pb-2">{{special_issue.title}}<br>{{special_issue.date}}</div>
+                            <div style="" class="card-title"><strong>{{special_issue.subtitle|slice:"14:"}}</strong></div>
+                        </div>        
+                        <div class="card-footer border-0 bk-cover-bg-{{special_issue.color_code}} oai-micro-fs-6">
+                                {% if special_issue.editors %}
+                                    Edited by <br>{% for e in special_issue.editors %}{{e}}<br>{% endfor %} 
+                                {% endif %}     
+                        </div>
+                        <a href="{% url 'collection' special_issue.object.pk %}" class="stretched-link"></a>
+                        
                     </div>
-                    <a href="{% url 'collection' special_issue.object.pk %}" class="stretched-link"></a>
-                    
+                    <!-- <div>
+                        <span class="badge llt-burgundy rounded-0 oai-micro-fs-8"><a href="http://localhost:8000/media/voices-from-llt/" class="llt-burgundy"><i class="fa-solid fa-podcast fa-xl"></i></a></span>
+                    </div> -->
                 </div>
-                <!-- <div>
-                    <span class="badge llt-burgundy rounded-0 oai-micro-fs-8"><a href="http://localhost:8000/media/voices-from-llt/" class="llt-burgundy"><i class="fa-solid fa-podcast fa-xl"></i></a></span>
-                </div> -->
-            </div>
-            {% endif %}
+            {% endfor %}
         </div>
 
 
