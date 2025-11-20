@@ -59,7 +59,7 @@ class HomeView(BaseSideMenuMixin, TemplateView):
             try:
                 context['volumes'] = journal.list_collections_by_volume()
                 current_issues = next(iter(context['volumes'].values()))
-                context['curr_special_issues'] = [i.title_tuple() for i in current_issues if i.special_issue]
+                context['curr_special_issues'] = [i.title_tuple() for i in current_issues[::-1] if i.special_issue]
             except Exception as e:
                 print(e, 'Cannot load all collections')
             
@@ -132,6 +132,12 @@ class PreviousIssuesView(BaseSideMenuMixin, TemplateView):
         context = super(PreviousIssuesView, self).get_context_data(**kwargs)
         journal = Community.objects.all()[0]
         context['volumes'] = journal.list_collections_by_volume()
+        issues = {}
+        for i, j in context['volumes'].items():
+            issues[i] = []
+            for issue in j[::-1]:
+                issues[i].append(issue.title_tuple())
+        context['issues'] = issues
         context['latest'] = [(vol, vol.list_records()) for vol in Collection.objects.all().order_by('-name')][0]
         context['curr_page'] = 'previous_issues'
         return context
