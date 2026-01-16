@@ -40,9 +40,8 @@
                 </div>                         
             </div>
             {% endif %}
-
             <!-- Special Issue display -->
-            {% for special_issue in curr_special_issues %}
+            {# {% for special_issue in curr_special_issues %} #}
            
                 <div class="col-md p-1">
                     <!-- Special Issue Book cover -->
@@ -58,14 +57,27 @@
                                     Edited by <br>{% for e in special_issue.editors %}{{e}}<br>{% endfor %} 
                                 {% endif %}     
                         </div>
-                        <a href="{% url 'collection' special_issue.object.pk %}" class="stretched-link"></a>
-                        
+                        <a href="{% url 'collection' special_issue.object.pk %}" class="stretched-link"></a>                        
                     </div>
-                    <!-- <div>
-                        <span class="badge llt-burgundy rounded-0 oai-micro-fs-8"><a href="http://localhost:8000/media/voices-from-llt/" class="llt-burgundy"><i class="fa-solid fa-podcast fa-xl"></i></a></span>
-                    </div> -->
                 </div>
-            {% endfor %}
+            {# {% endfor %} #}
+
+                <div class="col-md p-1">
+                    <!-- Special Announcement Book cover -->
+                    <div class="card border-0" style="height: 100%;">
+                        <div class="card-body bg-llt-gold llt-burgundy">
+                            <span class="badge bg-llt-burgundy llt-light-gold rounded-0 fw-normal oai-micro-fs-6 ">Special Announcement</span>
+                            <div class="card-title fw-normal pt-4">Call for Editors: September 2026 to August 2029</div>
+                            <div class="card-text oai-micro-fs-8">
+                                The Language Learning & Technology (LLT) Executive Board invites applications for the editorship of the journal.
+                            </div>                          
+                        </div>
+                        <div class="card-footer bg-llt-darkgray bg-llt-gold llt-burgundy border-0 oai-micro-fs-6">January 15, 2026</div>
+                        <a href="https://scholarspace.manoa.hawaii.edu/server/api/core/bitstreams/cafdb99f-b4a4-442c-85c6-324adb197cce/content?authentication-token=eyJhbGciOiJIUzI1NiJ9.eyJlaWQiOiI3NjkwNTRhOC1hYjE4LTQyZGQtOWI3YS1kMGFkNTU4NjdhZTciLCJzZyI6W10sImF1dGhlbnRpY2F0aW9uTWV0aG9kIjoicGFzc3dvcmQiLCJleHAiOjE3Njg1Mjg3NTN9.8GMAp3PO9nFOcSOrbLIlW7tgTnciBBF_OMW0TzEvD00" target="_blank" class="stretched-link"></a>               
+                    </div>
+                </div>
+
+
         </div>
 
 

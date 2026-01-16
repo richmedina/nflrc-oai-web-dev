@@ -16,6 +16,15 @@ from .models import OAISitePage, OAISitePost, OAISiteSupplementaryCollection
 from .forms import PageUpdateForm, PostCreateForm, PostUpdateForm
 
 
+"""" Filter snippet to list records by columns name.
+recs = Record.objects.all().order_by('-hdr_datestamp')
+cols = {}
+for r in recs:
+    cname = i.get_metadata_item('llt.topic')
+    if cname:
+        cols.setdefault(cname[0][0], []).append(i)
+"""
+
 def get_related_item(handle=''):
     """Returns a related object from the db based handle. Searches Record and Collection
     Handle is in the format: 'https://hdl.handle.net/nnnnn/nnnnnn'"""
