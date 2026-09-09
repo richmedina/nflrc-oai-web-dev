@@ -1,5 +1,6 @@
 {% load static %}
 
+<!-- base.html -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,7 +52,7 @@
     <!-- End UH Banner -->
     
     <!-- Fixed navbar content -->
-    <nav class="navbar navbar-expand bg-white sticky-md-top">
+    <!-- <nav class="navbar navbar-expand bg-white sticky-md-top"> -->
         <div class="container-md">
             <div class="d-md-flex bg-llt-burgundy">
             <!-- COL NFLRC LOGO -->
@@ -71,18 +72,18 @@
                 </div>
 
             <!-- COL SEARCH/NAVIGATION -->
-                <div class="d-md-flex justify-content-end align-items-right">
-                    <div class="d-flex justify-content-center align-items-center resp-navmenu pe-3 gap-0" style="padding-left: 200px">             
+                <!-- <div class="d-md-flex justify-content-end align-items-right"> -->
+                    <div class="d-flex justify-content-center align-items-center resp-navmenu pe-1 gap-0">             
                         <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
                         <a class="nav-link text-white" href="{% url 'page_slug_view' 'about' %}">About</a>
                         <a class="nav-link text-white" href="{% url 'page_slug_view' 'people' %}">People</a>
                         <a class="nav-link text-white" href="{% url 'page_slug_view' 'contact' %}">Contact</a>            
                         <a class="nav-link btn btn-link btn-md text-white" href="{% url 'haystack_search' %}"><i class="fa fa-search"></i></a> 
                     </div> 
-                </div>
+                <!-- </div> -->
             </div> 
         </div>
-    </nav><!--PARENT NAV-->
+    <!-- </nav>PARENT NAV -->
 
     <!-- Page content -->
     <div class="container-md pt-5">
