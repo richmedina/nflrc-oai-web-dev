@@ -96,7 +96,6 @@
                         {% if result.model_name == 'record' %} 
                             <dt><a href="{% url 'item' result.pk %}" class="link-secondary">{{ result.object }}</a></dt>
                             <dd>
-                                <div class="oai-micro-fs-8">{% highlight result.object.full_text with query html_tag "span" css_class "text-success "%}</div>
                                 <p class="oai-micro-fs-8">{% for i in result.object.get_readable_authors %}{% if forloop.first %}by {% endif %}<a href="{% url 'haystack_search' %}?q={{i}}" title="Search articles for this author.">{{ i }}</a>{% if not forloop.last %}, {% else %} <br>{% endif %} {% endfor %}
                                 in <a href="{% url 'collection' result.object.hdr_setSpec.identifier %}" class=""> {{ result.object.hdr_setSpec.name }}</a></p>
                             </dd>                        
